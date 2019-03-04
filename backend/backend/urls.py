@@ -8,6 +8,7 @@ from backend.backend import views
 router = DefaultRouter()
 
 router.register(r'profiles', views.ProfileViewSet)
+router.register(r'receipt-file', views.ReceiptViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
