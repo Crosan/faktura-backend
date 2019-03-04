@@ -32,6 +32,11 @@ class RekvirentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rekvirent
         fields = "__all__"
+        
+class ReceiptFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReceiptFile
+        fields = "__all__"
                
         
 # ------------------------

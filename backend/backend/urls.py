@@ -8,6 +8,7 @@ from backend.backend import views
 router = DefaultRouter()
 
 router.register(r'profiles', views.ProfileViewSet)
+router.register(r'receipt-file', views.ReceiptViewSet)
 
 router.register(r'analyse-priser', views.AnalysePrisViewSet)
 
