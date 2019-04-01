@@ -37,7 +37,7 @@ class Command(BaseCommand):
             
             type = ""
             
-            if ydelses_kode.startswith('A') or ydelses_kode.endswith('T'):
+            if ydelses_kode.startswith('T') or ydelses_kode.endswith('A'):
                 type = "Analyse"
             else:
                 type = "Blodprodukter"
