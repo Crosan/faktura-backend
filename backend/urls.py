@@ -22,5 +22,5 @@ schema_view = get_schema_view(title='Asbjørn\'s og Kaj\'s web-API')
 urlpatterns = [
     path('schema/', schema_view),
     path('admin/', admin.site.urls),
-    path('', include('backend.backend.urls')),
+    path('', include('backend.faktura.urls')),
 ]

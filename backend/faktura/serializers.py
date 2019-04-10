@@ -1,7 +1,7 @@
 import os
 
 from rest_framework import serializers
-from backend.backend.models import *
+from backend.faktura.models import *
 
 
 # ------------------------

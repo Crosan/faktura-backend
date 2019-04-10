@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from backend.backend.models import Rekvirent
-from backend.backend.serializers import RekvirentSerializer, NestedRekvirentSerializer
+from backend.faktura.models import Rekvirent
+from backend.faktura.serializers import RekvirentSerializer, NestedRekvirentSerializer
 
 
 class RekvirentViewSet(viewsets.ModelViewSet):
