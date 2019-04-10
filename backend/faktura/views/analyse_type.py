@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from backend.backend.models import AnalyseType
-from backend.backend.serializers import AnalyseTypeSerializer, NestedAnalyseTypeSerializer
+from backend.faktura.models import AnalyseType
+from backend.faktura.serializers import AnalyseTypeSerializer, NestedAnalyseTypeSerializer
 
 
 class AnalyseTypeViewSet(viewsets.ModelViewSet):

@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from backend.backend.models import AnalysePris
-from backend.backend.serializers import AnalysePrisSerializer
+from backend.faktura.models import AnalysePris
+from backend.faktura.serializers import AnalysePrisSerializer
 
 
 class AnalysePrisViewSet(viewsets.ModelViewSet):

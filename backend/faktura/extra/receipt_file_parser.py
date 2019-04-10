@@ -4,7 +4,7 @@ import pyexcel
 from django.conf import settings
 from django.core.files import File
 
-from backend.backend.models import receipt_row
+from backend.faktura.models import receipt_row
 
 
 class Parser:

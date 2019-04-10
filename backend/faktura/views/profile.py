@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from backend.backend.models import Profile
-from backend.backend.serializers import ProfileSerializer
+from backend.faktura.models import Profile
+from backend.faktura.serializers import ProfileSerializer
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
