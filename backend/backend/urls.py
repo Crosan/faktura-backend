@@ -10,6 +10,17 @@ router = DefaultRouter()
 router.register(r'profiles', views.ProfileViewSet)
 router.register(r'receipt-file', views.ReceiptViewSet)
 
+router.register(r'analyse-priser', views.AnalysePrisViewSet)
+
+router.register(r'analyse-typer', views.AnalyseTypeViewSet)
+router.register(r'analyse-typer-nested', views.NestedAnalyseTypeViewSet)
+
+router.register(r'analyser', views.AnalyseViewSet)
+router.register(r'analyser-nested', views.NestedAnalyseViewSet)
+
+router.register(r'rekvirenter', views.RekvirentViewSet)
+router.register(r'rekvirenter-nested', views.NestedRekvirentViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
 ]
