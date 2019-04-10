@@ -1,0 +1,301 @@
+YdelsesKode;Ydelsesnavn;Gruppering;Kilde navn;"Intern Pris
+Region H 
+2017";"Intern Pris
+Region H 
+2018";"Ekstern pris 
+2017";"Ekstern
+pris 
+2018"
+601T;Ukendt patient;;1301_Blodbank;0;0;0;0
+001A;BLODTYPE MASKIN;Blodtypeserologiske analyser;1301_Blodbank;214;214;281;285
+002A;MANUEL BLODTYPE;Blodtypeserologiske analyser;1301_Blodbank;214;214;264;281
+003A;BLODTYPE BØRN;Blodtypeserologiske analyser;1301_Blodbank;214;214;281;285
+004A;OVERFØRT PT.TYP;Blodtypeserologiske analyser;1301_Blodbank;103;214;135;281
+005A;DONORTYPE;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+006A;OVERFØRT DONTYP;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+007A;RH.PROF. RUTINE;Blodtypeserologiske analyser;1301_Blodbank;41;41;54;55
+009A;ANDEN UNDERSØG.;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+010A;TYPEKONT.KNOGLE;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+011A;OVERFØRT PT.TYP;Blodtypeserologiske analyser;1301_Blodbank;195;195;262;266
+098A;FREMSKYND. TYPE;Blodtypeserologiske analyser;1301_Blodbank;214;214;391;396
+099A;AKUT BLODTYPE;Blodtypeserologiske analyser;1301_Blodbank;214;214;521;528
+100A;Transfusionsstrategi;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+101A;FLOW FÆNO ENK;Blodtypeserologiske analyser;1301_Blodbank;1.033;1.033;1.387;1.405
+102A;FLOW FÆNO FLERE;Blodtypeserologiske analyser;1301_Blodbank;3.947;3.948;5.296;5.365
+103A;FLOW FÆNO RETIC;Blodtypeserologiske analyser;1301_Blodbank;4.548;4.549;6.103;6.182
+110A;SCREENTEST;Blodtypeserologiske analyser;1301_Blodbank;40;40;53;54
+120A;TITER GRAVID;Blodtypeserologiske analyser;1301_Blodbank;235;235;315;319
+121A;TITER ABO;Blodtypeserologiske analyser;1301_Blodbank;235;235;315;319
+122A;TITER KULDE;Blodtypeserologiske analyser;1301_Blodbank;175;175;235;238
+123A;TITER ANDRE;Blodtypeserologiske analyser;1301_Blodbank;301;301;403;409
+124A;TITER NYRE;Blodtypeserologiske analyser;1301_Blodbank;301;301;403;409
+125A;UDV.RHD-TYPE;Blodtypeserologiske analyser;1301_Blodbank;176;176;237;240
+126A;UDV.ABO-TYPE;Blodtypeserologiske analyser;1301_Blodbank;192;192;258;261
+130A;PANELUS.RUTINE;Blodtypeserologiske analyser;1301_Blodbank;632;632;831;842
+131A;PANELUS.AKUT;Blodtypeserologiske analyser;1301_Blodbank;632;632;1.456;1.475
+138A;FÆNOTYPER (>9);Blodtypeserologiske analyser;1301_Blodbank;1.113;1.113;1.494;1.513
+139A;FÆNOTYPER;Blodtypeserologiske analyser;1301_Blodbank;217;217;292;295
+141A;DAT SPECIFIK;Blodtypeserologiske analyser;1301_Blodbank;155;155;208;211
+146A;Osmotisk resistens;Blodtypeserologiske analyser;1301_Blodbank;;1.705;0;2.242
+147A;FLOW DAT SPEC.;Blodtypeserologiske analyser;1301_Blodbank;936;936;1.256;1.272
+148A;FLOW DAT SUBKLASSE;Blodtypeserologiske analyser;1301_Blodbank;1.677;1.677;2.249;2.279
+149A;FLOW EMA;Blodtypeserologiske analyser;1301_Blodbank;1.155;1.155;1.549;1.569
+150A;KOMPL.US RUTINE;Blodtypeserologiske analyser;1301_Blodbank;813;813;1.069;1.083
+151A;KOMPL.US AKUT;Blodtypeserologiske analyser;1301_Blodbank;813;813;1.384;1.402
+170A;ELUERING;Blodtypeserologiske analyser;1301_Blodbank;564;564;756;766
+171A;ABSORBTION AUTO;Blodtypeserologiske analyser;1301_Blodbank;872;872;1.170;1.186
+172A;ABSORBTION ANDR;Blodtypeserologiske analyser;1301_Blodbank;677;677;908;920
+180A;SCT SCREEN;Blodtypeserologiske analyser;1301_Blodbank;61;61;80;81
+181A;SCT TITER;Blodtypeserologiske analyser;1301_Blodbank;113;113;149;151
+182A;SCT PANEL;Blodtypeserologiske analyser;1301_Blodbank;421;421;565;572
+183A;TYPE PÅ PLADE;Blodtypeserologiske analyser;1301_Blodbank;201;201;270;274
+184A;SCT DONOR TIT;Blodtypeserologiske analyser;1301_Blodbank;369;369;496;502
+185A;SCT-MINOR;Blodtypeserologiske analyser;1301_Blodbank;760;760;1.019;1.032
+186A;TYPE GELKORT;Blodtypeserologiske analyser;1301_Blodbank;398;398;534;541
+187A;GENOM TYP ENK/ZYGO;Blodtypeserologiske analyser;1301_Blodbank;1.021;1.021;1.371;1.388
+188A;GENOMISK TYPE FULD;Blodtypeserologiske analyser;1301_Blodbank;9.679;9.682;12.989;13.156
+189A;IGA KVANTITATIV;Blodtypeserologiske analyser;1301_Blodbank;359;359;483;489
+191A;Donath Landsteiner;Blodtypeserologiske analyser;1301_Blodbank;1.023;1.023;1.374;1.391
+194A;INTERUTERIN US.;Blodtypeserologiske analyser;1301_Blodbank;138;138;186;188
+196A;FOSTERPRØVE;Blodtypeserologiske analyser;1301_Blodbank;572;572;768;778
+197A;FMH ANALYSE RUTINE;Blodtypeserologiske analyser;1301_Blodbank;1.665;1.665;2.189;2.217
+199A;US.FOR IGA;Blodtypeserologiske analyser;1301_Blodbank;621;621;834;845
+400A;BAC-TEST RUTINE;Blodtypeserologiske analyser;1301_Blodbank;245;245;322;326
+498A;BAC-TEST FREMSK;Blodtypeserologiske analyser;1301_Blodbank;245;245;385;390
+499A;BAC-TEST AKUT;Blodtypeserologiske analyser;1301_Blodbank;245;245;512;519
+500A;FORLIG RUTINE;Blodtypeserologiske analyser;1301_Blodbank;69;69;91;92
+501A;FORLIG OPBEVAR.;Blodtypeserologiske analyser;1301_Blodbank;183;183;246;249
+505A;FORLIG I GLAS;Blodtypeserologiske analyser;1301_Blodbank;183;183;246;249
+510A;Forlig rekv.;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+555A;Kopiprøver;Blodtypeserologiske analyser;1301_Blodbank;44;44;58;59
+591T;Flytning;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+592T;Udlev. Uden BAS-test;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+593T;Øjendråber;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+707A;RH.PROF. RUTINE;Blodtypeserologiske analyser;1301_Blodbank;41;41;54;55
+770A;Antenatal RhD;Blodtypeserologiske analyser;1301_Blodbank;398;398;534;541
+771A;DNA SRY;Blodtypeserologiske analyser;1301_Blodbank;1.135;1.135;1.523;1.543
+773A;Antenatal K;Blodtypeserologiske analyser;1301_Blodbank;8.058;6.702;10.814;10.954
+774A;Antenatal c;Blodtypeserologiske analyser;1301_Blodbank;;6.702;0;8.813
+775A;Antenatal E;Blodtypeserologiske analyser;1301_Blodbank;;6.702;0;8.813
+776A;Antenatal AB0;Blodtypeserologiske analyser;1301_Blodbank;;6.702;0;8.813
+777A;Antenat. HPA-1a;Blodtypeserologiske analyser;1301_Blodbank;;6.702;0;8.813
+790A;Don.gentyp(LGC);Blodtypeserologiske analyser;1301_Blodbank;;1.150;0;1.512
+824A;SCT patient;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+853A;Barnetype;Blodtypeserologiske analyser;1301_Blodbank;0;0;0;0
+999A;KOPISVAR;Blodtypeserologiske analyser;1301_Blodbank;60;60;79;80
+901A;Trombocytmarkør;Funktionsanalyser;1301_Blodbank;2.046;3.280;0;4.313
+902A;Truculture;Funktionsanalyser;1301_Blodbank;;3.762;0;4.947
+E05280P;Optøet blod;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E05284P;Optøet blod;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E0528VP;Optøet blod;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E25530P;Plasma kryodepleteret;Komponenter;1301_Blodbank;593;593;797;807
+E25534P;Plasma kryodepleteret;Komponenter;1301_Blodbank;593;593;797;807
+E2553VP;Plasma kryodepleteret;Komponenter;1301_Blodbank;593;593;797;807
+E35870P;Kryopræcipitat pool;Komponenter;1301_Blodbank;2.765;2.766;3.710;3.758
+E35874P;Kryopræcipitat pool;Komponenter;1301_Blodbank;2.765;2.766;3.710;3.758
+E3587VP;Kryopræcipitat pool;Komponenter;1301_Blodbank;2.765;2.766;3.710;3.758
+E3773VP;Granolocyt aferese;Komponenter;1301_Blodbank;0;0;0;0
+E38460P;Filtreret erytro.;Komponenter;1301_Blodbank;857;857;1.150;1.165
+E38464P;Filtreret erytro.;Komponenter;1301_Blodbank;857;857;1.150;1.165
+E3846QP;Filtreret erytro. fænotypeudvalgt;Komponenter;1301_Blodbank;857;857;1.150;1.165
+E3846VP;Filtreret erytro.;Komponenter;1301_Blodbank;857;857;1.150;1.165
+E38470P;Filtr. bestr. erytro.;Komponenter;1301_Blodbank;901;901;1.209;1.225
+E38474P;Filtr. bestr. erytro.;Komponenter;1301_Blodbank;901;901;1.209;1.225
+E3847QP;Filtr. bestr. erytro.;Komponenter;1301_Blodbank;901;901;1.209;1.225
+E3847VP;Filtr. bestr. erytro.;Komponenter;1301_Blodbank;901;901;1.209;1.225
+E38510P;Vasket filtr. erytro.;Komponenter;1301_Blodbank;2.428;2.429;3.258;3.300
+E38514P;Vasket filtr. erytro.;Komponenter;1301_Blodbank;2.428;2.429;3.258;3.300
+E3851QP;Vasket filtr. erytro.;Komponenter;1301_Blodbank;2.428;2.429;3.258;3.300
+E3851VP;Vasket filtr. erytro.;Komponenter;1301_Blodbank;2.428;2.429;3.258;3.300
+E38550P;Plasma frisk frosset;Komponenter;1301_Blodbank;;578;0;760
+E38740P;Plasma frisk frosset;Komponenter;1301_Blodbank;566;566;760;770
+E38940P;Øjendråber frosset;Komponenter;1301_Blodbank;3.536;3.537;4.746;4.807
+E38944P;Øjendråber frosset;Komponenter;1301_Blodbank;3.536;3.537;4.746;4.807
+E3894VP;Øjendråber frosset;Komponenter;1301_Blodbank;3.536;3.537;4.746;4.807
+E38980P;Trombocyt filtr. Poolet;Komponenter;1301_Blodbank;1.712;1.728;2.357;2.388
+E38984P;Trombocyt filtr. Poolet;Komponenter;1301_Blodbank;1.712;1.728;2.357;2.388
+E3898VP;Trombocyt filtr. Poolet;Komponenter;1301_Blodbank;1.712;1.728;2.357;2.388
+E38990P;Trombocyt filtr. bestr. poolet;Komponenter;1301_Blodbank;1.761;1.777;2.423;2.454
+E38994P;Trombocyt filtr. bestr. poolet;Komponenter;1301_Blodbank;1.761;1.777;2.423;2.454
+E3899VP;Trombocyt filtr. bestr. poolet;Komponenter;1301_Blodbank;1.761;1.777;2.423;2.454
+E3902VP;Trombocytpool plasmareduceret;Komponenter;1301_Blodbank;1.757;1.758;2.358;2.389
+E39280P;Trombaferese filtret;Komponenter;1301_Blodbank;1.712;1.728;2.357;2.388
+E39284P;Trombaferese filtr. HLA-udv.;Komponenter;1301_Blodbank;5.618;5.620;7.540;7.637
+E3928VP;Trombaferese filtret;Komponenter;1301_Blodbank;1.712;1.728;2.357;2.388
+E39290P;Trombaferese filtr. bestr.;Komponenter;1301_Blodbank;1.761;1.777;2.423;2.454
+E39294P;Trombaferese filtr. bestr. HLA-udv.;Komponenter;1301_Blodbank;5.666;5.668;7.604;7.702
+E3929VP;Trombaferese filtr. bestr.;Komponenter;1301_Blodbank;1.761;1.777;2.423;2.454
+E40190P;Plasmaferese friskfrosset;Komponenter;1301_Blodbank;478;578;676;760
+E40194P;Plasmaferese friskfrosset;Komponenter;1301_Blodbank;478;578;676;760
+E4019VP;Plasmaferese friskfrosset;Komponenter;1301_Blodbank;478;578;676;760
+E40520P;Plasma frisk frosset;Komponenter;1301_Blodbank;;578;0;760
+E40760P;Udskiftning filtr. bestr. erytro.;Komponenter;1301_Blodbank;2.194;2.195;2.944;2.982
+E40764P;Udskiftning filtr. bestr. erytro.;Komponenter;1301_Blodbank;2.194;2.195;2.944;2.982
+E4076VP;Udskiftning filtr. bestr. erytro.;Komponenter;1301_Blodbank;2.194;2.195;2.944;2.982
+E4469VP;Plasmaferese flydende;Komponenter;1301_Blodbank;478;578;676;760
+E46830P;Optøet SAG-M;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E46834P;Optøet SAG-M;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E4683QP;Optøet SAG-M;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E4683VP;Optøet SAG-M;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E50590P;Intrauterin filtr. bestr. erytro.;Komponenter;1301_Blodbank;1.547;1.547;2.077;2.104
+E50594P;Intrauterin filtr. bestr. erytro.;Komponenter;1301_Blodbank;1.547;1.547;2.077;2.104
+E5059VP;Intrauterin filtr. bestr. erytro.;Komponenter;1301_Blodbank;1.547;1.547;2.077;2.104
+E50600P;Plasma frisk frosset;Komponenter;1301_Blodbank;478;578;676;760
+E50604P;Plasma frisk frosset;Komponenter;1301_Blodbank;478;578;676;760
+E5060QP;Plasma frisk frosset;Komponenter;1301_Blodbank;478;578;676;760
+E5060VP;Plasma frisk frosset;Komponenter;1301_Blodbank;478;578;676;760
+E50610P;Plasma frisk frosset filtr.;Komponenter;1301_Blodbank;743;743;997;1.010
+E50614P;Plasma frisk frosset filtr.;Komponenter;1301_Blodbank;743;743;997;1.010
+E5061VP;Plasma frisk frosset filtr.;Komponenter;1301_Blodbank;743;743;997;1.010
+E50620P;Trombaferese i AB-pl filtr.;Komponenter;1301_Blodbank;3.958;3.959;5.311;5.379
+E50624P;Trombaferese i AB-pl filtr.;Komponenter;1301_Blodbank;3.958;3.959;5.311;5.379
+E5062VP;Trombocytsusp. fra Afer. AB pl   HLA-Udvalgt   Filtreret;Komponenter;1301_Blodbank;5.750;5.752;7.716;7.815
+E50630P;Trombaferese i AB-pl filtr. bestr.;Komponenter;1301_Blodbank;4.020;4.021;5.395;5.465
+E50634P;Trombaferese i AB-pl filtr. bestr.;Komponenter;1301_Blodbank;4.020;4.021;5.395;5.465
+E5063VP;Trombocytsusp. fra Afer. AB-pl    HLA-Udvalgt,    Filtreret Bestr.;Komponenter;1301_Blodbank;5.796;5.798;7.779;7.879
+E50650P;Tromb. pool. filtr. rek. i AB-pl;Komponenter;1301_Blodbank;2.583;2.584;3.466;3.510
+E50654P;Tromb. pool. filtr. rek. i AB-pl;Komponenter;1301_Blodbank;2.583;2.584;3.466;3.510
+E5065VP;Tromb. pool. filtr. rek. i AB-pl;Komponenter;1301_Blodbank;2.583;2.584;3.466;3.510
+E50660P;Tromb. pool. filtr. bestr. rek i AB-pl;Komponenter;1301_Blodbank;2.784;2.785;3.736;3.784
+E50664P;Tromb. pool. filtr. bestr. rek i AB-pl;Komponenter;1301_Blodbank;2.784;2.785;3.736;3.784
+E5066VP;Tromb. pool. filtr. bestr. rek i AB-pl;Komponenter;1301_Blodbank;2.784;2.785;3.736;3.784
+E53950P;Trombocyt filtreret;Komponenter;1301_Blodbank;1.712;1.728;2.357;2.388
+E56510P;Frosne erytrocytter;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E56514P;Frosne erytrocytter;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E5651VP;Frosne erytrocytter;Komponenter;1301_Blodbank;4.229;4.230;5.675;5.749
+E61570P;Plasma optøet;Komponenter;1301_Blodbank;478;578;676;760
+E61574P;Plasma optøet;Komponenter;1301_Blodbank;478;578;676;760
+E6157QP;Plasma optøet;Komponenter;1301_Blodbank;478;578;676;760
+E6157VP;Plasma optøet;Komponenter;1301_Blodbank;478;578;676;760
+E7287VP;LYOPLAS NW FRYSETØRRET PLASMA;Komponenter;1301_Blodbank;1.531;1.531;2.013;2.039
+E72930P;Frisk frosset plasma;Komponenter;1301_Blodbank;478;578;676;760
+E72940P;Plasmaferese optøet;Komponenter;1301_Blodbank;478;578;676;760
+E7294VP;Plasmaferese optøet;Komponenter;1301_Blodbank;478;578;676;760
+E72950P;Plasmaferese frisk frosset;Komponenter;1301_Blodbank;478;578;676;760
+E8979VP;LYOPLAS P FRYSETØRRET PLASMA;Komponenter;1301_Blodbank;1.531;1.531;2.013;2.039
+T00010P;Caput Femoris Hel;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T00014P;Caput Femoris Hel;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T0001VP;Caput Femoris Hel;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T00060P;Caput Femoris Halv;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T00064P;Caput Femoris Halv;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T0006VP;Caput Femoris Halv;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T00140P;Kondyler;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T00144P;Kondyler;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T0014VP;Kondyler;Komponenter;1301_Blodbank;2.221;2.222;2.981;3.019
+T0025VP;Knoglesmuld Stor 30 cc;Komponenter;1301_Blodbank;4.676;4.677;6.149;6.150
+T0026VP;Knoglesmuld XL 45 cc;Komponenter;1301_Blodbank;6.938;6.940;9.123;9.126
+T0027VP;Knoglesmuld Lille 15 cc;Komponenter;1301_Blodbank;3.470;3.471;4.563;4.564
+T0073VP;TENDON,PATELLA,WHOLE,BONEBLOCK;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0077VP;TENDON,PATELLA,HALF,BONEBLOCKS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0085VP;TENDON ACHILLES BONE BLOCK;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0089VP;TENDON, SEMITENDINOSUS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0173VP;FEMOR VENSTRE HOVED;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0174VP;FEMOR HOVED HØJRE;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T02040P;Kranieknogle;Komponenter;1301_Blodbank;1.365;1.365;1.832;1.856
+T02041P;Kranieknogle autolog;Komponenter;1301_Blodbank;1.365;1.365;1.832;1.856
+T02044P;Kranieknogle;Komponenter;1301_Blodbank;1.365;1.365;1.832;1.856
+T0204VP;Kranieknogle;Komponenter;1301_Blodbank;1.365;1.365;1.832;1.856
+T0219VP;WHOLE KNEE JOINT RIGHT;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0227VP;Calcar Femoris;Komponenter;1301_Blodbank;2.092;2.093;2.807;2.844
+T0307VP;TENDON QUADRIC BONE BLOCK;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0308VP;TENDON GRACILIS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0309VP;LIGAMENT MED.COLL. LEFT BONE B;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0310VP;LIGAM.MEDIAL.COLLAT.RIGHT.BBS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0311VP;LIGAMENT ANTERIOR CRUC.LEFT BB;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0312VP;LIGAMENT ANTER.CRUC.RIGHT BBS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0313VP;LIGAMENT POST.CRUCIA.LEFT BB;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0314VP;LIGAMENT POST.CRUCI.RIGHT BBS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0315VP;TENDON BICEPS FEMORIS BONE BLO;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0316VP;TENDON FLEXOR HALLUCIS LONG;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0317VP;TENDON FLEXOR DIGITORUM LONGUS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0318VP;TENDON PERONEUS LONGUS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0319VP;TENDON ILIOTIBIALIS;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0320VP;MENISCUS MED.TIBIA PLA. LEFT;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0321VP;MENISCUS.MED.TIBIAPLATE.RIGHT;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0322VP;MENISCUS LATERAL TIBIA PL.LEFT;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0323VP;MENISC.LATERAL TIBI.PLA.RIGHT;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0324VP;TENDON TIBIALIS ANTERIOR BONEB;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0325VP;TENDON TIBIALIS POSTER.BONE BL;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0386VP;TENDON PERONEUS BREVIS BONE BL;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0387VP;TENDON EXTENSOR DIGITORUM COMM;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0388VP;TENDON EXTENSOR HALLUCIS LONGU;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0393VP;CARTILAGE,JOINT KNEE,REFRIGEAT;Komponenter;1301_Blodbank;2.313;2.314;3.104;3.144
+T0588VP;NERVE-PERIPHERAL;Komponenter;1301_Blodbank;906;906;1.191;1.206
+T0667VP;Demineraliserede knoglefibre;Komponenter;1301_Blodbank;;924;0;1.215
+X0004000P;POOLET FROSSET PLASMA;Komponenter;1301_Blodbank;;578;0;760
+550T;Retur ikke Kass.;Transfusionsmedicin;1301_Blodbank;134;135;0;178
+588T;FÆNOTYPE 1-4;Transfusionsmedicin;1301_Blodbank;217;217;0;285
+589T;FÆNOTYPE>5;Transfusionsmedicin;1301_Blodbank;1.113;1.113;0;1.464
+703T;Udlev. Helikopter;Transfusionsmedicin;1301_Blodbank;134;135;0;178
+712A;TEG ALMEN;Transfusionsmedicin;1301_Blodbank;214;214;0;281
+713A;TEG HEPARIN;Transfusionsmedicin;1301_Blodbank;259;259;0;341
+716A;Funk.fribinogen;Transfusionsmedicin;1301_Blodbank;220;220;0;289
+717A;Funk.fibri.hepa;Transfusionsmedicin;1301_Blodbank;256;256;0;337
+718A;Rapid TEG;Transfusionsmedicin;1301_Blodbank;311;311;0;409
+719A;Rapis TEG heparinase;Transfusionsmedicin;1301_Blodbank;357;357;0;469
+720A;TRAP Multiplate;Transfusionsmedicin;1301_Blodbank;183;183;0;241
+721A;ASPI Multplate;Transfusionsmedicin;1301_Blodbank;182;182;0;239
+722A;ADP Multiplate;Transfusionsmedicin;1301_Blodbank;182;182;0;239
+725A;Risto high;Transfusionsmedicin;1301_Blodbank;366;366;0;481
+731A;ASPI Hirudin;Transfusionsmedicin;1301_Blodbank;182;182;0;239
+732A;ADP Hirudin;Transfusionsmedicin;1301_Blodbank;182;182;0;239
+300A;HIV 1+2 Ab,ruti;Virusanalyser;1301_Blodbank;33;33;43;44
+301A;HCV Ab,rutine;Virusanalyser;1301_Blodbank;43;43;57;58
+302A;HBs Ag,rutine;Virusanalyser;1301_Blodbank;31;31;41;42
+303A;HBc Ab total,ru;Virusanalyser;1301_Blodbank;43;43;57;58
+304A;HBs Ab,rutine;Virusanalyser;1301_Blodbank;43;43;57;58
+305A;HBe Ag,rutine;Virusanalyser;1301_Blodbank;37;37;49;50
+306A;HBe Ab,rutine;Virusanalyser;1301_Blodbank;37;37;49;50
+307A;HBc Ab IgM,ruti;Virusanalyser;1301_Blodbank;43;43;57;58
+308A;HTLV I/II Ab,ru;Virusanalyser;1301_Blodbank;45;45;59;60
+310A;Syfilis Ab;Virusanalyser;1301_Blodbank;39;39;51;52
+311A;HAV Ab total;Virusanalyser;1301_Blodbank;186;186;250;253
+312A;HAV Ab IgM;Virusanalyser;1301_Blodbank;186;186;250;253
+313A;Ultrio;Virusanalyser;1301_Blodbank;111;111;146;148
+314A;HIV 1,NAT;Virusanalyser;1301_Blodbank;111;111;146;148
+315A;HCV,NAT;Virusanalyser;1301_Blodbank;111;111;146;148
+316A;HBV,NAT;Virusanalyser;1301_Blodbank;111;111;146;148
+317A;HIV 1, LIA;Virusanalyser;1301_Blodbank;331;331;444;450
+318A;HIV 2, LIA;Virusanalyser;1301_Blodbank;0;0;0;0
+319A;HCV Ab, LIA;Virusanalyser;1301_Blodbank;405;405;544;551
+320A;HTLV I Ab, LIA;Virusanalyser;1301_Blodbank;496;496;665;674
+321A;HTLV II Ab, LIA;Virusanalyser;1301_Blodbank;496;496;665;674
+323A;HIV combo;Virusanalyser;1301_Blodbank;43;43;57;58
+324A;HBSAG GRAVID;Virusanalyser;1301_Blodbank;0;0;0;0
+326A;Hbc Ab Architect;Virusanalyser;1301_Blodbank;43;43;57;58
+327A;Syfilis konfirm.;Virusanalyser;1301_Blodbank;405;405;544;551
+328A;RPR Titer;Virusanalyser;1301_Blodbank;196;196;263;267
+331A;CMW Ab IgM;Virusanalyser;1301_Blodbank;101;101;133;135
+332A;CMV Ab IgG;Virusanalyser;1301_Blodbank;44;44;58;59
+10KI;FFP;Stamcelleenheden;1301_Labware;;0;0;0
+11KI;Nedfrysning x antal poser;Stamcelleenheden;1301_Labware;3.706;3.707;4.972;5.037
+12KI;CD34-oprensning NS;Stamcelleenheden;1301_Labware;76.529;76.552;76.529;100.666
+13KI;CD 34 oprensning large scale;Stamcelleenheden;1301_Labware;86.213;86.239;86.213;113.404
+14KI;Tilbagegift af celler;Stamcelleenheden;1301_Labware;5.907;5.909;7.927;8.029
+15KI;Calsiumdrop;Stamcelleenheden;1301_Labware;335;335;449;455
+16KI;Blodpriming;Stamcelleenheden;1301_Labware;1.121;1.121;1.505;1.524
+17KI;Volumenreduktion;Stamcelleenheden;1301_Labware;492;492;660;669
+18KI;Dyrkning;Stamcelleenheden;1301_Labware;268;268;360;364
+1KI;Leukocyttælling;Stamcelleenheden;1301_Labware;56;56;74;75
+20KI;Vask af autolog stamceller;Stamcelleenheden;1301_Labware;4.952;4.953;6.646;6.732
+21KI;SCT-tilkald;Stamcelleenheden;1301_Labware;1.683;1.683;2.258;2.287
+22KI;Granolocyt aferese-procedure;Stamcelleenheden;1301_Labware;6.603;6.605;8.861;8.975
+23KI;DLI aferese;Stamcelleenheden;1301_Labware;5.608;5.610;7.526;7.623
+24KI;CBU vask;Stamcelleenheden;1301_Labware;2.731;2.732;3.665;3.712
+25KI;CBU transplantation på afdeling;Stamcelleenheden;1301_Labware;3.388;3.389;4.547;4.605
+26KI;CD3/CD 19 normal scale;Stamcelleenheden;1301_Labware;88.622;88.648;88.622;116.572
+27KI;CD3/CD 19 large scale;Stamcelleenheden;1301_Labware;126.176;126.213;126.176;165.970
+28KI;CD3 depletering normal scale;Stamcelleenheden;1301_Labware;67.538;67.558;90.632;91.803
+29KI;CD3 depletering large scale;Stamcelleenheden;1301_Labware;88.020;88.046;118.119;119.645
+2KI;CD34-tælling;Stamcelleenheden;1301_Labware;1.092;1.092;1.466;1.485
+30KI;TCR alpha/beta depletering;Stamcelleenheden;1301_Labware;92.951;92.979;92.951;122.267
+31KI;Erytrocytudskiftning;Stamcelleenheden;1301_Labware;13.654;13.658;18.323;18.559
+32KI;TCR alpha/beta depletering large scale;Stamcelleenheden;1301_Labware;129.641;129.679;129.641;170.528
+33KI;Forundersøgelse;Stamcelleenheden;1301_Labware;5.701;6.203;7.651;8.157
+34KI;Plasmaudskiftning;Stamcelleenheden;1301_Labware;13.654;13.658;18.323;18.559
+3KI;CD8/4/3-tælling;Stamcelleenheden;1301_Labware;1.092;1.092;1.466;1.485
+4KI;Autolog psh.eget -plasma;Stamcelleenheden;1301_Labware;5.177;5.179;6.947;7.037
+5KI;Autolog psh. FFP;Stamcelleenheden;1301_Labware;5.176;5.178;6.946;7.036
+7KI;Allogen psh.;Stamcelleenheden;1301_Labware;6.084;6.086;8.165;8.270
+8KI;Allogen KM-HES;Stamcelleenheden;1301_Labware;6.050;6.052;8.119;8.224
+9KI;Navlesnorshøst;Stamcelleenheden;1301_Labware;38.227;38.238;51.299;51.962
