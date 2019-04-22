@@ -19,17 +19,25 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        # opret analysetyper og priser
-        analyse_typer_og_priser_filename = settings.BASE_DIR + \
-            '/backend/backend/assets/KI_eksterne_priser_2018.csv'
+        # opret analysetyper og priser   
+        #KI Priser
+        KI_priser_file = settings.BASE_DIR + \
+            '/backend/backend/assets/KI eksterne priser 2018.xlsx'
+            
+        KI_priser_df = pd.read_excel(KI_priser_file)
+        
+        data_found = False
+        
+        for row in KI_priser_df.iterrows():   
 
-        analyse_typer_og_priser_data_frame = pd.read_csv(
-            analyse_typer_og_priser_filename, sep=';', encoding='latin-1')
-        
-        for row in analyse_typer_og_priser_data_frame.iterrows():
-        
             _, method_data = row
-             
+            
+            if not data_found:
+                if str(method_data[0]).lower() == "ydelseskode":
+                    data_found = True
+                    continue            
+                continue            
+            
             ydelses_kode = method_data[0]
             ydelses_navn = method_data[1]
             gruppering = method_data[2]
@@ -49,17 +57,89 @@ class Command(BaseCommand):
             
             analyse_pris = AnalysePris.objects.create(intern_pris=intern_pris, ekstern_pris=ekstern_pris, analyse_type=analyse_type)
             
-        # opret rekvirenter
-        rekvirenter_filename = settings.BASE_DIR + \
-            '/backend/backend/assets/GLN_til_blodfakturering.csv'
-
-        rekvirenter_frame = pd.read_csv(
-            rekvirenter_filename, sep=';', encoding='latin-1')  
-           
-        for row in rekvirenter_frame.iterrows():
+        #KB Priser
+        KB_priser_file = settings.BASE_DIR + \
+            '/backend/backend/assets/KB eksterne priser 2018.xlsx'
             
+        KB_priser_df = pd.read_excel(KB_priser_file)
+        
+        data_found = False
+        
+        for row in KB_priser_df.iterrows():   
+
             _, method_data = row
-             
+            
+            if not data_found:
+                if str(method_data[0]).lower() == "ydelseskode":
+                    data_found = True
+                    continue            
+                continue            
+            
+            ydelses_kode = method_data[0]
+            ydelses_navn = method_data[1]
+            gruppering = method_data[2]
+            kilde_navn = method_data[3]
+            
+            type = ""
+            
+            analyse_type = AnalyseType.objects.create(ydelses_kode=ydelses_kode, ydelses_navn=ydelses_navn, gruppering=gruppering, type=type, kilde_navn=kilde_navn)
+            
+            intern_pris = method_data[5]
+            ekstern_pris = method_data[8]
+            
+            analyse_pris = AnalysePris.objects.create(intern_pris=intern_pris, ekstern_pris=ekstern_pris, analyse_type=analyse_type)
+            
+        #VTL Priser
+        VTL_priser_file = settings.BASE_DIR + \
+            '/backend/backend/assets/VTL eksterne priser 2018.xlsx'
+            
+        VTL_priser_df = pd.read_excel(VTL_priser_file)
+        
+        data_found = False
+        
+        for row in VTL_priser_df.iterrows():   
+
+            _, method_data = row
+            
+            if not data_found:
+                if str(method_data[0]).lower() == "ydelseskode":
+                    data_found = True
+                    continue            
+                continue            
+            
+            ydelses_kode = method_data[0]
+            ydelses_navn = method_data[1]
+            gruppering = method_data[2]
+            kilde_navn = method_data[3]
+            
+            type = ""
+            
+            analyse_type = AnalyseType.objects.create(ydelses_kode=ydelses_kode, ydelses_navn=ydelses_navn, gruppering=gruppering, type=type, kilde_navn=kilde_navn)
+            
+            intern_pris = method_data[5]
+            ekstern_pris = method_data[8]
+            
+            analyse_pris = AnalysePris.objects.create(intern_pris=intern_pris, ekstern_pris=ekstern_pris, analyse_type=analyse_type)
+            
+        # opret rekvirenter
+        #KI Rekvirenter
+        KI_rekvirenter_file = settings.BASE_DIR + \
+            '/backend/backend/assets/GLN til blodfakturering.xlsx'
+            
+        KI_rekvirenter_df = pd.read_excel(KI_rekvirenter_file)
+        
+        data_found = False
+        
+        for row in KI_rekvirenter_df.iterrows():
+        
+            _, method_data = row
+            
+            if not data_found:
+                if str(method_data[0]).lower() == "rekv_hosp":
+                    data_found = True
+                    continue            
+                continue 
+               
             hospital = method_data[0]
             niveau = method_data[1]
             afdelingsnavn = method_data[2]
