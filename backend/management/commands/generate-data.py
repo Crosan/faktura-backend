@@ -22,7 +22,7 @@ class Command(BaseCommand):
         # opret analysetyper og priser   
         #KI Priser
         KI_priser_file = settings.BASE_DIR + \
-            '/backend/backend/assets/KI eksterne priser 2018.xlsx'
+            '/backend/faktura/assets/KI eksterne priser 2018.xlsx'
             
         KI_priser_df = pd.read_excel(KI_priser_file)
         
@@ -59,7 +59,7 @@ class Command(BaseCommand):
             
         #KB Priser
         KB_priser_file = settings.BASE_DIR + \
-            '/backend/backend/assets/KB eksterne priser 2018.xlsx'
+            '/backend/faktura/assets/KB eksterne priser 2018.xlsx'
             
         KB_priser_df = pd.read_excel(KB_priser_file)
         
@@ -91,7 +91,7 @@ class Command(BaseCommand):
             
         #VTL Priser
         VTL_priser_file = settings.BASE_DIR + \
-            '/backend/backend/assets/VTL eksterne priser 2018.xlsx'
+            '/backend/faktura/assets/VTL eksterne priser 2018.xlsx'
             
         VTL_priser_df = pd.read_excel(VTL_priser_file)
         
@@ -124,7 +124,7 @@ class Command(BaseCommand):
         # opret rekvirenter
         #KI Rekvirenter
         KI_rekvirenter_file = settings.BASE_DIR + \
-            '/backend/backend/assets/GLN til blodfakturering.xlsx'
+            '/backend/faktura/assets/GLN til blodfakturering.xlsx'
             
         KI_rekvirenter_df = pd.read_excel(KI_rekvirenter_file)
         
