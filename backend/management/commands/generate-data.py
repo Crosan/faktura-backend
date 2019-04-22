@@ -1,6 +1,6 @@
 
 from django.core.management.base import BaseCommand, CommandError
-from backend.backend.models import *
+from backend.faktura.models import *
 from datetime import datetime, timedelta
 from django.core.management import call_command
 from django.conf import settings

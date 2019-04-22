@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
-    'backend.backend.apps.BackendConfig',
+    'backend.faktura.apps.FakturaConfig',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
