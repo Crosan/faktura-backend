@@ -117,3 +117,7 @@ venv.bak/
 .mypy_cache/
 graph*.png
 *.docx
+backend/faktura/models/receipt_file.py
+backend/faktura/admin.py
+backend/faktura/admin.py
+backend/faktura/admin.py
