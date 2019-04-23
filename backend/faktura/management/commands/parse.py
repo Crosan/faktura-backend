@@ -1,12 +1,17 @@
 
 from django.core.management.base import BaseCommand, CommandError
 from backend.faktura.models import *
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.core.management import call_command
 from django.conf import settings
 from dateutil.relativedelta import relativedelta
 from django.utils.timezone import now
+from django.core.exceptions import ObjectDoesNotExist
+from backend.faktura.extra.logger import *
 import pytz
+import pandas as pd
+import datetime
+import math
 
 
 class Command(BaseCommand):
@@ -15,7 +20,126 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--file', dest="file_path", required=False,
                             help='Path to excel file to parse (used for testing purposes).')
-
+    
+        
     def handle(self, *args, **options):
+    
+        def get_blodbank_rekvirent(HOSPITAL, L4NAME, L6NAME, analyse_type):
+            rekvirent = None
+        
+            if HOSPITAL == 'Bispebjerg og Frederiksberg Hospitaler':
+                try:
+                    rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, niveau='L6Name', afdelingsnavn=L6NAME)
+                except ObjectDoesNotExist:
+                    try:
+                        rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, niveau='L4Name', afdelingsnavn=L4NAME)
+                    except ObjectDoesNotExist:
+                        Logger.log("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+                        
+            elif HOSPITAL == 'Bornholm':
+                if not analyse_type.type == "Analyse":
+                    Logger.log("Fejl - Bornholm skal kun afregnes for virusanalyser")
+                    return None
+            
+                rekvirent = Rekvirent.objects.get(hospital=HOSPITAL)
+                
+            elif HOSPITAL == 'Amager og Hvidovre Hospital':
+                try:
+                    rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, niveau='L6Name', afdelingsnavn=L6NAME)
+                except ObjectDoesNotExist:
+                    try:
+                        rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, niveau='L4Name', afdelingsnavn=L4NAME)
+                    except ObjectDoesNotExist:
+                        Logger.log("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+                
+            elif HOSPITAL == 'Herlev og Gentofte Hospital':
+                try:
+                    rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, niveau='L4Name', afdelingsnavn=L4NAME)
+                except ObjectDoesNotExist:
+                    Logger.log("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+                
+                if rekvirent and rekvirent.GLN_nummer == "5798001502092":
+                    if not analyse_type.type == "Blodprodukt":
+                        Logger.log("Fejl - Hud- og allergiafdeling, overafd. U, GE skal kun afregnes for blodprodukter")
+                        return None
+                
+            elif HOSPITAL == 'Rigshospitalet' and L4NAME == 'Medicinsk overafd., M GLO':
+                rekvirent = Rekvirent.objects.get(GLN_nummer="5798001026031")
+                
+            elif HOSPITAL == 'Hospitalerne i Nordsjælland':
+                rekvirent = Rekvirent.objects.get(GLN_nummer="5798001068154")
+                
+            else:
+                Logger.log("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+                
+            return rekvirent
+            
+    
+        def parse_blodbank(method_data):
+            ANTAL = method_data[0]
+            YDELSESKODE = method_data[1]
+            HOSPITAL = method_data[12]
+            L4NAME = method_data[14]
+            L6NAME = method_data[17]
+            #Maybe try/catch here
+            DATO_DWKEY = datetime.datetime.strptime(method_data[19], "%Y%m%d").replace(tzinfo=pytz.UTC)
+            INSERT_DATO = method_data[20]
+            CPR = method_data[21]
+            
+            analyse_type = None
+            
+            try:
+                analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
+            except ObjectDoesNotExist:
+                Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE) 
 
-        print("HEY")
+            rekvirent = get_blodbank_rekvirent(str(HOSPITAL), str(L4NAME), str(L6NAME), analyse_type)
+                
+            PRIS = ""
+                
+            if analyse_type and rekvirent:
+            
+                if math.isnan(ANTAL):
+                    Logger.log("Fejl - Antallet af analyser ikke angivet for analyse med ydelseskode " + YDELSESKODE)
+                    return
+                
+                for p in analyse_type.priser.order_by('-gyldig_fra'):
+                    if p.gyldig_fra < now() and (not p.gyldig_til or p.gyldig_til > now()):
+                        PRIS = p.ekstern_pris
+                        
+                analyse = Analyse.objects.create(antal=ANTAL, pris=PRIS, CPR=CPR, rekvisitions_dato=DATO_DWKEY, analyse_type=analyse_type, rekvirent=rekvirent)
+                
+                print(analyse)
+            
+        def parse_other(method_data):
+            print(method_data[0])
+    
+        if options['file_path']:
+            KI_priser_file = options['file_path']
+            
+            
+            KI_priser_df = pd.read_excel(KI_priser_file, header=None)
+            
+            data_source = None
+            
+            for row in KI_priser_df.iterrows():   
+
+                _, method_data = row
+                
+                #Parse the data
+                if data_source and data_source.lower() == "blodbank":
+                    parse_blodbank(method_data)
+                elif data_source and data_source.lower() == "other":
+                    parse_other(method_data)
+                
+                #Set data source
+                if not data_source and str(method_data[0]).lower() == "antal":
+                    data_source = "blodbank"
+                elif not data_source:
+                    data_source = "other"
+                
+
+        else:
+            print("HEY")   
+    
+        

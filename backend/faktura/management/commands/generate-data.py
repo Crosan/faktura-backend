@@ -48,7 +48,7 @@ class Command(BaseCommand):
             if ydelses_kode.startswith('T') or ydelses_kode.endswith('A'):
                 type = "Analyse"
             else:
-                type = "Blodprodukter"
+                type = "Blodprodukt"
             
             analyse_type = AnalyseType.objects.create(ydelses_kode=ydelses_kode, ydelses_navn=ydelses_navn, gruppering=gruppering, type=type, kilde_navn=kilde_navn)
             
@@ -56,6 +56,7 @@ class Command(BaseCommand):
             ekstern_pris = method_data[7]
             
             analyse_pris = AnalysePris.objects.create(intern_pris=intern_pris, ekstern_pris=ekstern_pris, analyse_type=analyse_type)
+            
             
         #KB Priser
         KB_priser_file = settings.BASE_DIR + \

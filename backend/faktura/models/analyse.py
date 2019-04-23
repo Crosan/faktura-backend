@@ -8,8 +8,10 @@ from .rekvirent import Rekvirent
 
 class Analyse(models.Model):
     antal = models.IntegerField(default=1)
-    rekvisitions_dato = models.DateTimeField()
+    pris = models.CharField(max_length=50)
+    CPR = models.CharField(max_length=50)
     afregnings_dato = models.DateTimeField(default=now)
+    svar_dato = models.DateTimeField(blank=True, null=True)
     analyse_type = models.ForeignKey(
         'AnalyseType', related_name='analyser', on_delete=models.PROTECT, blank=True, null=True)
     rekvirent = models.ForeignKey(
