@@ -1,14 +1,15 @@
 
 from django.core.management.base import BaseCommand, CommandError
 from backend.faktura.models import *
-from datetime import datetime, timedelta
 from django.core.management import call_command
 from django.conf import settings
 from dateutil.relativedelta import relativedelta
 from django.utils.timezone import now
-import pytz
 import pandas as pd
 import math
+import pytz
+from pytz import timezone
+from datetime import datetime
 
 
 class Command(BaseCommand):
@@ -17,8 +18,14 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('-f', '--force', dest="force", action="store_true",
                             help='Override debug settings and always create dummy data.')
+    
 
     def handle(self, *args, **options):
+    
+        #Convert datetime
+        def to_UTC(self, d : datetime):
+            cph_tz = timezone('Europe/Copenhagen')
+            return cph_tz.normalize(cph_tz.localize(d)).astimezone(pytz.utc)
     
         #Creates an analyse_type object
         def create_analyse_type(method_data):
@@ -42,8 +49,11 @@ class Command(BaseCommand):
                     type = "Analyse"
                 else:
                     type = "Blodprodukt"
-                
-            analyse_type = AnalyseType.objects.create(ydelses_kode=ydelses_kode, ydelses_navn=ydelses_navn, gruppering=gruppering, afdeling=afdeling, type=type, kilde_navn=kilde_navn)
+                    
+            try:
+                analyse_type = AnalyseType.objects.get(ydelses_kode=method_data[0])   
+            except:
+                analyse_type = AnalyseType.objects.create(ydelses_kode=ydelses_kode, ydelses_navn=ydelses_navn, gruppering=gruppering, afdeling=afdeling, type=type, kilde_navn=kilde_navn)
             
             return analyse_type
             
@@ -53,12 +63,12 @@ class Command(BaseCommand):
             intern_pris = method_data[4]
             ekstern_pris = method_data[5]
             try:
-                gyldig_fra = method_data[7].replace(tzinfo=pytz.UTC)
+                gyldig_fra = to_UTC(method_data[7])
             except:
-                gyldig_fra = now().replace(tzinfo=pytz.UTC)
+                gyldig_fra = now()
                 
             try:
-                gyldig_til = method_data[8].replace(tzinfo=pytz.UTC)
+                gyldig_til = to_UTC(method_data[8])
             except:
                 gyldig_til = None
                 
@@ -77,7 +87,7 @@ class Command(BaseCommand):
         
         data_found = False
         
-        for row in KI_priser_df.iterrows():   
+        for row in KI_priser_df.iterrows():  
 
             _, method_data = row
             

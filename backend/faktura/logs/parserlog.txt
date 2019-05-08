@@ -1,117 +1,573 @@
-28-04-2019 16:17:18 - Fejl - Kunne ikke finde analyse med ydelseskode HBVCIGM.
-28-04-2019 16:17:18 - Fejl - Kunne ikke finde analyse med ydelseskode GRAV1US.
-28-04-2019 16:17:18 - Fejl - Kunne ikke finde analyse med ydelseskode GRAV1US.
-28-04-2019 16:17:18 - Fejl - Kunne ikke finde analyse med ydelseskode GRAVUSUH.
-28-04-2019 16:17:18 - Fejl - Kunne ikke finde analyse med ydelseskode GRAV1US.
-28-04-2019 16:17:18 - Fejl - Kunne ikke finde analyse med ydelseskode GRAV1US.
-28-04-2019 16:17:19 - Fejl - Kunne ikke finde analyse med ydelseskode HBVSAG.
-28-04-2019 16:17:19 - Fejl - Kunne ikke finde analyse med ydelseskode HIVCOMBO.
-28-04-2019 16:17:19 - Fejl - Kunne ikke finde analyse med ydelseskode HCVAB.
-28-04-2019 16:17:19 - Fejl - Kunne ikke finde analyse med ydelseskode KIA205.
-28-04-2019 16:17:19 - Fejl - Kunne ikke finde analyse med ydelseskode HBVCAB.
-28-04-2019 16:17:19 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:20 - Fejl - Kunne ikke finde analyse med ydelseskode INFOHÆMD.
-28-04-2019 16:17:20 - Fejl - Kunne ikke finde analyse med ydelseskode ANÆMI4.
-28-04-2019 16:17:20 - Fejl - Kunne ikke finde analyse med ydelseskode INFOTKON2.
-28-04-2019 16:17:20 - Fejl - Kunne ikke finde analyse med ydelseskode venlafax.
-28-04-2019 16:17:20 - Fejl - Kunne ikke finde analyse med ydelseskode desven.
-28-04-2019 16:17:20 - Fejl - Kunne ikke finde analyse med ydelseskode ven.
-28-04-2019 16:17:20 - Fejl - Kunne ikke finde analyse med ydelseskode BASTEST.
-28-04-2019 16:17:21 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:21 - Fejl - Kunne ikke finde analyse med ydelseskode DNAHFEL.
-28-04-2019 16:17:21 - Fejl - Kunne ikke finde analyse med ydelseskode EPC00195.
-28-04-2019 16:17:21 - Fejl - Kunne ikke finde analyse med ydelseskode TOXOGON.
-28-04-2019 16:17:21 - Fejl - Kunne ikke finde analyse med ydelseskode DNAHFEL.
-28-04-2019 16:17:22 - Fejl - Kunne ikke finde analyse med ydelseskode GRAV1US.
-28-04-2019 16:17:22 - Fejl - Kunne ikke finde analyse med ydelseskode GRAV1US.
-28-04-2019 16:17:22 - Fejl - Kunne ikke finde analyse med ydelseskode DNAPHPT.
-28-04-2019 16:17:22 - Fejl - Kunne ikke finde analyse med ydelseskode DNAHFEL.
-28-04-2019 16:17:22 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:22 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:22 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:23 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode eGFRbørn.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ZINK.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode ERYRDW.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode TYPE.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode GRAV1US.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode EPROPORH.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode SCREENAB.
-28-04-2019 16:17:24 - Fejl - Kunne ikke finde analyse med ydelseskode BASTEST.
-28-04-2019 16:17:25 - Fejl - Kunne ikke finde analyse med ydelseskode BASTEST.
-28-04-2019 16:17:25 - Fejl - Kunne ikke finde analyse med ydelseskode GRAV2US.
-28-04-2019 16:17:25 - Fejl - Kunne ikke finde analyse med ydelseskode ERYRDW.
-28-04-2019 16:17:25 - Fejl - Kunne ikke finde analyse med ydelseskode DNAPGS.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semabst.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semkonkl.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semkons.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semtid.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semudse.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode STERIL.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semvol.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semabst.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semkonkl.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semkons.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semleu.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semmaiga.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semmaigg.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semmorf.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semnprm.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode sempen.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semph.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semprm.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semspkonc.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semtid.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semtotal.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semube.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semudse.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semvol.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode SPERMA.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode spelev.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semabst.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semkonkl.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semkons.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semleu.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semmaiga.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semmaigg.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semmorf.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semnprm.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode sempen.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semph.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semprm.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semspkonc.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semtotal.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semtid.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semudse.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semube.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode semvol.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode spelev.
-28-04-2019 16:17:26 - Fejl - Kunne ikke finde analyse med ydelseskode SPERMA.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk sengeafsnit L124.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Gynækologisk/Obstetrisk overafd. G - Obstetrisk amb. G2A102.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124D.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 005A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 110A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Hæmatologisk overafd. L - Med. Hæmatologisk amb. LA124A.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Blodbanken - 54K6.
+08-05-2019 02:13:14 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 005A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 110A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 591T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Blodbanken - 54K6.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 550T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 110A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 110A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 001A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 001A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 712A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 712A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 712A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 712A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 712A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 712A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E5060VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E5060VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E5060VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3587VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3587VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Hæmatologisk ambulatorium 4041L9.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Hæmatologisk ambulatorium 4041L9.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3894VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Øjenklinikken, Ø - Øjenkl. cornea ØGA44COR GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 313A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hjerte-medicinsk Klinik B - Hjertemedicinsk ambulatorium 8523PACE.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hjerte-medicinsk Klinik B - Hjertemedicinsk ambulatorium 8523PACE.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Bispebjerg og Frederiksberg Hospitaler - Audiologisk ambulatorie, udefunktion RH - Audiologisk afsnit AUAM.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Bispebjerg og Frederiksberg Hospitaler - Audiologisk ambulatorie, udefunktion RH - Audiologisk afsnit AUAM.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 110A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 141A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3898VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Øjenklinikken, Ø - Øjenkl. externa ØGA46EXT GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Øjenklinikken, Ø - Øjenkl. externa ØGA46EXT GLO.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Bornholms Hospital - Medicinsk overafd. - Med. Onk. Amb..
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Bornholms Hospital - Medicinsk overafd. - Med. Onk. Amb..
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 323A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 301A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 302A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 550T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 550T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode 588T.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:18 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode E3846VP.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 323A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 301A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 303A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 304A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 302A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 332A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk klinik sengeafsnit 3134P2.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 501A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk klinik sengeafsnit 3133P2.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk klinik sengeafsnit 3134P2.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 500A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk klinik sengeafsnit 3133P2.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 310A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Infektionsmedicinsk Klinik - Infektion ambulatorium 8622IR9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 301A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Infektionsmedicinsk Klinik - Infektion ambulatorium 8622IR9.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde analyse med ydelseskode 400A.
+08-05-2019 02:14:19 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - BørneUngeKlinikken - Hæmatologisk/onkologisk børn sengeafsnit 5054GGKB.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Klinisk Immunologi - 2031.
+08-05-2019 02:25:23 - Fejl - Kunne ikke finde rekvirent Herlev og Gentofte Hospital - Blodbanken - 54K6.
+08-05-2019 02:25:24 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Hæmatologisk ambulatorium 4041L9.
+08-05-2019 02:25:24 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Hæmatologisk ambulatorium 4041L9.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Øjenklinikken, Ø - Øjenkl. cornea ØGA44COR GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:25 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - nan - DEKS,GLO.
+08-05-2019 02:25:26 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hjerte-medicinsk Klinik B - Hjertemedicinsk ambulatorium 8523PACE.
+08-05-2019 02:25:26 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hjerte-medicinsk Klinik B - Hjertemedicinsk ambulatorium 8523PACE.
+08-05-2019 02:25:26 - Fejl - Kunne ikke finde rekvirent Bispebjerg og Frederiksberg Hospitaler - Audiologisk ambulatorie, udefunktion RH - Audiologisk afsnit AUAM.
+08-05-2019 02:25:26 - Fejl - Kunne ikke finde rekvirent Bispebjerg og Frederiksberg Hospitaler - Audiologisk ambulatorie, udefunktion RH - Audiologisk afsnit AUAM.
+08-05-2019 02:25:28 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Øjenklinikken, Ø - Øjenkl. externa ØGA46EXT GLO.
+08-05-2019 02:25:28 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Øjenklinikken, Ø - Øjenkl. externa ØGA46EXT GLO.
+08-05-2019 02:25:28 - Fejl - Kunne ikke finde rekvirent Bornholms Hospital - Medicinsk overafd. - Med. Onk. Amb..
+08-05-2019 02:25:28 - Fejl - Kunne ikke finde rekvirent Bornholms Hospital - Medicinsk overafd. - Med. Onk. Amb..
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Hæmatologisk Klinik - Enheden for Trombose og Hæmostase 4222L9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk amb., Dialyseafsnit H 8601P9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk klinik sengeafsnit 3134P2.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk klinik sengeafsnit 3133P2.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk klinik sengeafsnit 3134P2.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Nefrologisk Klinik, P - Nefrologisk klinik sengeafsnit 3133P2.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Infektionsmedicinsk Klinik - Infektion ambulatorium 8622IR9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - Infektionsmedicinsk Klinik - Infektion ambulatorium 8622IR9.
+08-05-2019 02:25:29 - Fejl - Kunne ikke finde rekvirent Rigshospitalet - BørneUngeKlinikken - Hæmatologisk/onkologisk børn sengeafsnit 5054GGKB.
