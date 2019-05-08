@@ -21,6 +21,12 @@ router.register(r'analyser-nested', views.NestedAnalyseViewSet)
 router.register(r'rekvirenter', views.RekvirentViewSet)
 router.register(r'rekvirenter-nested', views.NestedRekvirentViewSet)
 
+router.register(r'parsing', views.ParsingViewSet)
+router.register(r'parsing-nested', views.NestedParsingViewSet)
+
+router.register(r'parsing-status', views.ParsingStatusViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
+    url(r'^priser/', views.NewPricesView.as_view()),
 ]

@@ -16,5 +16,7 @@ class Analyse(models.Model):
         'AnalyseType', related_name='analyser', on_delete=models.PROTECT, blank=True, null=True)
     rekvirent = models.ForeignKey(
         'Rekvirent', related_name='analyser', on_delete=models.PROTECT, blank=True, null=True)
+    parsing = models.ForeignKey(
+        'Parsing', related_name='analyser', on_delete=models.CASCADE, blank=True, null=True)
 
     objects = models.Manager()

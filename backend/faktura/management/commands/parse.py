@@ -116,13 +116,13 @@ class Command(BaseCommand):
                 
             return False
             
-        def get_labka_rekvirent(REKVIRENT, PAYERCODE, EAN_NUMMER, analyse_type):
+        def get_labka_rekvirent(HOSPITAL, AFDELING, EAN_NUMMER, analyse_type):
             rekvirent = None
             
             try:
-                rekvirent = Rekvirent.objects.get(hospital=REKVIRENT, afdelingsnavn=PAYERCODE, GLN_nummer=EAN_NUMMER)
+                rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, afdelingsnavn=AFDELING, GLN_nummer=EAN_NUMMER)
             except ObjectDoesNotExist:
-                rekvirent = Rekvirent.objects.create(hospital=REKVIRENT, afdelingsnavn=PAYERCODE, GLN_nummer=EAN_NUMMER)
+                rekvirent = Rekvirent.objects.create(hospital=HOSPITAL, afdelingsnavn=AFDELING, GLN_nummer=EAN_NUMMER)
                 
             return rekvirent
             
@@ -132,8 +132,8 @@ class Command(BaseCommand):
             YDELSESKODE = method_data[4]
             #Maybe try/catch here
             SVAR_DATO = method_data[10].replace(tzinfo=pytz.UTC)
-            REKVIRENT = method_data[13]
-            PAYERCODE = method_data[14]
+            AFDELING = method_data[13]
+            HOSPITAL = method_data[20]
             EAN_NUMMER = method_data[21]
             
             if not str(EAN_NUMMER):
@@ -147,7 +147,7 @@ class Command(BaseCommand):
             except ObjectDoesNotExist:
                 Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE) 
 
-            rekvirent = get_labka_rekvirent(str(REKVIRENT), str(PAYERCODE), str(EAN_NUMMER), analyse_type)
+            rekvirent = get_labka_rekvirent(str(HOSPITAL), str(AFDELING), str(EAN_NUMMER), analyse_type)
                 
             PRIS = ""
                 
@@ -206,7 +206,7 @@ class Command(BaseCommand):
             
             #Write to excel
             writer = ExcelWriter('Pandas-Example2.xlsx')
-            error_list_df.to_excel(writer, 'Sheet1', index=False, header=None)
+            error_list_df.to_excel(writer, 'Mangelliste', index=False, header=None)
             writer.save()
             
         else:
