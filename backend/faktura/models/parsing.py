@@ -2,8 +2,8 @@ import os
 
 from django.db import models
 from django.utils.timezone import now
-from model_utils import Choices
 
+from model_utils import Choices
 
 ParsingStatusChoices = Choices((1, 'oprettet'), (2, 'faktura sendt'), (3, 'slettet'))
 
