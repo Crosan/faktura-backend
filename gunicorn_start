@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# create keytab
+#/bin/bash ./scripts/generate-keytab.sh
+
+VOLUME_DIR="/var/faktura"
+
+[ ! -d "$VOLUME_DIR" ] && { echo "please mount a shared volume at /var/faktura, goodbye"; exit; }
+
+## creates log and socket dir in docker volume
+BACKEND_SHARED_DIR="$VOLUME_DIR/backend"
+LOG_DIR="$BACKEND_SHARED_DIR/logs"
+RUN_DIR="$BACKEND_SHARED_DIR/run"
+STATIC_DIR="$BACKEND_SHARED_DIR/static"
+MEDIA_DIR="$BACKEND_SHARED_DIR/media"
+SECRETS="/docker/secrets"
+
+mkdir -p "$LOG_DIR"
+mkdir -p "$RUN_DIR"
+mkdir -p "$MEDIA_DIR"
+mkdir -p "$STATIC_DIR"
+
+## symbolic links to media and static to docker volume
+[ -d "/usr/src/app/backend/static" ] && cp -rfT /usr/src/app/backend/static "$STATIC_DIR"
+[ -d "/usr/src/app/backend/media" ] && cp -rfT /usr/src/app/backend/media "$MEDIA_DIR"
+
+if [ "x$1" = "x" ] ; then echo "environment not provided"; exit; fi
+
+### GUNICORN RELATED ENVIRONMENT VARIABLES ###
+NAME="faktura"
+DJANGODIR=/usr/src/app/backend
+USER=root
+GROUP=root
+WORKERS=3
+BIND=unix:"$RUN_DIR/gunicorn.sock"
+DJANGO_SETTINGS_MODULE=backend.settings.${ENV}
+DJANGO_WSGI_MODULE=backend.wsgi
+LOGLEVEL=error
+
+#if [[ "$ENV" == "testing" || "$ENV" == "production" ]]; then
+    #echo "SOURCING CREDS_STD"
+    #source "$SECRETS/creds_std"
+#fi
+
+#if [[ "$ENV" == "production" ]]; then
+    #echo "SOURCING CREDS_MS"
+    #source "$SECRETS/creds_ms"
+#fi
+
+cd $DJANGODIR
+
+export LOG_DIR
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+
+# generate keytab
+#if [[ "$ENV" == "testing" || "$ENV" == "production" ]]; then
+    #echo "SOURCING CREDS_KT"
+    #source "$SECRETS/creds_kt"
+    #keytab_script="../scripts/generate-keytab.sh"
+
+    #"$keytab_script" "$KEYTAB_PRINCIPAL" "$KEYTAB_PASSWORD"
+
+    ## create ticket
+    #KEYTAB_FILE="$SECRETS/kmad0174.kt"
+    #kinit -kt "$KEYTAB_FILE" "$KEYTAB_PRINCIPAL"
+#fi
+
+# prepare database
+manage_script="./manage.py"
+"$manage_script" makemigrations genomisk
+"$manage_script" migrate
+"$manage_script" generate-data
+
+exec gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL --log-file=-

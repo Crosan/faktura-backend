@@ -17,11 +17,12 @@ class Command(BaseCommand):
                             help='Override debug settings and always create dummy data.')
 
     def handle(self, *args, **options):
-
-        call_command('generate-data')
+        print("Opretter mock data... ", end='', flush=True)
         
         analyseType1 = AnalyseType.objects.get(pk=1)
         
         rekvirent1 = Rekvirent.objects.get(pk=1)
         
         analyse1 = Analyse.objects.create(antal=2, rekvisitions_dato=now(), afregnings_dato=now(), analyse_type=analyseType1, rekvirent=rekvirent1)
+
+        print("done")
