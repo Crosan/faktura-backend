@@ -21,6 +21,8 @@ class Parser:
 
     @classmethod
     def parse(self, parsing_object):
+    
+        print("Parsing...")
 
         excel_parser = ExcelParser()
         
@@ -276,7 +278,7 @@ class ExcelParser:
             
             for p in analyse_type.priser.order_by('-gyldig_fra'):
                 if p.gyldig_fra < now() and (not p.gyldig_til or p.gyldig_til > now()):
-                    PRIS = p.ekstern_pris
+                    STYK_PRIS = p.ekstern_pris
                     
             SAMLET_PRIS = int(ANTAL) * STYK_PRIS
                     
