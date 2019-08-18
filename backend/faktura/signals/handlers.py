@@ -4,18 +4,16 @@ from backend.faktura.models import *
 
 from backend.faktura.extra.parser import Parser
     
-@receiver(post_save, sender=Parsing)
-def parsing_created(sender, **kwargs):
-    instance = kwargs['instance']
-
-    Parser.parse(instance)
-    
-    status = ParsingStatus.objects.create(status=1, parsing=instance)
-    
-@receiver(post_save, sender=ParsingStatus)
-def parsing_status_created(sender, **kwargs):
+@receiver(post_save, sender=Faktura)
+def faktura_created(sender, **kwargs):
     instance = kwargs['instance']
     
-    instance.parsing.status = instance.status
+    status = FakturaStatus.objects.create(status=10, faktura=instance)
+    
+@receiver(post_save, sender=FakturaStatus)
+def faktura_status_created(sender, **kwargs):
+    instance = kwargs['instance']
+    
+    instance.faktura.status = instance.status
 
 

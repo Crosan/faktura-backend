@@ -68,6 +68,8 @@ class NewPricesView(views.APIView):
             analyse_pris = AnalysePris(intern_pris=intern_pris, ekstern_pris=ekstern_pris, gyldig_fra=gyldig_fra, gyldig_til=gyldig_til, analyse_type=analyse_type)              
                 
             return analyse_pris 
+            
+        print(request.data['file'])
     
         file = request.data['file']
         
@@ -76,6 +78,7 @@ class NewPricesView(views.APIView):
         data_found = False
         
         new_prices = []
+        analyse_type_objects = []
 
         new_analyse_typer = []
         
@@ -98,11 +101,13 @@ class NewPricesView(views.APIView):
                 analyse_pris = create_analyse_pris(method_data, analyse_type)
             
                 new_prices.append(analyse_pris)
+                analyse_type_objects.append(AnalyseType.objects.get(pk=analyse_pris.analyse_type.id))
             
         serialized_prices = serializers.serialize('json', new_prices)
         serialized_types = serializers.serialize('json', new_analyse_typer)
+        serialized_analyse_type_objects = serializers.serialize('json', analyse_type_objects)
         
-        return Response(data={"prices": serialized_prices, "new_analyse_typer": serialized_types}, status=status.HTTP_200_OK)
+        return Response(data={"prices": serialized_prices, "new_analyse_typer": serialized_types, "analyse_type_objects": serialized_analyse_type_objects}, status=status.HTTP_200_OK)
         
         
         

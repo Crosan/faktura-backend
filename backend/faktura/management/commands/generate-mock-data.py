@@ -23,6 +23,6 @@ class Command(BaseCommand):
         
         rekvirent1 = Rekvirent.objects.get(pk=1)
         
-        analyse1 = Analyse.objects.create(antal=2, rekvisitions_dato=now(), afregnings_dato=now(), analyse_type=analyseType1, rekvirent=rekvirent1)
+        analyse1 = Analyse.objects.create(antal=2, CPR="p1", afregnings_dato=now(), svar_dato=now(), analyse_type=analyseType1)
 
         print("done")

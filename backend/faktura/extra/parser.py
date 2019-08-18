@@ -35,6 +35,10 @@ class Parser:
         
         antal_oprettet = 0
         samlet_pris = 0
+        
+        rekvirent_list = []
+        
+        faktura_list = []
             
         for row in df.iterrows():   
 
@@ -44,23 +48,50 @@ class Parser:
             #If the data source if blodbank
             if data_source and data_source.lower() == "blodbank":
                 #Parse row and save result
-                analyse = excel_parser.parse_blodbank(method_data, parsing_object)
+                rekvirent = excel_parser.get_blodbank_rekvirent(method_data)
+                faktura = None
+                analyse = None
+                
+                if rekvirent:              
+                    if not rekvirent.id in rekvirent_list:
+                        rekvirent_list.append(rekvirent.id)
+                        faktura = Faktura.objects.create(parsing=parsing_object, rekvirent=rekvirent)
+                        faktura_list.append(faktura)
+                    else:
+                        index = rekvirent_list.index(rekvirent.id)
+                        faktura = faktura_list[index]
+                        
+                    analyse = excel_parser.parse_blodbank(method_data, faktura)
+                    
                 #If there was an error append the data to error list
                 if not analyse:
                     error_list_list.append(method_data)
-                else:
-                    antal_oprettet = antal_oprettet + 1
-                    samlet_pris = samlet_pris + analyse.pris
+                elif faktura:
+                    faktura.antal_linjer = faktura.antal_linjer + 1
+                    faktura.samlet_pris = faktura.samlet_pris + analyse.samlet_pris                    
             #If the data source is LABKA
             elif data_source and data_source.lower() == "labka":
                 #Parse row and save result
-                analyse = excel_parser.parse_labka(method_data, parsing_object)
+                rekvirent = excel_parser.get_labka_rekvirent(method_data)
+                faktura = None
+                analyse = None
+                
+                if rekvirent:              
+                    if not rekvirent.id in rekvirent_list:
+                        rekvirent_list.append(rekvirent.id)
+                        faktura = Faktura.objects.create(parsing=parsing_object, rekvirent=rekvirent)
+                        faktura_list.append(faktura)
+                    else:
+                        index = rekvirent_list.index(rekvirent.id)
+                        faktura = faktura_list[index]
+                
+                    analyse = excel_parser.parse_labka(method_data, faktura)
                 #If there was an error append the data to error list
                 if not analyse:
                     error_list_list.append(method_data)
-                else:
-                    antal_oprettet = antal_oprettet + 1
-                    samlet_pris = samlet_pris + analyse.pris
+                elif faktura:
+                    faktura.antal_linjer = faktura.antal_linjer + 1
+                    faktura.samlet_pris = faktura.samlet_pris + analyse.samlet_pris  
                 
             #Set data source
             if not data_source and str(method_data[0]).lower() == "antal":
@@ -76,18 +107,33 @@ class Parser:
         error_list_df = pd.DataFrame(error_list_list)
         
         #Write to excel
-        mangel_liste_file_path = './media/mangellister/{}.xlsx'.format(parsing_object.id)
+        mangel_liste_file_path = './backend/media/mangellister/{}.xlsx'.format(parsing_object.id)
         writer = ExcelWriter(mangel_liste_file_path)
         error_list_df.to_excel(writer, 'Mangelliste', index=False, header=None)
         writer.save()
         
         parsing_object.mangel_liste_fil = 'mangellister/{}.xlsx'.format(parsing_object.id)
-        parsing_object.antal_oprettet = antal_oprettet
-        parsing_object.samlet_pris = samlet_pris
+        
+        for faktura in faktura_list:
+            Faktura.objects.filter(id=faktura.id).update(antal_linjer=faktura.antal_linjer)
+            Faktura.objects.filter(id=faktura.id).update(samlet_pris=faktura.samlet_pris)
 
 
 class ExcelParser:
-    def get_blodbank_rekvirent(self, HOSPITAL, L4NAME, L6NAME, analyse_type):
+    def get_blodbank_rekvirent(self, method_data):
+        YDELSESKODE = method_data[1]
+        HOSPITAL = str(method_data[12])
+        L4NAME = str(method_data[14])
+        L6NAME = str(method_data[17])
+        
+        analyse_type = None
+        
+        try:
+            analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
+        except ObjectDoesNotExist:
+            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
+            return None            
+        
         rekvirent = None
     
         if HOSPITAL == 'Bispebjerg og Frederiksberg Hospitaler':
@@ -138,7 +184,7 @@ class ExcelParser:
         return rekvirent
         
     
-    def parse_blodbank(self, method_data, parsing_object):
+    def parse_blodbank(self, method_data, faktura):
         ANTAL = method_data[0]
         YDELSESKODE = method_data[1]
         HOSPITAL = method_data[12]
@@ -154,13 +200,11 @@ class ExcelParser:
         try:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
-            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE) 
-
-        rekvirent = self.get_blodbank_rekvirent(str(HOSPITAL), str(L4NAME), str(L6NAME), analyse_type)
+            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
             
-        PRIS = ""
+        STYK_PRIS = 0
             
-        if analyse_type and rekvirent:
+        if analyse_type:
         
             if math.isnan(ANTAL):
                 Logger.log("Fejl - Antallet af analyser ikke angivet for analyse med ydelseskode " + YDELSESKODE)
@@ -168,16 +212,30 @@ class ExcelParser:
             
             for p in analyse_type.priser.order_by('-gyldig_fra'):
                 if p.gyldig_fra < now() and (not p.gyldig_til or p.gyldig_til > now()):
-                    PRIS = p.ekstern_pris
+                    STYK_PRIS = p.ekstern_pris
                     
-            analyse = Analyse.objects.create(antal=ANTAL, pris=PRIS, CPR=CPR, svar_dato=SVAR_DATO, analyse_type=analyse_type, rekvirent=rekvirent, parsing=parsing_object)
+            SAMLET_PRIS = int(ANTAL) * STYK_PRIS
+                    
+            analyse = Analyse.objects.create(antal=ANTAL, styk_pris=STYK_PRIS, samlet_pris=SAMLET_PRIS, CPR=CPR, svar_dato=SVAR_DATO, analyse_type=analyse_type, faktura=faktura)
             
-            print(analyse)
             return analyse
             
         return None
         
-    def get_labka_rekvirent(self, REKVIRENT, PAYERCODE, EAN_NUMMER, analyse_type):
+    def get_labka_rekvirent(self, method_data):
+        YDELSESKODE = method_data[4]
+        REKVIRENT = str(method_data[13])
+        PAYERCODE = str(method_data[14])
+        EAN_NUMMER = str(method_data[21])
+        
+        analyse_type = None
+        
+        try:
+            analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
+        except ObjectDoesNotExist:
+            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
+            return None 
+            
         rekvirent = None
         
         try:
@@ -187,7 +245,7 @@ class ExcelParser:
             
         return rekvirent
         
-    def parse_labka(self, method_data, parsing_object):
+    def parse_labka(self, method_data, faktura):
         ANTAL = 1
         CPR = method_data[3]
         YDELSESKODE = method_data[4]
@@ -200,19 +258,17 @@ class ExcelParser:
         if not str(EAN_NUMMER):
             Logger.log("Fejl - Intet EAN_nummer angivet")
             return None
-        
+            
         analyse_type = None
 
         try:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
-            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE) 
-
-        rekvirent = self.get_labka_rekvirent(str(REKVIRENT), str(PAYERCODE), str(EAN_NUMMER), analyse_type)
+            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
             
-        PRIS = ""
+        STYK_PRIS = 0
             
-        if analyse_type and rekvirent:
+        if analyse_type:
         
             if math.isnan(ANTAL):
                 Logger.log("Fejl - Antallet af analyser ikke angivet for analyse med ydelseskode " + YDELSESKODE)
@@ -222,9 +278,10 @@ class ExcelParser:
                 if p.gyldig_fra < now() and (not p.gyldig_til or p.gyldig_til > now()):
                     PRIS = p.ekstern_pris
                     
-            analyse = Analyse.objects.create(antal=ANTAL, pris=PRIS, CPR=CPR, svar_dato=SVAR_DATO, analyse_type=analyse_type, rekvirent=rekvirent, parsing=parsing_object)
+            SAMLET_PRIS = int(ANTAL) * STYK_PRIS
+                    
+            analyse = Analyse.objects.create(antal=ANTAL, styk_pris=STYK_PRIS, samlet_pris=SAMLET_PRIS, CPR=CPR, svar_dato=SVAR_DATO, analyse_type=analyse_type, faktura=faktura)
             
-            print(analyse)
             return analyse
             
         return None
