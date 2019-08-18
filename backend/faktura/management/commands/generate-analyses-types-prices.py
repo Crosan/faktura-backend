@@ -83,7 +83,7 @@ class Command(BaseCommand):
         print("Creating KI analyse_type and analyse_pris objects...")
         
         KI_priser_file = settings.BASE_DIR + \
-            '/backend/faktura/assets/KI eksterne priser 2018.xlsx'
+            '/faktura/assets/KI eksterne priser 2018.xlsx'
             
         KI_priser_df = pd.read_excel(KI_priser_file, header=None)
         
@@ -108,7 +108,7 @@ class Command(BaseCommand):
         print("Creating KB analyse_type and analyse_pris objects...")
         
         KB_priser_file = settings.BASE_DIR + \
-            '/backend/faktura/assets/KB eksterne priser 2018.xlsx'
+            '/faktura/assets/KB eksterne priser 2018.xlsx'
             
         KB_priser_df = pd.read_excel(KB_priser_file, header=None)
         
@@ -132,7 +132,7 @@ class Command(BaseCommand):
         print("Creating VTL analyse_type and analyse_pris objects...")
         
         VTL_priser_file = settings.BASE_DIR + \
-            '/backend/faktura/assets/VTL eksterne priser 2018.xlsx'
+            '/faktura/assets/VTL eksterne priser 2018.xlsx'
             
         VTL_priser_df = pd.read_excel(VTL_priser_file, header=None)
         
@@ -156,7 +156,7 @@ class Command(BaseCommand):
         print("Creating GM analyse_type and analyse_pris objects...")
         
         GM_priser_file = settings.BASE_DIR + \
-            '/backend/faktura/assets/GM eksterne priser 2018.xlsx'
+            '/faktura/assets/GM eksterne priser 2018.xlsx'
             
         GM_priser_df = pd.read_excel(GM_priser_file, header=None)
         
@@ -179,7 +179,7 @@ class Command(BaseCommand):
         # opret rekvirenter
         #KI Rekvirenter
         KI_rekvirenter_file = settings.BASE_DIR + \
-            '/backend/faktura/assets/GLN til blodfakturering.xlsx'
+            '/faktura/assets/GLN til blodfakturering.xlsx'
             
         KI_rekvirenter_df = pd.read_excel(KI_rekvirenter_file)
         

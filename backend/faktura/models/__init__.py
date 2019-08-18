@@ -6,3 +6,4 @@ from .rekvirent import *
 from .parsing import *
 from .receipt_row import *
 from .receipt_file import *
+from .faktura import *

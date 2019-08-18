@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 
-from backend.faktura.models import ParsingStatus
-from backend.faktura.serializers import ParsingStatusSerializer
+from backend.faktura.models import FakturaStatus
+from backend.faktura.serializers import FakturaStatusSerializer
 
 
-class ParsingStatusViewSet(viewsets.ModelViewSet):
-    queryset = ParsingStatus.objects.all()
-    serializer_class = ParsingStatusSerializer
+class FakturaStatusViewSet(viewsets.ModelViewSet):
+    queryset = FakturaStatus.objects.all()
+    serializer_class = FakturaStatusSerializer

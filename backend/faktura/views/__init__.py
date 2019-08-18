@@ -5,5 +5,6 @@ from .analyse import *
 from .rekvirent import *
 from .parsing import *
 from .parsing_status import *
-from .receipt_file import *
 from .new_prices import *
+from .download_file import *
+from .faktura import *
