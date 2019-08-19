@@ -41,6 +41,8 @@ class Parser:
         rekvirent_list = []
         
         faktura_list = []
+        
+        counter = 0
             
         for row in df.iterrows():   
 
@@ -104,6 +106,9 @@ class Parser:
                 data_source = "labka"
                 #Set headers for error data
                 error_list_list.append(method_data)
+
+            print(counter)
+            counter = counter + 1
                 
         #Create data frame from error data
         error_list_df = pd.DataFrame(error_list_list)
