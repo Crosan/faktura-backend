@@ -13,15 +13,17 @@ from django.conf import settings
 from dateutil.relativedelta import relativedelta
 from django.utils.timezone import now
 from django.core.exceptions import ObjectDoesNotExist
-from backend.faktura.extra.logger import *
 from django.core.files import File
 
+import logging
+
+logger = logging.getLogger("app")
 
 class Parser:
 
     @classmethod
     def parse(self, parsing_object):
-    
+
         print("Parsing...")
 
         excel_parser = ExcelParser()
@@ -138,7 +140,7 @@ class ExcelParser:
         try:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
-            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
+            logger.info("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
             return None            
         
         rekvirent = None
@@ -150,11 +152,11 @@ class ExcelParser:
                 try:
                     rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, niveau='L4Name', afdelingsnavn=L4NAME)
                 except ObjectDoesNotExist:
-                    Logger.log("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+                    logger.info("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
                     
         elif HOSPITAL == 'Bornholm':
             if not analyse_type.type == "Analyse":
-                Logger.log("Fejl - Bornholm skal kun afregnes for virusanalyser")
+                logger.info("Fejl - Bornholm skal kun afregnes for virusanalyser")
                 return None
         
             rekvirent = Rekvirent.objects.get(hospital=HOSPITAL)
@@ -166,17 +168,17 @@ class ExcelParser:
                 try:
                     rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, niveau='L4Name', afdelingsnavn=L4NAME)
                 except ObjectDoesNotExist:
-                    Logger.log("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+                    logger.info("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
             
         elif HOSPITAL == 'Herlev og Gentofte Hospital':
             try:
                 rekvirent = Rekvirent.objects.get(hospital=HOSPITAL, niveau='L4Name', afdelingsnavn=L4NAME)
             except ObjectDoesNotExist:
-                Logger.log("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+                logger.info("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
             
             if rekvirent and rekvirent.GLN_nummer == "5798001502092":
                 if not analyse_type.type == "Blodprodukt":
-                    Logger.log("Fejl - Hud- og allergiafdeling, overafd. U, GE skal kun afregnes for blodprodukter")
+                    logger.info("Fejl - Hud- og allergiafdeling, overafd. U, GE skal kun afregnes for blodprodukter")
                     return None
             
         elif HOSPITAL == 'Rigshospitalet' and L4NAME == 'Medicinsk overafd., M GLO':
@@ -186,7 +188,7 @@ class ExcelParser:
             rekvirent = Rekvirent.objects.get(GLN_nummer="5798001068154")
             
         else:
-            Logger.log("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+            logger.info("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
             
         return rekvirent
         
@@ -207,14 +209,14 @@ class ExcelParser:
         try:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
-            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
+            logger.info("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
             
         STYK_PRIS = 0
             
         if analyse_type:
         
             if math.isnan(ANTAL):
-                Logger.log("Fejl - Antallet af analyser ikke angivet for analyse med ydelseskode " + YDELSESKODE)
+                logger.info("Fejl - Antallet af analyser ikke angivet for analyse med ydelseskode " + YDELSESKODE)
                 return None
             
             for p in analyse_type.priser.order_by('-gyldig_fra'):
@@ -240,7 +242,7 @@ class ExcelParser:
         try:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
-            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
+            logger.info("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
             return None 
             
         rekvirent = None
@@ -263,7 +265,7 @@ class ExcelParser:
         EAN_NUMMER = method_data[21]
         
         if not str(EAN_NUMMER):
-            Logger.log("Fejl - Intet EAN_nummer angivet")
+            logger.info("Fejl - Intet EAN_nummer angivet")
             return None
             
         analyse_type = None
@@ -271,14 +273,14 @@ class ExcelParser:
         try:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
-            Logger.log("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
+            logger.info("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
             
         STYK_PRIS = 0
             
         if analyse_type:
         
             if math.isnan(ANTAL):
-                Logger.log("Fejl - Antallet af analyser ikke angivet for analyse med ydelseskode " + YDELSESKODE)
+                logger.info("Fejl - Antallet af analyser ikke angivet for analyse med ydelseskode " + YDELSESKODE)
                 return None
             
             for p in analyse_type.priser.order_by('-gyldig_fra'):

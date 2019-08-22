@@ -10,7 +10,6 @@ import pytz
 from pytz import timezone
 from datetime import datetime
 
-
 class Command(BaseCommand):
     help = 'Populates the database with data'
 
