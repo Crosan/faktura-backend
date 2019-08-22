@@ -28,48 +28,44 @@ if [ "x$1" = "x" ] ; then echo "environment not provided"; exit; fi
 
 ### GUNICORN RELATED ENVIRONMENT VARIABLES ###
 NAME="faktura"
-DJANGODIR=/usr/src/app/backend
+DJANGODIR=/usr/src/app
 USER=root
 GROUP=root
 WORKERS=3
 BIND=unix:"$RUN_DIR/gunicorn.sock"
-DJANGO_SETTINGS_MODULE=backend.settings.${ENV}
+DJANGO_SETTINGS_MODULE=backend.settings.${FAKTURA_ENV}
 DJANGO_WSGI_MODULE=backend.wsgi
 LOGLEVEL=error
 
-#if [[ "$ENV" == "testing" || "$ENV" == "production" ]]; then
-    #echo "SOURCING CREDS_STD"
-    #source "$SECRETS/creds_std"
-#fi
-
-#if [[ "$ENV" == "production" ]]; then
-    #echo "SOURCING CREDS_MS"
-    #source "$SECRETS/creds_ms"
-#fi
-
-cd $DJANGODIR
+# source database & ftp credentials
+# if [[ "$FAKTURA_ENV" == "testing" || "$FAKTURA_ENV" == "production" ]]; then
+#     echo "SOURCING CREDS_STD"
+#     source "$SECRETS/creds_std"
+#     echo "SOURCING CREDS_MS"
+#     source "$SECRETS/creds_ms"
+# fi
 
 export LOG_DIR
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
 # generate keytab
-#if [[ "$ENV" == "testing" || "$ENV" == "production" ]]; then
-    #echo "SOURCING CREDS_KT"
-    #source "$SECRETS/creds_kt"
-    #keytab_script="../scripts/generate-keytab.sh"
+# if [[ "$FAKUTRA_ENV" == "testing" || "$FAKTURA_ENV" == "production" ]]; then
+#     echo "SOURCING CREDS_KT"
+#     source "$SECRETS/creds_kt"
+#     keytab_script="$DJANGODIR/scripts/generate-keytab.sh"
 
-    #"$keytab_script" "$KEYTAB_PRINCIPAL" "$KEYTAB_PASSWORD"
+#     "$keytab_script" "$KEYTAB_PRINCIPAL" "$KEYTAB_PASSWORD"
 
-    ## create ticket
-    #KEYTAB_FILE="$SECRETS/kmad0174.kt"
-    #kinit -kt "$KEYTAB_FILE" "$KEYTAB_PRINCIPAL"
-#fi
+#     # create ticket
+#     KEYTAB_FILE="$SECRETS/kerberos.kt"
+#     kinit -kt "$KEYTAB_FILE" "$KEYTAB_PRINCIPAL"
+# fi
 
 # prepare database
-manage_script="./manage.py"
-"$manage_script" makemigrations genomisk
+manage_script="$DJANGODIR/manage.py"
+"$manage_script" makemigrations faktura --no-input
 "$manage_script" migrate
 "$manage_script" generate-data
 
-exec gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL --log-file=-
+exec gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL --log-file=

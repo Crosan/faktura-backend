@@ -19,9 +19,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print("Opretter mock data... ", end='', flush=True)
         
-        analyseType1 = AnalyseType.objects.get(pk=1)
+        analyseType1 = AnalyseType.objects.first()
         
-        rekvirent1 = Rekvirent.objects.get(pk=1)
+        rekvirent1 = Rekvirent.objects.first()
         
         analyse1 = Analyse.objects.create(antal=2, CPR="p1", afregnings_dato=now(), svar_dato=now(), analyse_type=analyseType1)
 
