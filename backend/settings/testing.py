@@ -9,5 +9,5 @@ PRODUCTION = False
 
 ALLOWED_HOSTS = [
     'localhost',
-    'lnxgenmed02.unix.regionh.top.local',
+    'lnxgenmed01.unix.regionh.top.local',
 ]
