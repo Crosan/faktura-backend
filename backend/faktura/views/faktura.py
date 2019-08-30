@@ -8,6 +8,15 @@ class FakturaViewSet(viewsets.ModelViewSet):
     queryset = Faktura.objects.all()
     serializer_class = FakturaSerializer
     
+    def perform_update(self, serializer):
+    
+        pdf_fil = self.request.data.get('pdf_fil')
+        
+        if pdf_fil:
+            serializer.save(pdf_fil=pdf_fil)
+        else:
+            instance = serializer.save()       
+    
 class NestedFakturaViewSet(viewsets.ModelViewSet):
     queryset = Faktura.objects.all()
     serializer_class = NestedFakturaSerializer

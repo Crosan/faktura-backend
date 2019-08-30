@@ -9,7 +9,7 @@ FakturaStatusChoices = Choices((10, 'oprettet'), (20, 'faktura sendt'), (30, 'sl
 
 
 def upload_faktura_to(instance, file):
-    return "fakturaer/{} - {}.xlsx".format(instance.data_fil, now().strftime("%Y%m%d%H%M%S"))
+    return "fakturaer/{} - {}.pdf".format(instance.id, now().strftime("%Y%m%d%H%M%S"))
     
 class FakturaStatus(models.Model):
     oprettet = 10
