@@ -11,8 +11,8 @@ import pytz
 from pytz import timezone
 from datetime import datetime
 
-from backend.backend.faktura.extra.xml.XML_faktura import XMLFaktura
-from backend.backend.faktura.models import Parsing
+from backend.faktura.extra.xml.XML_faktura import XMLFaktura
+from backend.faktura.models import Parsing
 
 
 class Command(BaseCommand):
@@ -20,11 +20,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        call_command('generate-analyses-types-prices')
-        call_command('generate-mock-data')
-
         parsing = Parsing.objects.first()
-
 
         XML_writer = XMLFaktura(parsing)
 

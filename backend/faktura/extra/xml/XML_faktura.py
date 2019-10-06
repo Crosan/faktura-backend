@@ -25,7 +25,7 @@ class XMLFaktura:
         if not value:
             raise Exception("Missing mandatory value " + tag)
         else:
-            self._Message__add_subtag(parent, tag).text = value
+            self.__add_subtag(parent, tag).text = value
 
     def prettify(self, elem):
         """Return a pretty-printed XML string for the Element. """
@@ -34,7 +34,7 @@ class XMLFaktura:
         return reparsed.toprettyxml(indent="\t")
 
     def create(self):
-        sap_order = self._Message__add_subtag(self.root, 'GenericSAPOrder')
+        sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
         self.__add_message_header(sap_order)
         self.__add_order_header_lst(sap_order)
 
@@ -42,7 +42,7 @@ class XMLFaktura:
             f.write(self.prettify(self.root))
 
     def __add_message_header(self, parent):
-        message_header = self._Message__add_subtag(parent, 'messageHeader')
+        message_header = self.__add_subtag(parent, 'messageHeader')
         self.__test_and_set_or_fail(message_header, 'SenderBusinessSystemID', self.SenderBusinessSystemID)
         self.__test_and_set_or_fail(message_header, 'CreationDateTime', datetime.today().strftime('%Y-%m-%d;%H:%M'))
 
@@ -55,28 +55,28 @@ class XMLFaktura:
             self.__add_order_header(parent, faktura)
 
     def __add_order_header(self, parent, faktura):
-        order_header = self._Message__add_subtag(parent, 'orderHeader')
+        order_header = self.__add_subtag(parent, 'orderHeader')
 
         self.__test_and_set_or_fail(order_header, 'BillingCompanyCode', self.BillingCompanyCode)
         self.__test_and_set_or_fail(order_header, 'DebtorType', self.debtorType)
         self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
         self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%d;%H:%M'))
-        self.__test_and_set_or_fail(order_header, 'OrderNumber', faktura.id)  
+        self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id))
         self.__test_and_set_or_fail(order_header, 'OrderText1', "Her skal der skrives noget brødtekst om faktura header")  # selv generer
 
-        self.add_item_lines_lst(order_header, faktura)
+        self.__add_item_lines_lst(order_header, faktura)
 
     def __add_item_lines_lst(self, parent, faktura: Faktura):
         for analyse in faktura.analyser.all():
             self.__add_item_lines(parent, analyse)
 
-    def __add_item_lines(self, parent, lineNumber, analyse: Analyse):
-        item_lines = self._Message__add_subtag(parent, 'itemLines')
+    def __add_item_lines(self, parent, analyse: Analyse):
+        item_lines = self.__add_subtag(parent, 'itemLines')
 
         self.__test_and_set_or_fail(item_lines, 'LineNumber', "PLACEHOLDER")
         self.__test_and_set_or_fail(item_lines, 'ItemNumber', "PLACEHOLDER")
-        self.__test_and_set_or_fail(item_lines, 'NumberOrdered', analyse.antal)
-        self.__test_and_set_or_fail(item_lines, 'UnitPrice', analyse.styk_pris)
+        self.__test_and_set_or_fail(item_lines, 'NumberOrdered', str(analyse.antal))
+        self.__test_and_set_or_fail(item_lines, 'UnitPrice', str(analyse.styk_pris))
         self.__test_and_set_or_fail(item_lines, 'PriceCurrency', "DKK")
         self.__test_and_set_or_fail(item_lines, 'ItemText1', "Her skal der skrives noget brødtekst om denne ydelse")
 
