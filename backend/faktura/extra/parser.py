@@ -22,13 +22,16 @@ logger = logging.getLogger("app")
 class Parser:
 
     @classmethod
-    def parse(self, parsing_object):
+    def parse(self, parsing_object=None, file_path=None):
 
         print("Parsing...")
 
         excel_parser = ExcelParser()
         
-        file = parsing_object.data_fil            
+        if not file_path:
+            file = parsing_object.data_fil            
+        else:
+            file = file_path
             
         df = pd.read_excel(file, header=None)
             
