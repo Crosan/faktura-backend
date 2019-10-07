@@ -139,6 +139,14 @@ class NestedParsingSerializer(serializers.ModelSerializer):
         return data
         
     def create(self, validated_data):
+        try:
+            test = validated_data.get('fakturaer')
+            
+            if test is not None:
+                validated_data.pop('fakturaer')
+        except:
+            print("No faktura list sent")
+    
         parsing_obj = Parsing.objects.create(**validated_data)
         
         Parser.parse(parsing_obj)
