@@ -11,9 +11,9 @@ class XMLFaktura:
             'Emessage', {'xmlns': 'http://rep.oio.dk/medcom.dk/xml/schemas/2014/10/08/'})
         self.parsing = parsing
 
-        self.SenderBusinessSystemID = "Genmed2200"
+        self.SenderBusinessSystemID = "RHDIA"
         self.BillingCompanyCode = "2200"
-        self.debtorType = "1"
+        self.debtorType = "6"
 
     def __str__(self):
         return ET.tostring((self.root), encoding='ISO-8859-1')
@@ -46,8 +46,11 @@ class XMLFaktura:
         self.__test_and_set_or_fail(message_header, 'SenderBusinessSystemID', self.SenderBusinessSystemID)
         self.__test_and_set_or_fail(message_header, 'CreationDateTime', datetime.today().strftime('%Y-%m-%d;%H:%M'))
 
-        # Tekst (Filnavn for faktura eks. DIAOrder_20141007.xml)
-        self.__test_and_set_or_fail(message_header, 'OriginalLoadFileName', "PLACEHOLDER")  # lav unikt navn
+        d = datetime.now()
+        timestamp = "{}/{}/{}_{}:{}:{}.{}".format(d.year, d.month, d.day, d.hour, d.minute, d.second, d.microsecond)
+        unique_name = "DIAOrder_" + timestamp
+
+        self.__test_and_set_or_fail(message_header, 'OriginalLoadFileName', unique_name)  # lav unikt navn
 
 
     def __add_order_header_lst(self, parent):
@@ -59,10 +62,12 @@ class XMLFaktura:
 
         self.__test_and_set_or_fail(order_header, 'BillingCompanyCode', self.BillingCompanyCode)
         self.__test_and_set_or_fail(order_header, 'DebtorType', self.debtorType)
-        self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
+
+        self.__test_and_set_or_fail(order_header, 'Debitor', "222252300")
+        # self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
         self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%d;%H:%M'))
         self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id))
-        self.__test_and_set_or_fail(order_header, 'OrderText1', "Her skal der skrives noget brødtekst om faktura header")  # selv generer
+        self.__test_and_set_or_fail(order_header, 'OrderText1', "for spørgsmål, kontakt Brian Schmidt 12345678")  # selv generer
 
         self.__add_item_lines_lst(order_header, faktura)
 
@@ -76,40 +81,15 @@ class XMLFaktura:
         item_lines = self.__add_subtag(parent, 'itemLines')
 
         self.__test_and_set_or_fail(item_lines, 'LineNumber', str(line_number))
-        self.__test_and_set_or_fail(item_lines, 'ItemNumber', "PLACEHOLDER")
+        self.__test_and_set_or_fail(item_lines, 'ItemNumber', "901363")
         self.__test_and_set_or_fail(item_lines, 'NumberOrdered', str(analyse.antal))
         self.__test_and_set_or_fail(item_lines, 'UnitPrice', str(analyse.styk_pris))
         self.__test_and_set_or_fail(item_lines, 'PriceCurrency', "DKK")
-        self.__test_and_set_or_fail(item_lines, 'ItemText1', "Her skal der skrives noget brødtekst om denne ydelse")
 
-"""
-    <?xml version="1.0" encoding="utf-8"?>
-    <GenericSAPOrder>
-    <messageHeader>
-        <senderBusinessSystemID>str1234</senderBusinessSystemID>
-        <creationDateTime>str1234</creationDateTime>
-        <originalLoadFileName>str1234</originalLoadFileName>
-    </messageHeader>
-    <orderHeader>
-        <BillingCompanyCode>str1</BillingCompanyCode>
-        <DebtorType>s</DebtorType>
-        <GlobalLocationNumber>str1234</GlobalLocationNumber>
-        <CVRNumber>str1234</CVRNumber>
-        <CPRNumber>str1234000</CPRNumber>
-        <VATNumber>str1234</VATNumber>
-        <SAPDebtorNumber>str1234</SAPDebtorNumber>
-        <PreferedInvoiceDate>str1234</PreferedInvoiceDate>
-        <OrderNumber>str1234</OrderNumber>
-        <OrderText1>str1234</OrderText1>
-        <AttachedDocument>AAAAZg==</AttachedDocument>
-        <itemLines>
-        <LineNumber>str1234</LineNumber>
-        <ItemNumber>str1234</ItemNumber>
-        <NumberOrdered>str1234</NumberOrdered>
-        <UnitPrice>str1234</UnitPrice>
-        <PriceCurrency>str1234</PriceCurrency>
-        <ItemText1>str1234</ItemText1>
-        </itemLines>
-    </orderHeader>
-    </GenericSAPOrder>
-"""
+        months = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"]
+        date = analyse.svar_dato
+
+        itemtext = "{} - {} - {}".format(analyse.CPR, str(date.day) + "-" + months[date.month-1], analyse.analyse_type.ydelses_kode)
+
+
+        self.__test_and_set_or_fail(item_lines, 'ItemText1', itemtext)
