@@ -67,13 +67,15 @@ class XMLFaktura:
         self.__add_item_lines_lst(order_header, faktura)
 
     def __add_item_lines_lst(self, parent, faktura: Faktura):
+        line_number = 1
         for analyse in faktura.analyser.all():
-            self.__add_item_lines(parent, analyse)
+            self.__add_item_lines(parent, analyse, line_number)
+            line_number = line_number + 1
 
-    def __add_item_lines(self, parent, analyse: Analyse):
+    def __add_item_lines(self, parent, analyse: Analyse, line_number):
         item_lines = self.__add_subtag(parent, 'itemLines')
 
-        self.__test_and_set_or_fail(item_lines, 'LineNumber', "PLACEHOLDER")
+        self.__test_and_set_or_fail(item_lines, 'LineNumber', str(line_number))
         self.__test_and_set_or_fail(item_lines, 'ItemNumber', "PLACEHOLDER")
         self.__test_and_set_or_fail(item_lines, 'NumberOrdered', str(analyse.antal))
         self.__test_and_set_or_fail(item_lines, 'UnitPrice', str(analyse.styk_pris))
