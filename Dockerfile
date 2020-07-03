@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.6
 
 WORKDIR /usr/src/app
 
@@ -15,13 +15,14 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list -o /etc/apt/sources.list.d/mssql-release.list
 
 # ODBC 17 driver dependency
-RUN wget -O libssl1.0.0 http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb && dpkg -i libssl1.0.0
+RUN wget -O libssl1.0.0 http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u12_amd64.deb && dpkg -i libssl1.0.0
 
 RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
     libsasl2-dev \
     python-dev \
     libldap2-dev \
     libssl-dev \
+    ldap-utils \
     vim \
     unixodbc-dev \
     msodbcsql17 \
@@ -41,4 +42,3 @@ RUN chmod +x scripts/*
 
 RUN chmod +x gunicorn_start
 ENTRYPOINT [ "./gunicorn_start" ]
-

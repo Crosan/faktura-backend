@@ -11,6 +11,7 @@ django-excel==0.0.10
 django-extensions==2.1.5
 django-model-utils==3.2.0
 djangorestframework==3.9.1
+django-pyodbc-azure==2.1.0.0
 et-xmlfile==1.0.1
 gunicorn==19.9.0
 idna==2.8
