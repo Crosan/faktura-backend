@@ -10,7 +10,6 @@ class AnalysePris(models.Model):
     ekstern_pris = models.FloatField(default=0)
     gyldig_fra = models.DateTimeField(default=now)
     gyldig_til = models.DateTimeField(blank=True, null=True)
-    analyse_type = models.ForeignKey(
-        'AnalyseType', related_name='priser', on_delete=models.PROTECT, blank=True, null=True)
+    analyse_type = models.ForeignKey('AnalyseType', related_name='priser', on_delete=models.PROTECT, blank=True, null=True)
 
     objects = models.Manager()

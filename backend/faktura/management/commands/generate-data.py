@@ -19,4 +19,5 @@ class Command(BaseCommand):
         call_command('generate-analyses-types-prices')
 
         if settings.DEVELOPMENT or settings.TESTING:
+            call_command('generate-mock-users')
             call_command('generate-mock-data')

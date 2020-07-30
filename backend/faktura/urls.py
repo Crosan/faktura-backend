@@ -31,5 +31,7 @@ router.register(r'faktura-status', views.FakturaStatusViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     url(r'^priser/', views.NewPricesView.as_view()),
+    url(r'^priser-patoweb/', views.NewPatowebPricesView.as_view()),
     url(r'^download/$', views.download_file),
+    url(r'^authenticate/', views.AuthenticateView.as_view()),
 ]

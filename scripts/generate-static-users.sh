@@ -9,8 +9,4 @@ KT_CREDENTIALS="/docker/secrets/creds_kt"
 . "$MS_CREDENTIALS"
 . "$KT_CREDENTIALS"
 
-"$SCRIPT" flush --no-input
-"$SCRIPT" generate-packages
-"$SCRIPT" generate-analysis-material
 "$SCRIPT" generate-static-users
-"$SCRIPT" generate-variants
