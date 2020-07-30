@@ -20,7 +20,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        parsing = Parsing.objects.first()
+        parsing = Parsing.objects.latest("oprettet")
 
         XML_writer = XMLFaktura(parsing)
 

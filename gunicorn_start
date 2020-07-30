@@ -49,23 +49,29 @@ export LOG_DIR
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
+echo "$FAKTURA_ENV"
+
 # generate keytab
-# if [[ "$FAKUTRA_ENV" == "testing" || "$FAKTURA_ENV" == "production" ]]; then
-#     echo "SOURCING CREDS_KT"
-#     source "$SECRETS/creds_kt"
-#     keytab_script="$DJANGODIR/scripts/generate-keytab.sh"
+if [[ "$FAKTURA_ENV" == "testing" || "$FAKTURA_ENV" == "production" ]]; then
+    echo "SOURCING CREDS_KT"
+    source "$SECRETS/creds_kt"
+    keytab_script="$DJANGODIR/scripts/generate-keytab.sh"
 
-#     "$keytab_script" "$KEYTAB_PRINCIPAL" "$KEYTAB_PASSWORD"
+    "$keytab_script" "$KEYTAB_PRINCIPAL" "$KEYTAB_PASSWORD"
 
-#     # create ticket
-#     KEYTAB_FILE="$SECRETS/kerberos.kt"
-#     kinit -kt "$KEYTAB_FILE" "$KEYTAB_PRINCIPAL"
-# fi
+    # create ticket
+    KEYTAB_FILE="$SECRETS/kerberos.kt"
+    kinit -kt "$KEYTAB_FILE" "$KEYTAB_PRINCIPAL"
+elif [[ "$FAKTURA_ENV" == "development" ]]; then ## delete sqlite db that was copied to container
+    echo "Removing development db"
+    rm -rf "$DJANGODIR/backend/db.sqlite3"
+fi
 
 # prepare database
 manage_script="$DJANGODIR/manage.py"
-"$manage_script" makemigrations faktura --no-input
 "$manage_script" migrate
 "$manage_script" generate-data
+
+echo "Server is up and running and ready to use."
 
 exec gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL --log-file=-

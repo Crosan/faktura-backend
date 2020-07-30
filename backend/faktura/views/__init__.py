@@ -6,5 +6,7 @@ from .rekvirent import *
 from .parsing import *
 from .parsing_status import *
 from .new_prices import *
+from .new_patoweb_prices import *
 from .download_file import *
 from .faktura import *
+from .authenticate import *

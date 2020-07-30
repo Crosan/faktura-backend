@@ -4,6 +4,7 @@ from pandas import ExcelWriter
 from pandas import ExcelFile
 import datetime
 import math
+import time
 
 from django.core.management.base import BaseCommand, CommandError
 from backend.faktura.models import *
@@ -15,14 +16,15 @@ from django.utils.timezone import now
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files import File
 
+from django.conf import settings
+
 import logging
 
 logger = logging.getLogger("app")
 
 class Parser:
-
     @classmethod
-    def parse(self, parsing_object=None, file_path=None):
+    def parse(cls, parsing_object=None, file_path=None):
 
         print("Parsing...")
 
@@ -48,6 +50,11 @@ class Parser:
         faktura_list = []
         
         counter = 0
+
+        GLN_file = settings.BASE_DIR + '/faktura/assets/patoweb/GLN.xlsx'
+        kommune_file = settings.BASE_DIR + '/faktura/assets/patoweb/kommune.xlsx'
+        GLN = pd.read_excel(GLN_file)
+        kommune = pd.read_excel(kommune_file)
             
         for row in df.iterrows():   
 
@@ -78,6 +85,7 @@ class Parser:
                 elif faktura:
                     faktura.antal_linjer = faktura.antal_linjer + 1
                     faktura.samlet_pris = faktura.samlet_pris + analyse.samlet_pris                    
+
             #If the data source is LABKA
             elif data_source and data_source.lower() == "labka":
                 #Parse row and save result
@@ -101,14 +109,61 @@ class Parser:
                 elif faktura:
                     faktura.antal_linjer = faktura.antal_linjer + 1
                     faktura.samlet_pris = faktura.samlet_pris + analyse.samlet_pris  
+
+            elif data_source and data_source.lower() == "patoweb":
+                # t0 = time.perf_counter()
+
+                #Parse row and save result
+                region = excel_parser.get_patoweb_region(method_data, kommune)
+                gln_df = excel_parser.get_patoweb_gln(method_data, GLN)
+
+                if region is None:
+                    print("Manglende kommune opslag")
+                    print(method_data)
+                    error_list_list.append(method_data)
+                    continue
+
+                rekvirent = excel_parser.get_patoweb_rekvirent(method_data, gln_df, region)
+
+
+                faktura = None
+                analyse = None
+                
+                if rekvirent:              
+                    tlistrekv_start = time.perf_counter()
+                    if not rekvirent.id in rekvirent_list:
+                        rekvirent_list.append(rekvirent.id)
+                        faktura = Faktura.objects.create(parsing=parsing_object, rekvirent=rekvirent)
+                        faktura_list.append(faktura)
+                    else:
+                        index = rekvirent_list.index(rekvirent.id)
+                        faktura = faktura_list[index]
+
+                    analyse = excel_parser.parse_patoweb(method_data, faktura, gln_df, region)
+
+                #If there was an error append the data to error list
+                if not analyse:
+                    error_list_list.append(method_data)
+                elif faktura:
+                    faktura.antal_linjer = faktura.antal_linjer + 1
+                    faktura.samlet_pris = faktura.samlet_pris + analyse.samlet_pris  
+
+                t1 = time.perf_counter()
+
+                # ttotal = t1-t0
+                # print("time: " + str(ttotal))
                 
             #Set data source
             if not data_source and str(method_data[0]).lower() == "antal":
                 data_source = "blodbank"
                 #Set headers for error data
                 error_list_list.append(method_data)
-            elif not data_source:
+            elif not data_source and str(method_data[1]).lower() == "ordinv_id":
                 data_source = "labka"
+                #Set headers for error data
+                error_list_list.append(method_data)
+            elif not data_source and str(method_data[0]).lower() == "rekvnr":
+                data_source = "patoweb"
                 #Set headers for error data
                 error_list_list.append(method_data)
 
@@ -132,6 +187,8 @@ class Parser:
 
 
 class ExcelParser:
+    analyse_typer = dict()
+
     def get_blodbank_rekvirent(self, method_data):
         YDELSESKODE = method_data[1]
         HOSPITAL = str(method_data[12])
@@ -293,6 +350,102 @@ class ExcelParser:
             SAMLET_PRIS = int(ANTAL) * STYK_PRIS
                     
             analyse = Analyse.objects.create(antal=ANTAL, styk_pris=STYK_PRIS, samlet_pris=SAMLET_PRIS, CPR=CPR, svar_dato=SVAR_DATO, analyse_type=analyse_type, faktura=faktura)
+            
+            return analyse
+            
+        return None
+
+
+    def get_patoweb_rekvirent(self, method_data, gln_df, region):
+        REKVIRENT = str(method_data[0])
+        AFD_NAME = str(method_data[7])
+
+        if not gln_df is None:
+            gln_num = gln_df.GLN
+        else:
+            gln_num = region.lokationsnummer
+        
+        rekvirent = None
+        gln_num = int(gln_num)
+        
+        try:
+            rekvirent = Rekvirent.objects.get(hospital=REKVIRENT, afdelingsnavn=AFD_NAME, GLN_nummer=gln_num)
+        except ObjectDoesNotExist:
+            rekvirent = Rekvirent.objects.create(hospital=REKVIRENT, afdelingsnavn=AFD_NAME, GLN_nummer=gln_num)
+            
+        return rekvirent
+
+    def calculate_patoweb_price(self, method_data, region_navn, hospital):
+        points = int(method_data[9])
+
+        for p in PatowebPrisFaktor.objects.all():
+            if p.gyldig_fra < now() and (not p.gyldig_til or p.gyldig_til > now()):
+                RgH_faktor = p.RgH
+                praksis_faktor = p.praksis
+                grønland_faktor = p.grønland
+                andet_faktor = p.andet
+
+        if region_navn == "Hovedstaden":
+            return points * RgH_faktor * 0.5
+        elif hospital is None:
+            return points * praksis_faktor
+        elif region_navn == "Grønland":
+            return points * grønland_faktor * 1.1
+        else:
+            return points * andet_faktor
+
+    def get_patoweb_gln(self, data, GLN):
+        rekvafd = data[6]
+
+        if not isinstance(rekvafd, str) and not isinstance(rekvafd, int):
+            return None
+
+        for j in range(len(GLN)):
+            if GLN.rekvafd.iloc[j] == rekvafd:
+                return GLN.iloc[j]
+                break
+        
+        return None
+
+    def get_patoweb_region(self, data, kommune):
+        kommune_kode = data[2]
+        if not isinstance(kommune_kode, str):
+            return None
+
+        for j in range(len(kommune)):
+            if kommune.kommune_nr.iloc[j] == int(kommune_kode):
+                return kommune.iloc[j]
+                break
+        
+        return None
+
+    def parse_patoweb(self, method_data, faktura, gln_row, region):
+        region_navn = region.region_navn
+        CPR = method_data[1]
+        MAT_TYPE = method_data[8]
+        SVAR_DATO = method_data[4].replace(tzinfo=pytz.UTC)
+
+        hospital = None
+        if not gln_row is None:
+            hospital = gln_row.Hospital
+
+        EAN_NUMMER = int(faktura.rekvirent.GLN_nummer)
+
+        # if not MAT_TYPE in self.analyse_typer.keys(c):
+        try:
+            analyse_type = AnalyseType.objects.get(ydelses_kode=MAT_TYPE)
+        except ObjectDoesNotExist:
+            analyse_type = AnalyseType.objects.create(ydelses_kode=MAT_TYPE)
+            
+        #     self.analyse_typer[MAT_TYPE] = analyse_type
+        # else:
+        #     analyse_type = self.analyse_typer[MAT_TYPE]
+
+            
+        pris = self.calculate_patoweb_price(method_data, region_navn, hospital)
+            
+        if analyse_type:
+            analyse = Analyse.objects.create(antal=1, styk_pris=pris, samlet_pris=pris, CPR=CPR, svar_dato=SVAR_DATO, analyse_type=analyse_type, faktura=faktura)
             
             return analyse
             

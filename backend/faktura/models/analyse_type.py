@@ -5,9 +5,9 @@ from django.utils.timezone import now
 
 class AnalyseType(models.Model):
     ydelses_kode = models.CharField(max_length=50)
-    ydelses_navn = models.CharField(max_length=100)
+    ydelses_navn = models.CharField(max_length=100, blank=True, null=True)
     gruppering = models.CharField(max_length=100, blank=True, null=True)
-    afdeling = models.CharField(max_length=50)
+    afdeling = models.CharField(max_length=50, blank=True, null=True)
     type = models.CharField(max_length=100, blank=True, null=True)
     kilde_navn = models.CharField(max_length=100, blank=True, null=True) 
 
