@@ -2,14 +2,15 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from backend.faktura.models import Faktura, Parsing, Analyse, Rekvirent
 from xml.dom import minidom
+from django.conf import settings
 
 
-class XMLFaktura:
+class XMLFakturaWriter:
 
-    def __init__(self, parsing: Parsing):
+    def __init__(self):
         self.root = ET.Element(
             'Emessage', {'xmlns': 'http://rep.oio.dk/medcom.dk/xml/schemas/2014/10/08/'})
-        self.parsing = parsing
+        self.parsing = None
 
         self.SenderBusinessSystemID = "RHDIA"
         self.BillingCompanyCode = "2200"
@@ -33,13 +34,18 @@ class XMLFaktura:
         reparsed = minidom.parseString(rough_string)
         return reparsed.toprettyxml(indent="\t")
 
-    def create(self):
+    def create(self, parsing: Parsing):
+        self.parsing = parsing
+
         sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
         self.__add_message_header(sap_order)
         self.__add_order_header_lst(sap_order)
 
-        with open('out.xml', 'w') as f:
-            f.write(self.prettify(self.root))
+        if settings.DEVELOPMENT:
+            with open('out.xml', 'w') as f:
+                f.write(self.prettify(self.root))
+
+        return self.prettify(self.root)
 
     def __add_message_header(self, parent):
         message_header = self.__add_subtag(parent, 'messageHeader')
