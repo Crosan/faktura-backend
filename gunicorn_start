@@ -39,6 +39,8 @@ LOGLEVEL=error
 
 # source database & ftp credentials
 if [[ "$FAKTURA_ENV" == "testing" || "$FAKTURA_ENV" == "production" ]]; then
+    echo "SOURCING CREDS_FTP"
+    source "$SECRETS/creds_ftp"
     echo "SOURCING CREDS_STD"
     source "$SECRETS/creds_std"
     echo "SOURCING CREDS_MS"

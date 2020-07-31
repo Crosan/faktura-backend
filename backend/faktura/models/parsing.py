@@ -15,5 +15,6 @@ class Parsing(models.Model):
     oprettet = models.DateTimeField(default=now)
     #oprettet_af = models.ForeignKey(
     #    'Profile', related_name='parsings', on_delete=models.PROTECT)
+    sent = models.BooleanField(default=False)
     
     objects = models.Manager()
