@@ -17,7 +17,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         call_command('generate-analyses-types-prices')
+        call_command('generate-patoweb-price-faktor')
 
-        if settings.DEVELOPMENT or settings.TESTING:
+        if settings.DEVELOPMENT:
             call_command('generate-mock-users')
             call_command('generate-mock-data')

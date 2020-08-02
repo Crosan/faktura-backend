@@ -34,4 +34,5 @@ urlpatterns = [
     url(r'^priser-patoweb/', views.NewPatowebPricesView.as_view()),
     url(r'^download/$', views.download_file),
     url(r'^authenticate/', views.AuthenticateView.as_view()),
+    url(r'^send/', views.SendFaktura.as_view()),
 ]

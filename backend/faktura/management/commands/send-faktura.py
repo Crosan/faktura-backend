@@ -1,4 +1,4 @@
-
+import logging
 import math
 import re
 from datetime import datetime
@@ -11,23 +11,23 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.timezone import now
 from pytz import timezone
+from django.core.files.base import ContentFile
 
-from backend.faktura.extra.upload.FTP_DIR import FTPDirectory
 from backend.faktura.extra.xml.XML_faktura_writer import XMLFakturaWriter
 from backend.faktura.models import *
 from backend.faktura.models import Parsing
+from ftplib import FTP, error_perm
 
+logger = logging.getLogger(__name__)
 local_tz = pytz.timezone('Europe/Copenhagen')
 
 class Command(BaseCommand):
     help = 'Uploads faktura answers'
 
-    def add_arguments(self, parser):
-        parser.add_argument('upload_dir', help='Indicates the directory to upload receipt messages to.')
-
     def handle(self, *args, **options):
+        self.print_env()
         ftp = self.init_ftp()
-        upload_dir = options['upload_dir'] 
+        upload_dir = os.environ.get('FTP_UPLOAD_DIR')
 
         ftp_dir = FTPDirectory(upload_dir, ftp)
 
@@ -35,8 +35,17 @@ class Command(BaseCommand):
 
         xml_fakturas = self.process_parsings(parsings)
 
-        w.run()
-    
+        django_xml_fakturas = self.generate_django_xml_fakturas(xml_fakturas)
+
+        ## Overvej her at slette successfuldt sendte fakturaer da de kan fylde ganske meget
+
+        # worker = Worker(ftp_dir, django_xml_fakturas)
+
+        # worker.run()
+
+    def print_env(self):
+        logger.info("HOST: {}\nUSER: {}\nUPLOAD_DIR: {}".format(os.environ.get('FTP_HOST'), os.environ.get('FTP_USER'), os.environ.get('FTP_UPLOAD_DIR')))
+
     def init_ftp(self):
         if "FTP_HOST" not in os.environ:
             print("FTP environment variables not set, exiting")
@@ -48,24 +57,31 @@ class Command(BaseCommand):
         return ftp
     
     def get_unprocessed_parsings(self):
-        return Parsing.objects.filter(sent==False)
+        return Parsing.objects.filter(sent=False)
     
     def process_parsings(self, parsings):
         XML_faktura_writer = XMLFakturaWriter()
         return [XML_faktura_writer.create(p) for p in parsings]
 
+    def generate_django_xml_fakturas(self, xml_fakturas):
+        res = []
+        for f in xml_fakturas:
+            django_xml_faktura = FakturaXml.objects.create()
+            django_xml_faktura.file.save("xml", ContentFile(f))
+            res.append(django_xml_faktura)
 
+        return res
 
-class FTPHandler:
+class Worker:
 
-    def __init__(self, ftp_dir: FTPDirectory, xml_fakturas):
+    def __init__(self, ftp_dir, xml_fakturas):
         self.ftp_dir = ftp_dir
         self.xml_fakturas
     
     def run(self):
 
         for f in self.xml_fakturas:
-            self.ftp_dir.put_file(f)
+            self.ftp_dir.put_file(f.file)
 
 
 class FTPDirectory(object):

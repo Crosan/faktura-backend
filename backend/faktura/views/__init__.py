@@ -10,3 +10,4 @@ from .new_patoweb_prices import *
 from .download_file import *
 from .faktura import *
 from .authenticate import *
+from .send_faktura import *
