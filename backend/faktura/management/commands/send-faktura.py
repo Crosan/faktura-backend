@@ -33,6 +33,14 @@ class Command(BaseCommand):
         try:
             conn = self.test_smb_conn()
         except:
+            parsings = self.get_unprocessed_parsings()
+
+            xml_fakturas = self.process_parsings(parsings)
+
+            django_xml_fakturas = self.generate_django_xml_fakturas(xml_fakturas)
+
+            print("prepared fakturas")
+
             return
             None
 
