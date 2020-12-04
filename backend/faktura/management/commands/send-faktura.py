@@ -31,7 +31,7 @@ class Command(BaseCommand):
         self.print_env()
 
         try:
-            conn = self.test_smb_conn()
+            conn = self.setup_smb_conn()
         except:
             parsings = self.get_unprocessed_parsings()
 
