@@ -92,8 +92,9 @@ class Parser:
                 rekvirent = excel_parser.get_labka_rekvirent(method_data)
                 faktura = None
                 analyse = None
+                error = ""
                 
-                if rekvirent:              
+                if not type(rekvirent) is str:              
                     if not rekvirent.id in rekvirent_list:
                         rekvirent_list.append(rekvirent.id)
                         faktura = Faktura.objects.create(parsing=parsing_object, rekvirent=rekvirent)
@@ -103,8 +104,11 @@ class Parser:
                         faktura = faktura_list[index]
                 
                     analyse = excel_parser.parse_labka(method_data, faktura)
+                else:
+                    error = rekvirent
                 #If there was an error append the data to error list
                 if not analyse:
+                    method_data["Error"] = error
                     error_list_list.append(method_data)
                 elif faktura:
                     faktura.antal_linjer = faktura.antal_linjer + 1
@@ -303,7 +307,7 @@ class ExcelParser:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
             logger.info("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
-            return None 
+            return "Fejl - Analyse" 
             
         rekvirent = None
         
