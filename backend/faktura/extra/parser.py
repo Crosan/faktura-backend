@@ -67,8 +67,9 @@ class Parser:
                 rekvirent = excel_parser.get_blodbank_rekvirent(method_data)
                 faktura = None
                 analyse = None
+                error = ""
                 
-                if rekvirent:              
+                if not type(rekvirent) is str:             
                     if not rekvirent.id in rekvirent_list:
                         rekvirent_list.append(rekvirent.id)
                         faktura = Faktura.objects.create(parsing=parsing_object, rekvirent=rekvirent)
@@ -78,9 +79,15 @@ class Parser:
                         faktura = faktura_list[index]
                         
                     analyse = excel_parser.parse_blodbank(method_data, faktura)
+
+                    if type(analyse) is str: 
+                        error = analyse
+                else:
+                    error = rekvirent
                     
                 #If there was an error append the data to error list
                 if not analyse:
+                    method_data["Error"] = error
                     error_list_list.append(method_data)
                 elif faktura:
                     faktura.antal_linjer = faktura.antal_linjer + 1
@@ -205,7 +212,7 @@ class ExcelParser:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
             logger.info("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
-            return None            
+            return "Fejl - Kunne ikke finde analyse"            
         
         rekvirent = None
     
@@ -221,7 +228,7 @@ class ExcelParser:
         elif HOSPITAL == 'Bornholm':
             if not analyse_type.type == "Analyse":
                 logger.info("Fejl - Bornholm skal kun afregnes for virusanalyser")
-                return None
+                return "Fejl - Bornholm skal kun afregnes for virusanalyser"
         
             rekvirent = Rekvirent.objects.get(hospital=HOSPITAL)
             
@@ -243,7 +250,7 @@ class ExcelParser:
             if rekvirent and rekvirent.GLN_nummer == "5798001502092":
                 if not analyse_type.type == "Blodprodukt":
                     logger.info("Fejl - Hud- og allergiafdeling, overafd. U, GE skal kun afregnes for blodprodukter")
-                    return None
+                    return "Fejl - Hud- og allergiafdeling, overafd. U, GE skal kun afregnes for blodprodukter"
             
         elif HOSPITAL == 'Rigshospitalet' and L4NAME == 'Medicinsk overafd., M GLO':
             rekvirent = Rekvirent.objects.get(GLN_nummer="5798001026031")
@@ -252,10 +259,12 @@ class ExcelParser:
             rekvirent = Rekvirent.objects.get(GLN_nummer="5798001068154")
             
         else:
-            logger.info("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)
+            logger.info("Fejl - Kunne ikke finde rekvirent " + HOSPITAL + " - " + L4NAME + " - " + L6NAME)            
             
-        return rekvirent
-        
+        if rekvirent:
+            return rekvirent
+        else:
+            return "Fejl - Kunne ikke finde rekvirent"
     
     def parse_blodbank(self, method_data, faktura):
         ANTAL = method_data[0]
@@ -274,6 +283,7 @@ class ExcelParser:
             analyse_type = AnalyseType.objects.get(ydelses_kode=YDELSESKODE)
         except ObjectDoesNotExist:
             logger.info("Fejl - Kunne ikke finde analyse med ydelseskode " + YDELSESKODE)
+            return "Fejl - Kunne ikke finde analyse"
             
         STYK_PRIS = 0
             
@@ -281,7 +291,7 @@ class ExcelParser:
         
             if math.isnan(ANTAL):
                 logger.info("Fejl - Antallet af analyser ikke angivet for analyse med ydelseskode " + YDELSESKODE)
-                return None
+                return "Fejl - Antallet af analyser ikke angivet"
             
             for p in analyse_type.priser.order_by('-gyldig_fra'):
                 if p.gyldig_fra < now() and (not p.gyldig_til or p.gyldig_til > now()):
@@ -293,7 +303,7 @@ class ExcelParser:
             
             return analyse
             
-        return None
+        return "Ukendt fejl"
         
     def get_labka_rekvirent(self, method_data):
         YDELSESKODE = method_data[4]
