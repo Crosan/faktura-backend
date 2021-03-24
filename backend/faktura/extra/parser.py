@@ -46,23 +46,23 @@ class Parser:
         antal_oprettet = 0
         samlet_pris = 0
 
+        # Denne kunne laves om til en dict
         rekvirent_list = []
-
         faktura_list = []
 
-        counter = 0
 
         GLN_file = settings.BASE_DIR + '/faktura/assets/patoweb/GLN.xlsx'
         kommune_file = settings.BASE_DIR + '/faktura/assets/patoweb/kommune.xlsx'
         GLN = pd.read_excel(GLN_file)
         kommune = pd.read_excel(kommune_file)
 
+        # Loop through all lines in input xlsx file
         for row in df.iterrows():
 
-            _, method_data = row
+            count, method_data = row
 
             #Parse the data
-            #If the data source if blodbank
+            #If the data source is blodbank
             if data_source and data_source.lower() == "blodbank":
                 #Parse row and save result
                 rekvirent = excel_parser.get_blodbank_rekvirent(method_data)
@@ -70,12 +70,16 @@ class Parser:
                 analyse = None
                 error = ""
 
+                # If the excel_parser returned a rekvirent object
                 if not type(rekvirent) is str:
+                    # If we have not encountered this rekvirent in this run before
                     if not rekvirent.id in rekvirent_list:
+                        # Add the rekvirent ID to rekvirent list and instantiate a faktura object
                         rekvirent_list.append(rekvirent.id)
                         faktura = Faktura.objects.create(parsing=parsing_object, rekvirent=rekvirent)
                         faktura_list.append(faktura)
                     else:
+                        # The current faktura is already in the faktura list
                         index = rekvirent_list.index(rekvirent.id)
                         faktura = faktura_list[index]
 
@@ -102,12 +106,16 @@ class Parser:
                 analyse = None
                 error = ""
 
+                # If the excel_parser returned a rekvirent object
                 if not type(rekvirent) is str:
+                    # If we have not encountered this rekvirent in this run before
                     if not rekvirent.id in rekvirent_list:
+                        # Add the rekvirent ID to rekvirent list and instantiate a faktura object
                         rekvirent_list.append(rekvirent.id)
                         faktura = Faktura.objects.create(parsing=parsing_object, rekvirent=rekvirent)
                         faktura_list.append(faktura)
                     else:
+                        # The current faktura is already in the faktura list
                         index = rekvirent_list.index(rekvirent.id)
                         faktura = faktura_list[index]
 
@@ -165,6 +173,7 @@ class Parser:
                 # ttotal = t1-t0
                 # print("time: " + str(ttotal))
 
+            # During the first row, everything above will have failed, so the data source can be set here
             #Set data source
             if not data_source and str(method_data[0]).lower() == "antal":
                 data_source = "blodbank"
@@ -180,18 +189,22 @@ class Parser:
                 error_list_list.append(method_data)
 
             # print(counter)
-            sys.stdout.write('\r%d' % counter)
-            counter = counter + 1
+            sys.stdout.write('\r%d' % count)
+            # counter = counter + 1
 
         print(' lines parsed\nDone parsing lines')
         #Create data frame from error data
         error_list_df = pd.DataFrame(error_list_list)
 
-        #Write to excel
-        mangel_liste_file_path = './backend/media/mangellister/{}.xlsx'.format(parsing_object.id)
-        writer = ExcelWriter(mangel_liste_file_path)
-        error_list_df.to_excel(writer, 'Mangelliste', index=False, header=None)
-        writer.save()
+        #Write to excel-file
+        # TODO: Måske find på et bedre filnavn
+        mangel_liste_file_name = str(parsing_object.id) + '.xlsx'
+        mangel_liste_file_path = os.path.join(os.getcwd(), 'backend', 'media', 'mangellister', mangel_liste_file_name)
+        with ExcelWriter(mangel_liste_file_path) as writer:
+        # writer = ExcelWriter(mangel_liste_file_path)
+            error_list_df.to_excel(writer, 'Mangelliste', index=False, header=None)
+            writer.save()
+            print('Mangelliste saved at: "%s"' % mangel_liste_file_path)
 
         parsing_object.mangel_liste_fil = 'mangellister/{}.xlsx'.format(parsing_object.id)
 
@@ -201,9 +214,37 @@ class Parser:
 
 
 class ExcelParser:
-    analyse_typer = dict()
+    analyse_typer = dict() # Denne bliver aldrig brugt
+
+    # def create_rekvirent(self, hospital, afdeling, gln_nummer=None):
+    #     pass
+
+    def get_or_create_rekvirent(self, hospital, afdeling=None, l4name=None, l6name=None, gln_nummer=None):
+        ''' Searches for rekvirent in DB, and if not found, creates it and returns rekvirent object '''
+        rekvirent_to_find = None
+        if gln_nummer:
+            try: # Implicit antagelse at ingen to rekvirenter har samme GLN
+                rekvirent_to_find = Rekvirent.objects.get(GLN_nummer=gln_nummer)
+            except ObjectDoesNotExist:
+                pass
+        elif l4name:
+            try:
+                rekvirent_to_find = Rekvirent.objects.get(hospital=hospital, niveau='L4Name', afdeling=l4name)
+            except ObjectDoesNotExist:
+                pass
+        elif l6name:
+            try:
+                rekvirent_to_find = Rekvirent.objects.get(hospital=hospital, niveau='L6Name', afdeling=l6name)
+            except ObjectDoesNotExist:
+                pass
+        else:
+            try:
+                rekvirent_to_find = Rekvirent.objects.get(hospital=hospital, afdelingsnavn=afdeling)
+            except ObjectDoesNotExist:
+                rekvirent_to_find = Rekvirent.objects.create(hospital=hospital, afdeling=afdeling) #TODO: map mulige stier ud
 
     def get_blodbank_rekvirent(self, method_data):
+        ''' Returns either a rekvirent-object or an error string. '''
         YDELSESKODE = method_data[1]
         HOSPITAL = str(method_data[12])
         L4NAME = str(method_data[14])
@@ -255,6 +296,7 @@ class ExcelParser:
                     logger.info("Fejl - Hud- og allergiafdeling, overafd. U, GE skal kun afregnes for blodprodukter")
                     return "Fejl - Hud- og allergiafdeling, overafd. U, GE skal kun afregnes for blodprodukter"
 
+        # Hvor kommer disse to fra?
         elif HOSPITAL == 'Rigshospitalet' and L4NAME == 'Medicinsk overafd., M GLO':
             rekvirent = Rekvirent.objects.get(GLN_nummer="5798001026031")
 
@@ -270,6 +312,7 @@ class ExcelParser:
             return "Fejl - Kunne ikke finde rekvirent"
 
     def parse_blodbank(self, method_data, faktura):
+        ''' Returns either an analyse-object or an error string. '''
         ANTAL = method_data[0]
         YDELSESKODE = method_data[1]
         HOSPITAL = method_data[12]
@@ -299,6 +342,7 @@ class ExcelParser:
             for p in analyse_type.priser.order_by('-gyldig_fra'):
                 if p.gyldig_fra < now() and (not p.gyldig_til or p.gyldig_til > now()):
                     STYK_PRIS = p.ekstern_pris
+                    # Should we have a check for if no price is found?
 
             SAMLET_PRIS = int(ANTAL) * STYK_PRIS
 
@@ -309,6 +353,7 @@ class ExcelParser:
         return "Ukendt fejl"
 
     def get_labka_rekvirent(self, method_data):
+        ''' Returns either a rekvirent-object or an error string. '''
         YDELSESKODE = method_data[4]
         REKVIRENT = str(method_data[13])
         PAYERCODE = str(method_data[14])
@@ -332,13 +377,14 @@ class ExcelParser:
         return rekvirent
 
     def parse_labka(self, method_data, faktura):
+        ''' Returns either an analyse-object or None. '''
         ANTAL = 1
         CPR = method_data[3]
         YDELSESKODE = method_data[4]
         #Maybe try/catch here
         SVAR_DATO = method_data[10].replace(tzinfo=pytz.UTC)
-        REKVIRENT = method_data[13]
-        PAYERCODE = method_data[14]
+        REKVIRENT = method_data[13] # Bruges ikke
+        PAYERCODE = method_data[14] # Bruges ikke
         EAN_NUMMER = method_data[21]
 
         if not str(EAN_NUMMER):
@@ -372,12 +418,13 @@ class ExcelParser:
 
         return None
 
-
     def get_patoweb_rekvirent(self, method_data, gln_df, region):
+        ''' Returns either a rekvirent-object or None. '''
         REKVIRENT = str(method_data[0])
         AFD_NAME = str(method_data[7])
 
         if not gln_df is None:
+            # Hvorfor trækkes det først ud her?
             gln_num = gln_df.GLN
         else:
             gln_num = region.lokationsnummer
@@ -411,8 +458,9 @@ class ExcelParser:
         else:
             return points * andet_faktor
 
-    def get_patoweb_gln(self, data, GLN):
-        rekvafd = data[6]
+    def get_patoweb_gln(self, method_data, GLN):
+        ''' Returns either an entire row from the GLN-dataframe or None. '''
+        rekvafd = method_data[6]
 
         if not isinstance(rekvafd, str) and not isinstance(rekvafd, int):
             return None
@@ -425,6 +473,7 @@ class ExcelParser:
         return None
 
     def get_patoweb_region(self, data, kommune):
+        ''' Returns either an entire row from the kommune-dataframe or None. '''
         kommune_kode = data[2]
         if not isinstance(kommune_kode, str):
             return None
@@ -446,7 +495,7 @@ class ExcelParser:
         if not gln_row is None:
             hospital = gln_row.Hospital
 
-        EAN_NUMMER = int(faktura.rekvirent.GLN_nummer)
+        EAN_NUMMER = int(faktura.rekvirent.GLN_nummer) # Denne bruges ikke til noget?
 
         # if not MAT_TYPE in self.analyse_typer.keys(c):
         try:

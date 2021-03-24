@@ -29,6 +29,7 @@ class Command(BaseCommand):
     
         
     def handle(self, *args, **options):
+        print("parse.py called with options:", options)
         parser = Parser()
         parser.parse(None, options["file_path"])
     
