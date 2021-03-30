@@ -28,6 +28,8 @@ router.register(r'faktura-nested', views.NestedFakturaViewSet)
 
 router.register(r'faktura-status', views.FakturaStatusViewSet)
 
+router.register(r'betalergruppe', views.BetalergruppeViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
     url(r'^priser/', views.NewPricesView.as_view()),

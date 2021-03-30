@@ -11,3 +11,4 @@ from .download_file import *
 from .faktura import *
 from .authenticate import *
 from .send_faktura import *
+from .betalergruppe import *

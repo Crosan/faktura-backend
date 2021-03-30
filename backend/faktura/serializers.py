@@ -75,6 +75,10 @@ class FakturaStatusSerializer(serializers.ModelSerializer):
         model = FakturaStatus
         fields = "__all__"
                
+class BetalergruppeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Betalergruppe
+        fields = "__all__"
         
 # ------------------------
 # NESTED SERIALIZERS
