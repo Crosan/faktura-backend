@@ -9,3 +9,4 @@ from .receipt_row import *
 from .receipt_file import *
 from .faktura import *
 from .faktura_xml import *
+from .betalergruppe import *
