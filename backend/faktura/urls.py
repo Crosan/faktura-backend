@@ -22,13 +22,16 @@ router.register(r'rekvirenter-nested', views.NestedRekvirentViewSet)
 
 router.register(r'parsing', views.ParsingViewSet)
 router.register(r'parsing-nested', views.NestedParsingViewSet)
+# router.register(r'parsing-semi', views.SemiNestedParsingViewSet)
 
 router.register(r'faktura', views.FakturaViewSet)
 router.register(r'faktura-nested', views.NestedFakturaViewSet)
+# router.register(r'faktura-semi', views.SemiNestedFakturaViewSet)
 
 router.register(r'faktura-status', views.FakturaStatusViewSet)
 
 router.register(r'betalergruppe', views.BetalergruppeViewSet)
+router.register(r'betalergruppe-nested', views.NestedBetalergruppeViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

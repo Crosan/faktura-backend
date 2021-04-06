@@ -19,7 +19,7 @@ class FakturaStatus(models.Model):
     status = models.IntegerField(choices=FakturaStatusChoices)
     dato = models.DateTimeField(default=now)
     faktura = models.ForeignKey(
-        'Faktura', related_name="status_historik", on_delete=models.PROTECT)
+        'Faktura', related_name="status_historik", on_delete=models.CASCADE)
     #oprettet_af = models.ForeignKey(
     #    'Profile', related_name='parsings', on_delete=models.PROTECT)
         
@@ -33,7 +33,7 @@ class Faktura(models.Model):
     samlet_pris = models.FloatField(default=0)
     status = models.IntegerField(default=10, choices=FakturaStatusChoices)
     parsing = models.ForeignKey(
-        'Parsing', related_name="fakturaer", on_delete=models.PROTECT)    
+        'Parsing', related_name="fakturaer", on_delete=models.CASCADE)    
     rekvirent = models.ForeignKey(
         'Rekvirent', related_name='fakturaer', on_delete=models.PROTECT, blank=True, null=True)
     

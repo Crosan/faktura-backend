@@ -13,6 +13,7 @@ class Parsing(models.Model):
     data_fil = models.FileField(upload_to=upload_parsing_to)
     mangel_liste_fil = models.FileField(blank=True, null=True)
     oprettet = models.DateTimeField(default=now)
+    ptype = models.CharField(max_length=100, null=True, blank=True)
     #oprettet_af = models.ForeignKey(
     #    'Profile', related_name='parsings', on_delete=models.PROTECT)
     sent = models.BooleanField(default=False)
