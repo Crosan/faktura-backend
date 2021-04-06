@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
 from backend.faktura.models import Faktura
-from backend.faktura.serializers import FakturaSerializer, NestedFakturaSerializer
+from backend.faktura.serializers import FakturaSerializer, NestedFakturaSerializer, SemiNestedFakturaSerializer
 
 
 class FakturaViewSet(viewsets.ModelViewSet):
@@ -20,3 +20,8 @@ class FakturaViewSet(viewsets.ModelViewSet):
 class NestedFakturaViewSet(viewsets.ModelViewSet):
     queryset = Faktura.objects.all()
     serializer_class = NestedFakturaSerializer
+
+class SemiNestedFakturaViewSet(viewsets.ModelViewSet):
+    queryset = Faktura.objects.all()
+    serializer_class = SemiNestedFakturaSerializer
+

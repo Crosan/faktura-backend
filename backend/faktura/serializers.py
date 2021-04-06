@@ -101,15 +101,16 @@ class NestedAnalyseSerializer(serializers.ModelSerializer):
         
         
 class NestedRekvirentSerializer(serializers.ModelSerializer):
-    fakturaer = FakturaSerializer(many=True)
+    # fakturaer = FakturaSerializer(many=True)
+    betalergruppe = BetalergruppeSerializer()
 
     class Meta:
         model = Rekvirent
         fields = "__all__"
         
 class NestedFakturaSerializer(serializers.ModelSerializer):
-    analyser = NestedAnalyseSerializer(many=True)
-    rekvirent = RekvirentSerializer()
+    # analyser = NestedAnalyseSerializer(many=True) #Udkommenteret af RS, 31/03/21
+    rekvirent = NestedRekvirentSerializer()
 
     class Meta:
         model = Faktura
@@ -157,19 +158,44 @@ class NestedParsingSerializer(serializers.ModelSerializer):
         
         return parsing_obj
         
+class NestedBetalergruppeSerializer(serializers.ModelSerializer):
+    rekvirenter = NestedRekvirentSerializer(many=True, required=False)
+
+    class Meta:
+        model = Betalergruppe
+        fields = "__all__"
+
+# ------------------------
+# ONE LEVEL NESTED SERIALIZERS
+# ------------------------       
+
+class SemiNestedParsingSerializer(serializers.ModelSerializer):
+    '''
+    Returns parsing, nested only one level (i.e. fakturaer in parse is included, but analyser in fakturaer are not)
+    '''
+    fakturaer = FakturaSerializer(many=True, required=False)
+
+    class Meta:
+        model = Parsing
+        fields = "__all__"
         
 
+class SemiNestedFakturaSerializer(serializers.ModelSerializer):
+    '''
+    Returns faktura, nested only one level (i.e. analyser in faktura is included, but analysetypes in analyser are not)
+    '''
+    analyser = AnalyseSerializer(many=True, required=False)
+
+    class Meta:
+        model = Faktura
+        fields = "__all__"
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
