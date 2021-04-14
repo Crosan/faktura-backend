@@ -3,19 +3,23 @@ import os
 from django.db import models
 from django.utils.timezone import now
 
+from model_utils import Choices
+from ..extra.typechoices import TypeChoices
 
 def upload_parsing_to(instance, file):
     return "parsed/{} - {}.xlsx".format(instance.data_fil, now().strftime("%Y%m%d%H%M%S"))
     
 
-        
 class Parsing(models.Model):
     data_fil = models.FileField(upload_to=upload_parsing_to)
     mangel_liste_fil = models.FileField(blank=True, null=True)
     oprettet = models.DateTimeField(default=now)
-    ptype = models.CharField(max_length=100, null=True, blank=True)
+    ptype = models.CharField(max_length=100, null=True, blank=True, choices=TypeChoices)
     #oprettet_af = models.ForeignKey(
     #    'Profile', related_name='parsings', on_delete=models.PROTECT)
     sent = models.BooleanField(default=False)
     
     objects = models.Manager()
+
+    def __str__(self):
+        return "%d - %s" % (self.id, self.data_fil.name)
