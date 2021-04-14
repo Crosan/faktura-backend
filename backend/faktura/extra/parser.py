@@ -23,6 +23,203 @@ import logging
 
 logger = logging.getLogger("app")
 
+class NewParser:
+    def __init__(cls):
+        print('New parser initialised')
+
+    @classmethod
+    def parseLabka(cls, parsing_object=None, file_path=None, metatype='Labka'):
+        print("Begin parsing '%s'" % file_path)
+
+        # if not file_path:
+        #     file = parsing_object.data_fil
+        # else:
+        #     file = file_path
+
+        current_parsing = Parsing.objects.create(data_fil=file_path, ptype=metatype)
+
+        mangel_liste_file_name = os.path.splitext(os.path.basename(file_path))[0] + '_Mangel_' + str(current_parsing.id) + '.xlsx'
+        mangel_liste_file_path = os.path.join(os.getcwd(), 'backend', 'media', 'mangellister', mangel_liste_file_name)
+        
+        current_parsing.mangel_liste_fil = mangel_liste_file_path
+        current_parsing.save()
+
+        # NOTE: Husk at rownr i errors er off by 2 i forhold til original xlsx!
+        error_lines = [] # Indexes of rows in input file that have failed 
+
+        # known_analyse_typer = {} # Not used as of now
+        # known_analyse_typer = {
+        #     "Analysename" : AnalyseID
+        # }
+
+        known_rekvirent_names = {}
+        # known_rekvirent_names = {
+        #     "Rekvirent Name" : RekvirentID,
+        # }
+
+        known_fakturaer = {}
+        # known_fakturaer = {
+        #     RekvirentID : FaktID,
+        # }
+
+        desired_cols = ["BETALERGRUPPE_SOR", 
+                        "CPRNR", 
+                        "LABKAKODE", 
+                        "EKSTERN_PRIS", 
+                        "REKVIRENT", 
+                        "SHORTNME", 
+                        "EAN_NUMMER",
+                        "PRVTAGNDATO",
+                        "SVARDATO"]
+
+
+        df = pd.read_excel(file_path, header=0, usecols=desired_cols)
+
+        GLN_file = settings.BASE_DIR + '/faktura/assets/patoweb/GLN.xlsx'
+        kommune_file = settings.BASE_DIR + '/faktura/assets/patoweb/kommune.xlsx'
+        GLN = pd.read_excel(GLN_file)
+        kommune = pd.read_excel(kommune_file)
+
+        # Loop through all lines in input xlsx file
+        for row in df.iterrows():
+
+            rownr, rowdata = row
+
+            # Store all fields in temporary variables
+            r_betalergruppe = cls.__cleanValues(rowdata['BETALERGRUPPE_SOR'])
+            r_cprnr         = rowdata['CPRNR']
+            r_labkakode     = rowdata['LABKAKODE']
+            r_ekstern_pris  = rowdata['EKSTERN_PRIS']
+            r_rekvirent     = cls.__cleanValues(rowdata['REKVIRENT'])
+            r_shortname     = rowdata['SHORTNME'].strip()
+            r_ean_nummer    = cls.__cleanValues(rowdata['EAN_NUMMER'])
+            r_prvdato       = rowdata['PRVTAGNDATO']
+            r_svardato      = rowdata['SVARDATO']
+
+
+            # print(r_betalergruppe, r_cprnr, r_labkakode, r_ekstern_pris,  r_rekvirent, r_shortname, r_ean_nummer)
+
+
+            # Check that analysetype exists
+            # if rowdata['LABKAKODE'] in known_analyse_typer.keys():
+            #     analyse_type_id =  rowdata['LABKAKODE']
+            # else:   
+
+            analyse_type_id = cls.__find_analyse_type_id(r_labkakode)
+            
+            if not analyse_type_id:
+                error_lines.append((rownr, 'Analyse type kendes ikke'))
+                continue
+
+            # Check that betalergruppe is specified #Maybe do this later?
+            # if pd.isnull(r_betalergruppe):
+            #     print('Null betalergruppe' + str(rownr))
+            #     error_lines.append((rownr, 'Betalergruppe ikke udfyldt'))
+            #     continue
+
+            betalergruppe_id = cls.__find_or_create_betalergruppe(r_betalergruppe, metatype) if r_betalergruppe else None
+
+            
+            # Check if we have already seen this rekvirent during this parsing, 
+            # and consequently also know the faktura ID
+            if r_rekvirent in known_rekvirent_names.keys():
+                current_rekvirent_id = known_rekvirent_names[r_rekvirent]
+                current_faktura_id   = known_fakturaer[current_rekvirent_id]
+            else:
+                current_rekvirent_id = cls.__find_or_create_rekvirent(cls, 
+                                                                      rekv_nr    = r_rekvirent, 
+                                                                      shortname  = r_shortname, 
+                                                                      ean_nummer = r_ean_nummer, 
+                                                                      betalergruppe_id=betalergruppe_id)
+                current_faktura_id   = cls.__create_faktura(cls, 
+                                                            parsing_id=current_parsing.id, 
+                                                            pdf_fil='remember to fill this in...',
+                                                            rekvirent_id=current_rekvirent_id)
+
+                known_rekvirent_names[r_rekvirent]    = current_rekvirent_id
+                known_fakturaer[current_rekvirent_id] = current_faktura_id
+
+            # print(known_rekvirent_names)
+            
+        
+            
+
+        print(error_lines)
+
+            #Find rekvirent (og betalergruppe)
+            # print(rowdata['REKVIRENT'])
+            #Check om der allerede er en faktura til rekv
+
+    def __cleanValues(subject):
+        ''' Handles if the input is a float NaN, int or string.\n
+        Returns a string or None. '''
+        if pd.isnull(subject):
+            return None
+        elif isinstance(subject, float):
+            return str(int(subject))
+        elif isinstance(subject, int):
+            return str(subject)
+        else:
+            return subject.strip()
+
+    def __create_parsing(cls, data_fil: str, mangel_liste_fil: str, ptype: str) -> Faktura:
+        ''' Creates a new parsing and returns it '''
+        newparse = Parsing.objects.create(data_fil=data_fil, mangel_liste_fil=mangel_liste_fil, ptype=ptype)
+        return newparse
+
+    def __create_faktura(cls, parsing_id: int, pdf_fil: str, rekvirent_id: int) -> int:
+        ''' Creates a new faktura and returns its ID '''
+        newfakt = Faktura.objects.create(parsing_id=parsing_id, pdf_fil=pdf_fil, rekvirent_id=rekvirent_id)
+        return newfakt.id
+
+    def __create_analyse(cls, cprnr: str, prvdato: pd.Timestamp, svardato: pd.Timestamp, analyse_type_id: int, faktura_id: int):
+        pass
+        
+
+    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, ean_nummer: str, betalergruppe_id: int):
+        ''' Looks up the rekvirent, and if none is found, creates one and returns the ID.\n
+            Updates the EAN-number as well as the betalergruppe if it is blank but supplied to the function. '''
+        try:
+            rekvirent = Rekvirent.objects.get(rekv_nr=rekv_nr)
+            # Check if GLN-number is null
+            if (not rekvirent.GLN_nummer) and ean_nummer:
+                rekvirent.GLN_nummer = ean_nummer
+                rekvirent.save()
+            # Check if betalergruppe is null
+            if (not rekvirent.betalergruppe) and betalergruppe_id:
+                # rekvirent.betalergruppe = Betalergruppe.objects.get(id=betalergruppe_id)
+                rekvirent.betalergruppe_id = betalergruppe_id
+                rekvirent.save()
+
+            retval = rekvirent.id
+        except ObjectDoesNotExist:
+            logger.info("Opretter ny rekvirent: %s (%s)" % (shortname, rekv_nr))
+            retval = Rekvirent.objects.create(rekv_nr    = rekv_nr, 
+                                              shortname  = shortname, 
+                                              GLN_nummer = ean_nummer, 
+                                              betalergruppe_id = betalergruppe_id).id
+        return retval
+
+    def __find_or_create_betalergruppe(betalergruppe: str, metatype: str) -> int:
+        ''' Looks up the betalergruppe, and if none is found, creates one and returns the ID '''
+        try:
+            retval = Betalergruppe.objects.get(navn=betalergruppe, bgtype=metatype).id
+        except ObjectDoesNotExist:
+            logger.info("Opretter ny betalergruppe: " + str(betalergruppe))
+            retval = Betalergruppe.objects.create(navn=betalergruppe, bgtype=metatype).id
+        return retval
+
+    def __find_analyse_type_id(labkakode: str):
+        ''' Looks up the analyse-code, and returns either the associated ID or None. '''
+        try:
+            retval = AnalyseType.objects.get(ydelses_kode=labkakode).id
+        except ObjectDoesNotExist:
+            logger.info("Fejl - Kunne ikke finde analyse med ydelseskode " + labkakode)
+            retval = None
+        return retval
+
+
+
 class Parser:
     @classmethod
     def parse(cls, parsing_object=None, file_path=None):
