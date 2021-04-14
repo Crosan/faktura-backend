@@ -7,7 +7,7 @@ from .analyse_type import AnalyseType
 from .rekvirent import Rekvirent
 
 class Analyse(models.Model):
-    antal = models.IntegerField(default=1)
+    # antal = models.IntegerField(default=1)
     styk_pris = models.FloatField(default=0)
     samlet_pris = models.FloatField(default=0)
     CPR = models.CharField(max_length=50)

@@ -38,3 +38,6 @@ class Faktura(models.Model):
         'Rekvirent', related_name='fakturaer', on_delete=models.PROTECT, blank=True, null=True)
     
     objects = models.Manager()
+
+    def __str__(self):
+        return "%d - %s" % (self.id, self.rekvirent.afdelingsnavn)
