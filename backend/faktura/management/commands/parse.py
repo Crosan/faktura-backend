@@ -17,7 +17,7 @@ import logging
 
 logger = logging.getLogger("app")
 
-from backend.faktura.extra.parser import Parser
+from backend.faktura.extra.parser import Parser, NewParser
 
 
 class Command(BaseCommand):
@@ -28,10 +28,11 @@ class Command(BaseCommand):
                             help='Path to excel file to parse (used for testing purposes).')
     
         
-    def handle(self, *args, **options):
-        print("parse.py called with options:", options)
-        parser = Parser()
-        parser.parse(None, options["file_path"])
+    def handle(self, *args, **kwargs):
+        print("parse.py called with kwargs:", kwargs)
+        # parser = Parser()
+        parser = NewParser()
+        parser.parseLabka(None, kwargs["file_path"])
     
         # def get_blodbank_rekvirent(HOSPITAL, L4NAME, L6NAME, analyse_type):
         #     rekvirent = None
