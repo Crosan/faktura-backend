@@ -10,7 +10,7 @@ class Analyse(models.Model):
     # antal = models.IntegerField(default=1)
     styk_pris = models.FloatField(default=0)
     samlet_pris = models.FloatField(default=0)
-    CPR = models.CharField(max_length=50)
+    CPR = models.CharField(max_length=50, blank=True, null=True)
     afregnings_dato = models.DateTimeField(default=now)
     svar_dato = models.DateTimeField(blank=True, null=True)
     analyse_type = models.ForeignKey(

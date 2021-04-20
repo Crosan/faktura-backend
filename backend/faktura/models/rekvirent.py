@@ -6,7 +6,7 @@ from django.utils.timezone import now
 class Rekvirent(models.Model):
     # hospital = models.CharField(max_length=100)
     niveau = models.CharField(max_length=50)
-    shortname = models.CharField(max_length=100)
+    shortname = models.CharField(max_length=100, null=True)
     rekv_nr = models.CharField(max_length=255)
     GLN_nummer = models.CharField(max_length=100, null=True)
     betalergruppe = models.ForeignKey(
