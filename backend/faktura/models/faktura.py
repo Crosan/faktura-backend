@@ -35,7 +35,7 @@ class Faktura(models.Model):
     parsing = models.ForeignKey(
         'Parsing', related_name="fakturaer", on_delete=models.CASCADE)    
     rekvirent = models.ForeignKey(
-        'Rekvirent', related_name='fakturaer', on_delete=models.PROTECT, blank=True, null=True)
+        'Rekvirent', related_name='fakturaer', on_delete=models.SET_NULL, blank=True, null=True)
     
     objects = models.Manager()
 
