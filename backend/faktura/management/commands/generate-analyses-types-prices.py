@@ -67,7 +67,9 @@ class Command(BaseCommand):
                 gyldig_fra = to_UTC(method_data[7])
             except:
                 gyldig_fra = now()
-                
+            
+            print(gyldig_fra)
+            
             try:
                 gyldig_til = to_UTC(method_data[8])
             except:

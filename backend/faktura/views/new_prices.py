@@ -7,6 +7,7 @@ from backend.faktura.models import *
 import json
 import pandas as pd
 import pytz
+import math
 from pytz import timezone
 from datetime import datetime
 
@@ -52,19 +53,30 @@ class NewPricesView(views.APIView):
     
         #Creates an analyse_pris object
         def create_analyse_pris(method_data, analyse_type):
-            
+            # print(type(method_data[7]), method_data[7])
+
             intern_pris = method_data[4]
             ekstern_pris = method_data[5]
-            try:
-                gyldig_fra = to_UTC(method_data[7])
-            except:
+            # try:
+            #     gyldig_fra = to_UTC(method_data[7])
+            # except:
+            #     gyldig_fra = now()
+                
+            # try:
+            #     gyldig_til = to_UTC(method_data[8])
+            # except:
+            #     gyldig_til = None
+                
+            if isinstance(method_data[7], datetime):
+                gyldig_fra = method_data[7]
+            else:
                 gyldig_fra = now()
-                
-            try:
-                gyldig_til = to_UTC(method_data[8])
-            except:
+
+            if isinstance(method_data[8], datetime):
+                gyldig_til = method_data[8]
+            else:
                 gyldig_til = None
-                
+
             analyse_pris = AnalysePris(intern_pris=intern_pris, ekstern_pris=ekstern_pris, gyldig_fra=gyldig_fra, gyldig_til=gyldig_til, analyse_type=analyse_type)              
                 
             return analyse_pris 

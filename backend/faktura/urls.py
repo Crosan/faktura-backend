@@ -17,21 +17,26 @@ router.register(r'analyse-typer-nested', views.NestedAnalyseTypeViewSet)
 router.register(r'analyser', views.AnalyseViewSet)
 router.register(r'analyser-nested', views.NestedAnalyseViewSet)
 
-router.register(r'rekvirenter', views.RekvirentViewSet)
-router.register(r'rekvirenter-nested', views.NestedRekvirentViewSet)
+router.register(r'rekvirent', views.RekvirentViewSet)
+router.register(r'rekvirent-nested', views.NestedRekvirentViewSet)
+router.register(r'rekvirent-missing', views.MissingRekvirentViewSet)
 
 router.register(r'parsing', views.ParsingViewSet)
 router.register(r'parsing-nested', views.NestedParsingViewSet)
 # router.register(r'parsing-semi', views.SemiNestedParsingViewSet)
 
-router.register(r'faktura', views.FakturaViewSet)
-router.register(r'faktura-nested', views.NestedFakturaViewSet)
+router.register(r'faktura', views.FakturaViewSet, basename="Faktura")
+router.register(r'faktura-nested', views.NestedFakturaViewSet, basename="Faktura")
 # router.register(r'faktura-semi', views.SemiNestedFakturaViewSet)
 
 router.register(r'faktura-status', views.FakturaStatusViewSet)
 
-router.register(r'betalergruppe', views.BetalergruppeViewSet)
+router.register(r'betalergruppe', views.BetalergruppeViewSet, basename="Betalergruppe")
 router.register(r'betalergruppe-nested', views.NestedBetalergruppeViewSet)
+
+router.register(r'bgrp-in-parse-price', views.BetalergrpInParseWithPriceViewSet)
+
+# router.register(r'testpp', views.BigPPVS, basename='testpp')
 
 urlpatterns = [
     path('', include(router.urls)),
