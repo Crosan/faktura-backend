@@ -76,6 +76,11 @@ class FakturaStatusSerializer(serializers.ModelSerializer):
         fields = "__all__"
                
 class BetalergruppeSerializer(serializers.ModelSerializer):
+    sum_total = serializers.FloatField(
+        # source='sum_total', 
+        read_only=True
+    )
+    antal = serializers.IntegerField(read_only=True)
     class Meta:
         model = Betalergruppe
         fields = "__all__"
@@ -165,9 +170,9 @@ class NestedBetalergruppeSerializer(serializers.ModelSerializer):
         model = Betalergruppe
         fields = "__all__"
 
-# ------------------------
+# ----------------------------
 # ONE LEVEL NESTED SERIALIZERS
-# ------------------------       
+# ----------------------------       
 
 class SemiNestedParsingSerializer(serializers.ModelSerializer):
     '''
@@ -192,10 +197,21 @@ class SemiNestedFakturaSerializer(serializers.ModelSerializer):
         
 
 
+# ------------------------
+# SPECIAL VIEW SERIALIZERS
+# ------------------------
 
+class PPBetalergruppeSerializer(serializers.ModelSerializer):
+    # rekvirenter = RekvirentWithFaktSerializer(many=True, required=False)
+    sum_total = serializers.FloatField()
 
+    class Meta:
+        model = Betalergruppe
+        fields = ('id', 'navn', 'sum_total')
 
+class RekvirentWithFaktSerializer(serializers.ModelSerializer):
+    fakturaer = FakturaSerializer(many=True)
 
-
-
-
+    class Meta:
+        model = Rekvirent
+        fields = "__all__"

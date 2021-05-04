@@ -5,8 +5,20 @@ from backend.faktura.serializers import FakturaSerializer, NestedFakturaSerializ
 
 
 class FakturaViewSet(viewsets.ModelViewSet):
-    queryset = Faktura.objects.all()
+    # queryset = Faktura.objects.all()
     serializer_class = FakturaSerializer
+
+    def get_queryset(self):
+        parsing = self.request.query_params.get('parsing', None)
+        betalergruppe = self.request.query_params.get('betalergruppe', None)
+        if parsing and betalergruppe:
+            qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe).order_by('-samlet_pris')
+        elif parsing:
+            qs = Faktura.objects.filter(parsing__id=parsing).order_by('-samlet_pris')
+        else:
+            qs = Faktura.objects.all()
+        return qs
+
     
     def perform_update(self, serializer):
     
@@ -18,8 +30,19 @@ class FakturaViewSet(viewsets.ModelViewSet):
             instance = serializer.save()       
     
 class NestedFakturaViewSet(viewsets.ModelViewSet):
-    queryset = Faktura.objects.all()
+    # queryset = Faktura.objects.all()
     serializer_class = NestedFakturaSerializer
+
+    def get_queryset(self):
+        parsing = self.request.query_params.get('parsing', None)
+        betalergruppe = self.request.query_params.get('betalergruppe', None)
+        if parsing and betalergruppe:
+            qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe).order_by('-samlet_pris')
+        elif parsing:
+            qs = Faktura.objects.filter(parsing__id=parsing).order_by('-samlet_pris')
+        else:
+            qs = Faktura.objects.all()
+        return qs
 
 class SemiNestedFakturaViewSet(viewsets.ModelViewSet):
     queryset = Faktura.objects.all()

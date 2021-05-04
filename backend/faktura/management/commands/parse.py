@@ -17,7 +17,7 @@ import logging
 
 logger = logging.getLogger("app")
 
-from backend.faktura.extra.parser import Parser, NewParser
+from backend.faktura.extra.parser import Parser
 
 
 class Command(BaseCommand):
@@ -31,8 +31,8 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         print("parse.py called with kwargs:", kwargs)
         # parser = Parser()
-        parser = NewParser()
-        parser.parseLabka(None, kwargs["file_path"])
+        parser = Parser()
+        parser.parse(None, kwargs["file_path"])
     
         # def get_blodbank_rekvirent(HOSPITAL, L4NAME, L6NAME, analyse_type):
         #     rekvirent = None

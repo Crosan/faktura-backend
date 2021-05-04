@@ -18,3 +18,7 @@ class SemiNestedParsingViewSet(viewsets.ModelViewSet):
     '''
     queryset = Parsing.objects.all()
     serializer_class = SemiNestedParsingSerializer
+
+# class BetalergrpInParseWithPriceParseViewSet(viewsets.ModelViewSet):
+#     queryset = Betalergruppe.objects.all().annotate(sum_total=Sum('rekvirenter__fakturaer__samlet_pris')))
+#     serializer_class = BetalergruppeSerializer
