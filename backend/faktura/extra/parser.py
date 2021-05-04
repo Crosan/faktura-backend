@@ -6,6 +6,7 @@ import datetime
 import math
 import time
 import sys
+# from typing import TypeVar
 
 from django.core.management.base import BaseCommand, CommandError
 from backend.faktura.models import *
@@ -22,46 +23,39 @@ import logging
 logger = logging.getLogger("app")
 
 
-class NewParser:
+class Parser:
     def __init__(cls):
         print('New parser initialised')
 
     @classmethod
-    def parseLabka(cls, parsing_object=None, file_path=None, metatype='Labka'):
-        print("Begin parsing '%s'" % file_path)
+    def parse(cls, parsing_object=None, file_path=None, metatype='Labka'):
 
-        # if not file_path:
-        #     file = parsing_object.data_fil
-        # else:
-        #     file = file_path
+        if not file_path:
+            file = parsing_object.data_fil
+        else:
+            file = file_path
 
-        current_parsing = Parsing.objects.create(
-            data_fil=file_path, ptype=metatype)
+        print("Begin parsing '%s'" % str(file))
 
-        mangel_liste_file_name = os.path.splitext(os.path.basename(file_path))[
-            0] + '_Mangel_' + str(current_parsing.id) + '.xlsx'
-        mangel_liste_file_path = os.path.join(
-            os.getcwd(), 'backend', 'media', 'mangellister', mangel_liste_file_name)
+        # parsing_object = Parsing.objects.create(data_fil=file, ptype=metatype)
 
-        current_parsing.mangel_liste_fil = mangel_liste_file_path
-        current_parsing.save()
+        mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
+
+        parsing_object.mangel_liste_fil = mangel_liste_file_path
+        parsing_object.ptype = 'Labka'
+        parsing_object.save()
 
         # NOTE: Husk at rownr i errors er off by 2 i forhold til original xlsx!
         error_lines = []  # Indexes of rows in input file that have failed
 
-        known_analyse_typer = {}  # Not used as of now
+        known_analyse_typer = {}
         # known_analyse_typer = {
-        #     "Labkakode" : AnalyseID
+        #     "Labkakode" : (AnalyseID, AnalysePris)
         # }
 
         known_rekvirent_names = {}
         # known_rekvirent_names = {
-        #     "Rekvirent Name" : RekvirentID,
-        # }
-
-        known_fakturaer = {}
-        # known_fakturaer = {
-        #     RekvirentID : FaktID,
+        #     "Rekvirent Name" : (RekvirentID, FakturaID)
         # }
 
         desired_cols = ["BETALERGRUPPE_SOR",
@@ -76,7 +70,7 @@ class NewParser:
 
         print("Loading file into memory...")
 
-        df = pd.read_excel(file_path, header=0, usecols=desired_cols)
+        df = pd.read_excel(file, header=0, usecols=desired_cols)
         total_rows = len(df)
 
         GLN_file = settings.BASE_DIR + '/faktura/assets/patoweb/GLN.xlsx'
@@ -92,8 +86,8 @@ class NewParser:
 
             rownr, rowdata = row
 
-            # Calculate remaining time
-            if (rownr % 100 == 0) and (rownr > 2000):
+            # Calculate remaining time - isn't stable until after a few thousand
+            if (rownr % 100 == 0) and (rownr > 3000):
                 time_passed = time.perf_counter() - t0
                 time_pr_row = time_passed / (rownr + 1)
                 time_left   = timedelta(seconds = int((total_rows - rownr + 1) * time_pr_row))
@@ -103,10 +97,10 @@ class NewParser:
             # Store all fields in temporary variables
             r_betalergruppe = cls.__cleanValues(rowdata['BETALERGRUPPE_SOR'])
             r_cprnr         = rowdata['CPRNR']
-            r_labkakode     = rowdata['LABKAKODE']
+            r_labkakode     = str(rowdata['LABKAKODE'])
             r_ekstern_pris  = rowdata['EKSTERN_PRIS']
             r_rekvirent     = cls.__cleanValues(rowdata['REKVIRENT'])
-            r_shortname     = cls.__cleanValues(rowdata['SHORTNME'])#.strip()
+            r_shortname     = cls.__cleanValues(rowdata['SHORTNME'])
             r_ean_nummer    = cls.__cleanValues(rowdata['EAN_NUMMER'])
             r_prvdato       = make_aware(rowdata['PRVTAGNDATO'])
             r_svardato      = make_aware(rowdata['SVARDATO'])
@@ -115,13 +109,26 @@ class NewParser:
 
             # Find analysetype
             if r_labkakode in known_analyse_typer.keys():
-                analyse_type_id = known_analyse_typer[r_labkakode]
+                analyse_type_id, analyse_type_pris = known_analyse_typer[r_labkakode]
             else:
-                analyse_type_id = cls.__find_analyse_type_id(r_labkakode)
-                known_analyse_typer[r_labkakode] = analyse_type_id
+                analyse_type      = cls.__find_analyse_type_id(r_labkakode)
+                if analyse_type:
+                    analyse_type_id   = analyse_type.id
+                    analyse_type_pris = cls.__find_analyse_type_pris(analyse_type, r_prvdato)
+                else:
+                    analyse_type_id   = None
+                    analyse_type_pris = None
+                known_analyse_typer[r_labkakode] = (analyse_type_id, analyse_type_pris)
 
             # Check that analysetype exists
             if not analyse_type_id:
+                error_lines.append(
+                    # (rownr, 'Analyse type "%s" kendes ikke' % r_labkakode))
+                    rownr)
+                continue
+
+            # Check that analysetype has price
+            if not analyse_type_pris:
                 error_lines.append(
                     # (rownr, 'Analyse type "%s" kendes ikke' % r_labkakode))
                     rownr)
@@ -139,23 +146,31 @@ class NewParser:
             # Check if we have already seen this rekvirent during this parsing,
             # and consequently also know the faktura ID
             if r_rekvirent in known_rekvirent_names.keys():
-                current_rekvirent_id = known_rekvirent_names[r_rekvirent]
-                current_faktura_id = known_fakturaer[current_rekvirent_id]
+                # current_rekvirent_id = known_rekvirent_names[r_rekvirent]
+                # current_faktura_id   = known_fakturaer[current_rekvirent_id]['ID']
+                current_rekvirent_id, current_faktura_id = known_rekvirent_names[r_rekvirent]
             else:
-                current_rekvirent_id = cls.__find_or_create_rekvirent(rekv_nr=r_rekvirent,
-                                                                      shortname=r_shortname,
-                                                                      ean_nummer=r_ean_nummer,
-                                                                      betalergruppe_id=betalergruppe_id)
-                current_faktura_id = cls.__create_faktura(parsing_id=current_parsing.id,
+                current_rekvirent_id = cls.__find_or_create_rekvirent(rekv_nr          = r_rekvirent,
+                                                                      shortname        = r_shortname,
+                                                                      ean_nummer       = r_ean_nummer,
+                                                                      betalergruppe_id = betalergruppe_id)
+                current_faktura_id = cls.__create_faktura(parsing_id=parsing_object.id,
                                                           # pdf_fil      = 'remember to fill this in...',
                                                           rekvirent_id=current_rekvirent_id)
 
-                known_rekvirent_names[r_rekvirent] = current_rekvirent_id
-                known_fakturaer[current_rekvirent_id] = current_faktura_id
+                known_rekvirent_names[r_rekvirent] = (current_rekvirent_id, current_faktura_id)
+                # known_fakturaer[current_rekvirent_id] = {'ID' : current_faktura_id, 'linjer' : 0, 'pris' : 0} #(current_faktura_id, 0)
 
             # Create the analyse
             Analyse.objects.create(CPR=r_cprnr, afregnings_dato=r_prvdato, svar_dato=r_svardato,
-                                   analyse_type_id=analyse_type_id, faktura_id=current_faktura_id)
+                                   analyse_type_id=analyse_type_id, faktura_id=current_faktura_id, samlet_pris=analyse_type_pris)
+
+            # Update lines and price in Faktura
+            current_faktura = Faktura.objects.get(id=current_faktura_id)
+            current_faktura.antal_linjer += 1
+            current_faktura.samlet_pris  += analyse_type_pris
+            current_faktura.save()
+
 
         # Finish the loop, print info
         t1 = time.perf_counter()
@@ -163,23 +178,25 @@ class NewParser:
               ((t1 - t0), ((t1-t0) / total_rows)))
 
         print("Errors: %d (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100))))
-        missing_analyser = [key for key, value in known_analyse_typer.items() if not value]
-        print("Unkown analysetypes: %s" % ', '.join(missing_analyser))
+        missing_analyser   = set([key for key, (Aid, _) in known_analyse_typer.items() if not Aid])
+        priceless_analyser = set([key for key, (_, price) in known_analyse_typer.items() if not price]) - missing_analyser
+        print("Unknown analysetypes: %s" % ', '.join(missing_analyser))
+        # print(known_analyse_typer)
         # print(missing_analyser)
 
         # Write error-files
         print('Writing missing-file to %s' % mangel_liste_file_path)
-        cls.subset_of_xlsx(file_path, mangel_liste_file_path, error_lines)
-
-        unknown_analysetyper_file_name = os.path.splitext(os.path.basename(file_path))[
-            0] + '_Ukendte_Analyser_' + str(current_parsing.id) + '.xlsx'
-        unknown_analysetyper_file_path = os.path.join(
-            os.getcwd(), 'backend', 'media', 'mangellister', unknown_analysetyper_file_name)
+        cls.subset_of_xlsx(file, mangel_liste_file_path, error_lines)
 
         print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
-        unk_anal_df = pd.DataFrame(missing_analyser)
-        unk_anal_df.columns = ['Ukendte analysetyper']
+        unknown_analysetyper_file_path = cls.__XLSXOutputFilePath('_Ukendte_analyser_', parsing_object, file)
+        unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : list(missing_analyser)})
         unk_anal_df.to_excel(unknown_analysetyper_file_path, index=False)
+
+        print('Writing analysetyper w/o price file to %s' % priceless_analysetyper_file_path)
+        priceless_analysetyper_file_path = cls.__XLSXOutputFilePath('_Analyser_uden_pris_', parsing_object, file)
+        unp_anal_df = pd.DataFrame({'Analysetyper uden pris' : list(priceless_analyser)})
+        unp_anal_df.to_excel(priceless_analysetyper_file_path, index=False)
         
         print('All done')
 
@@ -195,6 +212,13 @@ class NewParser:
         else:
             return subject.strip()
 
+    def __XLSXOutputFilePath(filename: str, parsing_object, file):
+        file_name = os.path.splitext(os.path.basename(str(file)))[
+            0] + filename + str(parsing_object.id) + '.xlsx'
+        file_path = os.path.join(
+            os.getcwd(), 'backend', 'media', 'mangellister', file_name)
+        return file_path
+
     # @classmethod
     # def __create_parsing(cls, data_fil: str, mangel_liste_fil: str, ptype: str) -> Faktura:
     #     ''' Creates a new parsing and returns it '''
@@ -205,8 +229,7 @@ class NewParser:
     @classmethod
     def __create_faktura(cls, parsing_id: int, rekvirent_id: int) -> int:
         ''' Creates a new faktura and returns its ID '''
-        newfakt = Faktura.objects.create(
-            parsing_id=parsing_id, rekvirent_id=rekvirent_id)
+        newfakt = Faktura.objects.create(parsing_id=parsing_id, rekvirent_id=rekvirent_id)
         return newfakt.id
 
     @classmethod
@@ -221,7 +244,6 @@ class NewParser:
                 rekvirent.save()
             # Check if betalergruppe is null
             if (not rekvirent.betalergruppe) and betalergruppe_id:
-                # rekvirent.betalergruppe = Betalergruppe.objects.get(id=betalergruppe_id)
                 rekvirent.betalergruppe_id = betalergruppe_id
                 rekvirent.save()
 
@@ -229,32 +251,46 @@ class NewParser:
         except ObjectDoesNotExist:
             logger.info("Opretter ny rekvirent: %s (%s)" %
                         (shortname, rekv_nr))
-            retval = Rekvirent.objects.create(rekv_nr=rekv_nr,
-                                              shortname=shortname,
-                                              GLN_nummer=ean_nummer,
-                                              betalergruppe_id=betalergruppe_id).id
+            retval = Rekvirent.objects.create(rekv_nr    = rekv_nr,
+                                              shortname  = shortname,
+                                              GLN_nummer = ean_nummer,
+                                              betalergruppe_id = betalergruppe_id).id
         return retval
 
     def __find_or_create_betalergruppe(betalergruppe: str, metatype: str) -> int:
         ''' Looks up the betalergruppe, and if none is found, creates one and returns the ID '''
         try:
-            retval = Betalergruppe.objects.get(
-                navn=betalergruppe, bgtype=metatype).id
+            retval = Betalergruppe.objects.get(navn=betalergruppe, bgtype=metatype).id
         except ObjectDoesNotExist:
             logger.info("Opretter ny betalergruppe: " + str(betalergruppe))
-            retval = Betalergruppe.objects.create(
-                navn=betalergruppe, bgtype=metatype).id
+            retval = Betalergruppe.objects.create(navn=betalergruppe, bgtype=metatype).id
         return retval
 
     def __find_analyse_type_id(labkakode: str):
-        ''' Looks up the analyse-code, and returns either the associated ID or None. '''
+        ''' Looks up the analyse-code, and returns either the associated AnalyseType or None. '''
         try:
-            retval = AnalyseType.objects.get(ydelses_kode=labkakode).id
+            retval = AnalyseType.objects.get(ydelses_kode=labkakode)
         except ObjectDoesNotExist:
             logger.info(
-                "Fejl - Kunne ikke finde analyse med ydelseskode " + labkakode)
+                "Fejl - Kunne ikke finde analyse med ydelseskode " + str(labkakode))
             retval = None
         return retval
+
+    def __find_analyse_type_pris(analyse_type, prvdato):
+        ''' Returns either the most recent active price or None '''
+        retval = None
+        tmp_dato = prvdato.to_pydatetime()
+        # print(tmp_dato)
+        # print(prvdato, analyse_type.priser.all())
+        # print(type(tmp_dato))
+        for p in analyse_type.priser.order_by('-gyldig_fra'):
+            # print((p.gyldig_fra), (p.gyldig_til))
+            if p.gyldig_fra < tmp_dato and (not p.gyldig_til or (p.gyldig_til > tmp_dato)):
+                retval = p.ekstern_pris
+                break
+        # print(retval)
+        return retval
+
 
     def subset_of_xlsx(infile: str, outfile: str, lines_to_include):
         ''' Writes the specified lines in the infile to the outfile. '''
@@ -263,7 +299,7 @@ class NewParser:
         outdf.to_excel(outfile, index=False)
 
 
-class Parser:
+class OldParser:
     @classmethod
     def parse(cls, parsing_object=None, file_path=None):
 
@@ -440,7 +476,6 @@ class Parser:
         error_list_df = pd.DataFrame(error_list_list)
 
         # Write to excel-file
-        # TODO: Måske find på et bedre filnavn
         mangel_liste_file_name = str(parsing_object.id) + '.xlsx'
         mangel_liste_file_path = os.path.join(
             os.getcwd(), 'backend', 'media', 'mangellister', mangel_liste_file_name)

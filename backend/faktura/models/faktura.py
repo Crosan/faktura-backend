@@ -40,4 +40,4 @@ class Faktura(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return "%d - %s" % (self.id, self.rekvirent.afdelingsnavn)
+        return "%d - %s (parse %d)" % (self.id, self.rekvirent.shortname, self.parsing.id)
