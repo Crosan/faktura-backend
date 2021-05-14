@@ -34,6 +34,8 @@ router.register(r'faktura-status', views.FakturaStatusViewSet)
 router.register(r'betalergruppe', views.BetalergruppeViewSet, basename="Betalergruppe")
 router.register(r'betalergruppe-nested', views.NestedBetalergruppeViewSet)
 
+router.register(r'debitor', views.DebitorViewSet, basename="Debitor")
+
 router.register(r'bgrp-in-parse-price', views.BetalergrpInParseWithPriceViewSet)
 
 # router.register(r'testpp', views.BigPPVS, basename='testpp')

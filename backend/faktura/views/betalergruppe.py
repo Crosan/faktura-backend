@@ -11,14 +11,17 @@ class BetalergruppeViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         parsing = self.request.query_params.get('parsing', None)
-        print(parsing)
+        # print(parsing)
         if parsing:
-            qs = Betalergruppe.objects.all().annotate(sum_total=Sum('rekvirenter__fakturaer__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=parsing))
+            qs = Betalergruppe.objects.all().annotate(sum_total=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=parsing))
+                                           ).annotate(sum_unsent=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10))
                                            ).annotate(antal=Count('rekvirenter__fakturaer', filter=Q(rekvirenter__fakturaer__parsing__id=parsing))
+                                           ).annotate(antal_unsent=Count('rekvirenter__fakturaer', filter=Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10))
                                            ).order_by('-sum_total')
         else:
             qs = Betalergruppe.objects.all()
         return qs
+    
 
 
 class NestedBetalergruppeViewSet(viewsets.ModelViewSet):
@@ -28,8 +31,10 @@ class NestedBetalergruppeViewSet(viewsets.ModelViewSet):
 
 class BetalergrpInParseWithPriceViewSet(viewsets.ModelViewSet):
     # queryset = Betalergruppe.objects.all().annotate(sum_total=Sum('rekvirenter__fakturaer__samlet_pris'))
+    # queryset = Betalergruppe.objects.all().annotate(sum_total=Sum(
+    #     'rekvirenter__fakturaer__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=3)))
     queryset = Betalergruppe.objects.all().annotate(sum_total=Sum(
-        'rekvirenter__fakturaer__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=3)))
+        'rekvirenter__fakturaer__analyser__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=3)))
 
     # def get_queryset(self):
     #     print(self.kwargs)

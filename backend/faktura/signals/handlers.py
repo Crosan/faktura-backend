@@ -8,7 +8,8 @@ from backend.faktura.extra.parser import Parser
 def faktura_created(sender, **kwargs):
     instance = kwargs['instance']
     
-    status = FakturaStatus.objects.create(status=10, faktura=instance)
+    # status = FakturaStatus.objects.create(status=10, faktura=instance)
+    status = FakturaStatus.objects.create(status=instance.status, faktura=instance)
     
 @receiver(post_save, sender=FakturaStatus)
 def faktura_status_created(sender, **kwargs):
