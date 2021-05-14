@@ -14,7 +14,7 @@ class NestedRekvirentViewSet(viewsets.ModelViewSet):
     serializer_class = NestedRekvirentSerializer
 
 class MissingRekvirentViewSet(viewsets.ModelViewSet):
-    filt = Q(GLN_nummer = None) | Q(betalergruppe = None)
+    filt = Q(debitor_nr = None) | Q(betalergruppe = None)
     queryset = Rekvirent.objects.filter(filt)
     # queryset = Betalergruppe.objects.all().annotate(sum_total=Sum('rekvirenter__fakturaer__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=pk)))
     serializer_class = NestedRekvirentSerializer

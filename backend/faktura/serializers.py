@@ -55,20 +55,32 @@ class ParsingSerializer(serializers.ModelSerializer):
 
         return data       
     
+class DebitorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Debitor
+        fields = "__all__"
         
 class FakturaSerializer(serializers.ModelSerializer):
+    antal_analyser = serializers.IntegerField(
+        read_only=True
+    )
+
+    moneys = serializers.FloatField(read_only=True)
+
     class Meta:
         model = Faktura
         fields = "__all__"
         
-    def validate(self, data):
-        """ Check the filetype of the 'faktura' file is allowed types """
-        file_ext = getFileType(data['pdf_fil'])
-        if file_ext != '.pdf':
-            raise ParsingFileTypeValidation(
-                'Faktura filetype must be .pdf', 'pdf_fil', status_code=status.HTTP_400_BAD_REQUEST)
+    # def validate(self, data):
+    #     """ Check the filetype of the 'faktura' file is allowed types
+    #     Overridden to always be true by RS 2021/05/14 """
+    #     return True
+    #     file_ext = getFileType(data['pdf_fil'])
+    #     if file_ext != '.pdf':
+    #         raise ParsingFileTypeValidation(
+    #             'Faktura filetype must be .pdf', 'pdf_fil', status_code=status.HTTP_400_BAD_REQUEST)
 
-        return data
+    #     return data
         
 class FakturaStatusSerializer(serializers.ModelSerializer):
     class Meta:
@@ -76,11 +88,10 @@ class FakturaStatusSerializer(serializers.ModelSerializer):
         fields = "__all__"
                
 class BetalergruppeSerializer(serializers.ModelSerializer):
-    sum_total = serializers.FloatField(
-        # source='sum_total', 
-        read_only=True
-    )
+    sum_total = serializers.FloatField(read_only=True)
+    sum_unsent = serializers.FloatField(read_only=True)
     antal = serializers.IntegerField(read_only=True)
+    antal_unsent = serializers.IntegerField(read_only=True)
     class Meta:
         model = Betalergruppe
         fields = "__all__"
@@ -115,6 +126,9 @@ class NestedRekvirentSerializer(serializers.ModelSerializer):
         
 class NestedFakturaSerializer(serializers.ModelSerializer):
     # analyser = NestedAnalyseSerializer(many=True) #Udkommenteret af RS, 31/03/21
+    antal_analyser = serializers.IntegerField(
+        read_only=True
+    )
     rekvirent = NestedRekvirentSerializer()
 
     class Meta:

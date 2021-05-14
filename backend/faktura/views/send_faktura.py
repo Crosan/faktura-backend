@@ -16,7 +16,12 @@ from datetime import datetime
 class SendFaktura(views.APIView):    
 
     def get(self, request, *args, **kwargs):
-        call_command('send-faktura')
+        # print(request)
+        # print(request.query_params.get('faktura', ""))
+        fakturas_to_send = request.query_params.get('faktura', "").split(',')
+        # print(fakturas_to_send)
+        # call_command('send-faktura') # Old, commented out by RS 2021-05-10
+        call_command('send-single-faktura', settings={'selectedFakts' : fakturas_to_send})
 
         return Response(status=status.HTTP_200_OK)
 
