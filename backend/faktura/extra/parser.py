@@ -15,6 +15,7 @@ from django.core.management import call_command
 from django.conf import settings
 from dateutil.relativedelta import relativedelta
 from django.utils.timezone import now, make_aware
+from django.utils.encoding import smart_str
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files import File
 
@@ -39,8 +40,10 @@ class Parser:
 
         # parsing_object = Parsing.objects.create(data_fil=file, ptype=metatype)
 
-        mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
+        # Change this to enable/disable the time calculation (not sure how impactful it is)
+        predict_time_left = True
 
+        mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
         parsing_object.mangel_liste_fil = mangel_liste_file_path
         parsing_object.ptype = 'Labka'
         parsing_object.save()
@@ -58,10 +61,15 @@ class Parser:
         #     "Rekvirent Name" : (RekvirentID, FakturaID)
         # }
 
+        known_debitors = {}
+        # known_debitors = {
+        #     'EAN-numner' : 'debitor_nr'
+        # }
+
         desired_cols = ["BETALERGRUPPE_SOR",
                         "CPRNR",
                         "LABKAKODE",
-                        "EKSTERN_PRIS",
+                        # "EKSTERN_PRIS",
                         "REKVIRENT",
                         "SHORTNME",
                         "EAN_NUMMER",
@@ -87,7 +95,7 @@ class Parser:
             rownr, rowdata = row
 
             # Calculate remaining time - isn't stable until after a few thousand
-            if (rownr % 100 == 0) and (rownr > 3000):
+            if predict_time_left and (rownr % 100 == 0) and (rownr > 25000):
                 time_passed = time.perf_counter() - t0
                 time_pr_row = time_passed / (rownr + 1)
                 time_left   = timedelta(seconds = int((total_rows - rownr + 1) * time_pr_row))
@@ -98,7 +106,7 @@ class Parser:
             r_betalergruppe = cls.__cleanValues(rowdata['BETALERGRUPPE_SOR'])
             r_cprnr         = rowdata['CPRNR']
             r_labkakode     = str(rowdata['LABKAKODE'])
-            r_ekstern_pris  = rowdata['EKSTERN_PRIS']
+            # r_ekstern_pris  = rowdata['EKSTERN_PRIS']
             r_rekvirent     = cls.__cleanValues(rowdata['REKVIRENT'])
             r_shortname     = cls.__cleanValues(rowdata['SHORTNME'])
             r_ean_nummer    = cls.__cleanValues(rowdata['EAN_NUMMER'])
@@ -137,6 +145,12 @@ class Parser:
             betalergruppe_id = cls.__find_or_create_betalergruppe(
                 r_betalergruppe, metatype) if r_betalergruppe else None
 
+            debitor = known_debitors.get(r_ean_nummer, None)
+            if not debitor:
+                debitor = cls.__lookup_debitor(r_ean_nummer)
+                if debitor:
+                    known_debitors[r_ean_nummer] = debitor
+
             # Check that betalergruppe is specified #Maybe do this later?
             # if pd.isnull(r_betalergruppe) or (not betalergruppe_id):
             #     print('Null betalergruppe' + str(rownr))
@@ -153,6 +167,7 @@ class Parser:
                 current_rekvirent_id = cls.__find_or_create_rekvirent(rekv_nr          = r_rekvirent,
                                                                       shortname        = r_shortname,
                                                                       ean_nummer       = r_ean_nummer,
+                                                                      debitor          = debitor,
                                                                       betalergruppe_id = betalergruppe_id)
                 current_faktura_id = cls.__create_faktura(parsing_id=parsing_object.id,
                                                           # pdf_fil      = 'remember to fill this in...',
@@ -166,10 +181,10 @@ class Parser:
                                    analyse_type_id=analyse_type_id, faktura_id=current_faktura_id, samlet_pris=analyse_type_pris)
 
             # Update lines and price in Faktura
-            current_faktura = Faktura.objects.get(id=current_faktura_id)
-            current_faktura.antal_linjer += 1
-            current_faktura.samlet_pris  += analyse_type_pris
-            current_faktura.save()
+            # current_faktura = Faktura.objects.get(id=current_faktura_id)
+            # current_faktura.antal_linjer += 1
+            # current_faktura.samlet_pris  += analyse_type_pris
+            # current_faktura.save()
 
 
         # Finish the loop, print info
@@ -185,16 +200,17 @@ class Parser:
         # print(missing_analyser)
 
         # Write error-files
+        # mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
         print('Writing missing-file to %s' % mangel_liste_file_path)
         cls.subset_of_xlsx(file, mangel_liste_file_path, error_lines)
 
-        print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
         unknown_analysetyper_file_path = cls.__XLSXOutputFilePath('_Ukendte_analyser_', parsing_object, file)
+        print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
         unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : list(missing_analyser)})
         unk_anal_df.to_excel(unknown_analysetyper_file_path, index=False)
 
-        print('Writing analysetyper w/o price file to %s' % priceless_analysetyper_file_path)
         priceless_analysetyper_file_path = cls.__XLSXOutputFilePath('_Analyser_uden_pris_', parsing_object, file)
+        print('Writing analysetyper w/o price file to %s' % priceless_analysetyper_file_path)
         unp_anal_df = pd.DataFrame({'Analysetyper uden pris' : list(priceless_analyser)})
         unp_anal_df.to_excel(priceless_analysetyper_file_path, index=False)
         
@@ -210,6 +226,7 @@ class Parser:
         elif isinstance(subject, int):
             return str(subject)
         else:
+            # return smart_str(subject.strip(), encoding='utf-8')
             return subject.strip()
 
     def __XLSXOutputFilePath(filename: str, parsing_object, file):
@@ -233,7 +250,18 @@ class Parser:
         return newfakt.id
 
     @classmethod
-    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, ean_nummer: str, betalergruppe_id: int) -> int:
+    def __lookup_debitor(cls, ean_nummer: str):
+        ''' Looks up the supplied EAN/GLN number in the debitor-table.
+        Returns None if none or several are found '''
+        debQS = Debitor.objects.filter(GLN_nummer=ean_nummer)
+        if len(debQS) == 1:
+            return debQS[0].debitor_nr
+        else:
+            return None
+
+
+    @classmethod
+    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, debitor: str, ean_nummer: str, betalergruppe_id: int) -> int:
         ''' Looks up the rekvirent, and if none is found, creates one and returns the ID.\n
             Updates the EAN-number as well as the betalergruppe if it is blank but supplied to the function. '''
         try:
@@ -242,18 +270,28 @@ class Parser:
             if (not rekvirent.GLN_nummer) and ean_nummer:
                 rekvirent.GLN_nummer = ean_nummer
                 rekvirent.save()
+
             # Check if betalergruppe is null
             if (not rekvirent.betalergruppe) and betalergruppe_id:
                 rekvirent.betalergruppe_id = betalergruppe_id
                 rekvirent.save()
 
+            # Check if debitor is null
+            if (not rekvirent.debitor_nr) and debitor:
+                print('Updating debitor')
+                rekvirent.debitor_nr = debitor
+                rekvirent.save()
+
             retval = rekvirent.id
+
         except ObjectDoesNotExist:
             logger.info("Opretter ny rekvirent: %s (%s)" %
                         (shortname, rekv_nr))
+            # debitor = cls.__lookup_debitor(ean_nummer)
             retval = Rekvirent.objects.create(rekv_nr    = rekv_nr,
                                               shortname  = shortname,
                                               GLN_nummer = ean_nummer,
+                                              debitor_nr = debitor,
                                               betalergruppe_id = betalergruppe_id).id
         return retval
 

@@ -39,14 +39,17 @@ class Command(BaseCommand):
 
         # Optional - register the credentials with a server (overrides ClientConfig for that server)
         smbclient.register_session(r"regionh.top.local", username="RGH-S-AutoDIAfaktura", password="JDQTS#wqzfg72396")
+
         # print(smbclient.listdir(r"\\regionh.top.local\DFS\Systemer\SAP\SAP001"))#\DIAC2SAP\Prod\"))
+        
         print(smbclient.listdir(r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Test"))#\DIAC2SAP\Prod\"))
+        
         # print(smbclient.stat('regionh.top.local\\DFS\\Systemer\\SAP\\SAP002\\beholdnings_styring\\prd\\backup\\DQ10053790-08.02.2021-08.19.04.csv'))
 
         # smbclient.mkdir(r"\\server\share\directory", username="user", password="pass")
 
-        # with smbclient.open_file(r"\\server\share\directory\file.txt", mode="w") as fd:
-        #     fd.write(u"file contents")
+        with smbclient.open_file(r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Test\file.txt", mode="w") as fd:
+            fd.write(u"file contents")
 
         # try:
         #     conn = self.setup_smb_conn()

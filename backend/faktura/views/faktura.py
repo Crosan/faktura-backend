@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from django.db.models import Count, Sum
 
 from backend.faktura.models import Faktura
 from backend.faktura.serializers import FakturaSerializer, NestedFakturaSerializer, SemiNestedFakturaSerializer
@@ -12,12 +13,14 @@ class FakturaViewSet(viewsets.ModelViewSet):
         parsing = self.request.query_params.get('parsing', None)
         betalergruppe = self.request.query_params.get('betalergruppe', None)
         if parsing and betalergruppe:
-            qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe).order_by('-samlet_pris')
+            qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
+            qs = qs.annotate(moneys=Sum('analyser__samlet_pris'))
+            qs = qs.order_by('-moneys')
         elif parsing:
             qs = Faktura.objects.filter(parsing__id=parsing).order_by('-samlet_pris')
         else:
             qs = Faktura.objects.all()
-        return qs
+        return qs.annotate(antal_analyser=Count('analyser'))
 
     
     def perform_update(self, serializer):
@@ -42,7 +45,7 @@ class NestedFakturaViewSet(viewsets.ModelViewSet):
             qs = Faktura.objects.filter(parsing__id=parsing).order_by('-samlet_pris')
         else:
             qs = Faktura.objects.all()
-        return qs
+        return qs.annotate(antal_analyser=Count('analyser'))
 
 class SemiNestedFakturaViewSet(viewsets.ModelViewSet):
     queryset = Faktura.objects.all()
