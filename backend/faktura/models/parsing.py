@@ -18,6 +18,8 @@ class Parsing(models.Model):
     #oprettet_af = models.ForeignKey(
     #    'Profile', related_name='parsings', on_delete=models.PROTECT)
     sent = models.BooleanField(default=False)
+    done = models.BooleanField(default=False)
+    status = models.CharField(max_length=150, null=True, blank=True, default='Oprettet')
     
     objects = models.Manager()
 

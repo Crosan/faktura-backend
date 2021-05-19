@@ -1,4 +1,5 @@
 import os
+import threading
 
 from rest_framework import serializers
 from backend.faktura.models import *
@@ -42,6 +43,8 @@ class RekvirentSerializer(serializers.ModelSerializer):
         fields = "__all__"
         
 class ParsingSerializer(serializers.ModelSerializer):
+    antal_fakturaer = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = Parsing
         fields = "__all__"
@@ -65,14 +68,14 @@ class FakturaSerializer(serializers.ModelSerializer):
         read_only=True
     )
 
-    moneys = serializers.FloatField(read_only=True)
+    samlet_pris = serializers.FloatField(read_only=True)
 
     class Meta:
         model = Faktura
         fields = "__all__"
         
     # def validate(self, data):
-    #     """ Check the filetype of the 'faktura' file is allowed types
+    #     """ Check the filetype of the 'faktura' file is allowed types   
     #     Overridden to always be true by RS 2021/05/14 """
     #     return True
     #     file_ext = getFileType(data['pdf_fil'])
@@ -129,6 +132,8 @@ class NestedFakturaSerializer(serializers.ModelSerializer):
     antal_analyser = serializers.IntegerField(
         read_only=True
     )
+    samlet_pris = serializers.FloatField(read_only=True)
+
     rekvirent = NestedRekvirentSerializer()
 
     class Meta:
@@ -173,9 +178,17 @@ class NestedParsingSerializer(serializers.ModelSerializer):
     
         parsing_obj = Parsing.objects.create(**validated_data)
         
-        Parser.parse(parsing_obj)
+        t = threading.Thread(target=self.parseWrap, args=[parsing_obj])
+        t.start()
+        # return True
+        # Parser.parse(parsing_obj)
         
         return parsing_obj
+
+    def parseWrap(self, parse_obj):
+        print('wrapper called with path: %s' % parse_obj)
+        parser = Parser()
+        parser.parse(parse_obj)
         
 class NestedBetalergruppeSerializer(serializers.ModelSerializer):
     rekvirenter = NestedRekvirentSerializer(many=True, required=False)
