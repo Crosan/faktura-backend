@@ -1,15 +1,16 @@
 from rest_framework import viewsets
+from django.db.models import Count
 
 from backend.faktura.models import Parsing
 from backend.faktura.serializers import ParsingSerializer, NestedParsingSerializer, SemiNestedParsingSerializer
 
 
 class ParsingViewSet(viewsets.ModelViewSet):
-    queryset = Parsing.objects.all()
+    queryset = Parsing.objects.all().annotate(antal_fakturaer=Count('fakturaer')).order_by('-oprettet')
     serializer_class = ParsingSerializer
     
 class NestedParsingViewSet(viewsets.ModelViewSet):
-    queryset = Parsing.objects.all()
+    queryset = Parsing.objects.all().order_by('-oprettet')
     serializer_class = NestedParsingSerializer
 
 class SemiNestedParsingViewSet(viewsets.ModelViewSet):

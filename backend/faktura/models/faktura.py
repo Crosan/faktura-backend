@@ -29,8 +29,8 @@ class FakturaStatus(models.Model):
 class Faktura(models.Model):
     pdf_fil = models.FileField(upload_to=upload_faktura_to, null=True, blank=True)
     oprettet = models.DateTimeField(default=now)
-    antal_linjer = models.IntegerField(default=0)
-    samlet_pris = models.FloatField(default=0)
+    # antal_linjer = models.IntegerField(default=0)
+    # samlet_pris = models.FloatField(default=0)
     status = models.IntegerField(default=10, choices=FakturaStatusChoices)
     parsing = models.ForeignKey(
         'Parsing', related_name="fakturaer", on_delete=models.CASCADE)    
@@ -41,3 +41,5 @@ class Faktura(models.Model):
 
     def __str__(self):
         return "%d - %s (parse %d)" % (self.id, self.rekvirent.shortname, self.parsing.id)
+
+

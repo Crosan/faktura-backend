@@ -81,11 +81,14 @@ class Parser:
         df = pd.read_excel(file, header=0, usecols=desired_cols)
         total_rows = len(df)
 
-        GLN_file = settings.BASE_DIR + '/faktura/assets/patoweb/GLN.xlsx'
-        kommune_file = settings.BASE_DIR + '/faktura/assets/patoweb/kommune.xlsx'
-        GLN = pd.read_excel(GLN_file)
-        kommune = pd.read_excel(kommune_file)
+        # GLN_file = settings.BASE_DIR + '/faktura/assets/patoweb/GLN.xlsx'
+        # kommune_file = settings.BASE_DIR + '/faktura/assets/patoweb/kommune.xlsx'
+        # GLN = pd.read_excel(GLN_file)
+        # kommune = pd.read_excel(kommune_file)
 
+        parsing_object.status = "Indlæsning i gang"
+        parsing_object.save()
+        
         # Loop through all lines in input xlsx file
         print('Starting loop')
         time_left = 0
@@ -95,12 +98,14 @@ class Parser:
             rownr, rowdata = row
 
             # Calculate remaining time - isn't stable until after a few thousand
-            if predict_time_left and (rownr % 100 == 0) and (rownr > 25000):
+            if predict_time_left and (rownr % 100 == 0): # and (rownr > 25000):
                 time_passed = time.perf_counter() - t0
                 time_pr_row = time_passed / (rownr + 1)
                 time_left   = timedelta(seconds = int((total_rows - rownr + 1) * time_pr_row))
+                parsing_object.status = 'Indlæser (%.02f %%)' % ((rownr / total_rows)*100)
+                parsing_object.save()
+                sys.stdout.write('\r%d / %d %s' % (rownr+1, total_rows, "" if time_left == 0 else "(%s remaining)" % (time_left)))
 
-            sys.stdout.write('\r%d / %d %s' % (rownr+1, total_rows, "" if time_left == 0 else "(%s remaining)" % (time_left)))
 
             # Store all fields in temporary variables
             r_betalergruppe = cls.__cleanValues(rowdata['BETALERGRUPPE_SOR'])
@@ -142,14 +147,23 @@ class Parser:
                     rownr)
                 continue
 
+            # Find betalergruppe
             betalergruppe_id = cls.__find_or_create_betalergruppe(
                 r_betalergruppe, metatype) if r_betalergruppe else None
 
-            debitor = known_debitors.get(r_ean_nummer, None)
-            if not debitor:
+
+            # Find debitor
+            if r_ean_nummer in known_debitors.keys():
+                debitor = known_debitors[r_ean_nummer]
+            else:
                 debitor = cls.__lookup_debitor(r_ean_nummer)
-                if debitor:
-                    known_debitors[r_ean_nummer] = debitor
+                known_debitors[r_ean_nummer] = debitor
+
+            # debitor = known_debitors.get(r_ean_nummer, None)
+            # if not debitor:
+            #     debitor = cls.__lookup_debitor(r_ean_nummer)
+            #     # if debitor:
+            #     known_debitors[r_ean_nummer] = debitor
 
             # Check that betalergruppe is specified #Maybe do this later?
             # if pd.isnull(r_betalergruppe) or (not betalergruppe_id):
@@ -192,10 +206,13 @@ class Parser:
         print('\nDone in %.02f seconds (%.05f sec/row)' %
               ((t1 - t0), ((t1-t0) / total_rows)))
 
+        parsing_object.status = "Skriver mangellister..."
+        parsing_object.save()
+
         print("Errors: %d (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100))))
         missing_analyser   = set([key for key, (Aid, _) in known_analyse_typer.items() if not Aid])
         priceless_analyser = set([key for key, (_, price) in known_analyse_typer.items() if not price]) - missing_analyser
-        print("Unknown analysetypes: %s" % ', '.join(missing_analyser))
+        # print("Unknown analysetypes: %s" % ', '.join(missing_analyser))
         # print(known_analyse_typer)
         # print(missing_analyser)
 
@@ -214,6 +231,10 @@ class Parser:
         unp_anal_df = pd.DataFrame({'Analysetyper uden pris' : list(priceless_analyser)})
         unp_anal_df.to_excel(priceless_analysetyper_file_path, index=False)
         
+        parsing_object.status = "Færdig:  %d fejl (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100)))
+        parsing_object.done = True
+        parsing_object.save()
+
         print('All done')
 
     def __cleanValues(subject):
