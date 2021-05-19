@@ -27,11 +27,11 @@ local_tz = pytz.timezone('Europe/Copenhagen')
 class Command(BaseCommand):
     ''' Generates XML-representation of specified fakturas and uploads them to the SMB server '''
 
-    serverLocation = r"//regionh.top.local/DFS/Systemer/SAP/SAP001/DIAC2SAP/Prod/"
+    serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
 
     def writeXMLtoFile(self, xml, filename):
         ''' For testing/debugging purposes '''
-        with open('C:\\Users\\RSIM0016\\Documents\\faktura\\xmltests\\%s.xml' % filename, 'w') as f:
+        with open('C:\\Users\\RSIM0016\\Documents\\faktura\\xmltests\\%s.xml' % filename, 'w', encoding='utf-8') as f:
             f.write(xml)
     
     def uploadToSMBShare(self, content):
@@ -44,14 +44,16 @@ class Command(BaseCommand):
             True : If file was transferred without errors
             None : Otherwise'''
         filename = r'DIAFaktura_' + datetime.now().strftime("%Y%m%d_%H%M%S%f")[:-4] + '.xml'
-        dst = self.serverLocation + filename
-        # try:
-        with smbclient.open_file(dst, mode="w", username="RGH-S-AutoDIAfaktura", password="JDQTS#wqzfg72396") as fd:
-            fd.write(u"%s" % content)
-        #     return True
-        # except E:
-        #     print(E)
-        return None
+        dst = self.serverLocation[:-1] + filename
+
+        try:
+            with smbclient.open_file(dst, mode="w") as fd:
+                # fd.write(u"%s" % content)
+                fd.write(content)
+            return True
+        except:
+            print('failed')
+            return None
 
     def handle(self, *args, **options):
         # self.print_env()
@@ -63,10 +65,18 @@ class Command(BaseCommand):
         faktQS = Faktura.objects.filter(pk__in=options['settings']['selectedFakts'])
         # print(faktQS)
 
+        # TODO: Lav en global config
+        # smbclient.ClientConfig(username='RGH-S-AutoDIAfaktura', password='JDQTS#wqzfg72396', skip_dfs=True)
+
+        # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
+        # print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\archive"))
+
         # for faktura in faktQS:
         for i, fakt in enumerate(faktQS):
-            XML_faktura_writer = XMLFakturaWriter() # Horrible hack, change this
+            XML_faktura_writer = XMLFakturaWriter(testing=True) # Horrible hack, change this
             print(fakt)
+            if not fakt.status == 10:
+                continue
             x = XML_faktura_writer.create(fakt)
             self.writeXMLtoFile(x, str(fakt.id))
             # success = self.uploadToSMBShare(x)

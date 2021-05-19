@@ -14,13 +14,18 @@ class FakturaViewSet(viewsets.ModelViewSet):
         betalergruppe = self.request.query_params.get('betalergruppe', None)
         if parsing and betalergruppe:
             qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
-            qs = qs.annotate(moneys=Sum('analyser__samlet_pris'))
-            qs = qs.order_by('-moneys')
+            # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+            # qs = qs.order_by('-samlet_pris')
         elif parsing:
-            qs = Faktura.objects.filter(parsing__id=parsing).order_by('-samlet_pris')
+            qs = Faktura.objects.filter(parsing__id=parsing)#.order_by('-samlet_pris')
+            # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+            # qs = qs.order_by('-samlet_pris')
         else:
             qs = Faktura.objects.all()
-        return qs.annotate(antal_analyser=Count('analyser'))
+        qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+        qs = qs.order_by('-samlet_pris')
+        qs = qs.annotate(antal_analyser=Count('analyser'))
+        return qs
 
     
     def perform_update(self, serializer):
@@ -40,9 +45,13 @@ class NestedFakturaViewSet(viewsets.ModelViewSet):
         parsing = self.request.query_params.get('parsing', None)
         betalergruppe = self.request.query_params.get('betalergruppe', None)
         if parsing and betalergruppe:
-            qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe).order_by('-samlet_pris')
+            qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
+            qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+            qs = qs.order_by('-samlet_pris')
         elif parsing:
-            qs = Faktura.objects.filter(parsing__id=parsing).order_by('-samlet_pris')
+            qs = Faktura.objects.filter(parsing__id=parsing)
+            qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+            qs = qs.order_by('-samlet_pris')
         else:
             qs = Faktura.objects.all()
         return qs.annotate(antal_analyser=Count('analyser'))

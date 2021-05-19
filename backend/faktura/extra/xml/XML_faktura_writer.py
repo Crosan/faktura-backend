@@ -7,32 +7,35 @@ from django.conf import settings
 
 class XMLFakturaWriter:
 
-    def __init__(self):
-        self.root = ET.Element(
-            'Emessage', {'xmlns': 'http://rep.oio.dk/medcom.dk/xml/schemas/2014/10/08/'})
+    def __init__(self, testing=False):
+        # self.root = ET.Element(
+        #     'Emessage', {'xmlns': 'http://rep.oio.dk/medcom.dk/xml/schemas/2014/10/08/'})
+        # self.root = ET.Element(r'ns1:GenericSAPOrder xmlns:ns1="urn:RegH:SalesOrderMgt:SCS:nonsap"')
+        self.root = ET.Element('ns1:GenericSAPOrder', attrib={ 'xmlns:ns1' : 'urn:RegH:SalesOrderMgt:SCS:nonsap'})
         # self.parsing = None
         self.qs = None
 
         self.SenderBusinessSystemID = "RHDIA"
         self.BillingCompanyCode = "2200"
-        self.debtorType = "6"
+        self.debitorType = "6"
         self.ProfitCenter = "222252300"
+        self.testing = testing
 
     def __str__(self):
-        return ET.tostring((self.root), encoding='ISO-8859-1')
+        return ET.tostring((self.root), encoding='UTF-8')
 
-    def __add_subtag(self, parent, tag):
-        return ET.SubElement(parent, tag)
+    def __add_subtag(self, parent, tag, attrib={}):
+        return ET.SubElement(parent, tag, attrib)
 
-    def __test_and_set_or_fail(self, parent, tag, value):
+    def __test_and_set_or_fail(self, parent, tag, value, attrib={}):
         if not value:
             raise Exception("Missing mandatory value " + tag)
         else:
-            self.__add_subtag(parent, tag).text = value
+            self.__add_subtag(parent, tag, attrib).text = value
 
     def prettify(self, elem):
         """Return a pretty-printed XML string for the Element. """
-        rough_string = ET.tostring(elem, 'utf-8')
+        rough_string = ET.tostring(elem, encoding='UTF-8')
         reparsed = minidom.parseString(rough_string)
         return reparsed.toprettyxml(indent="\t")
 
@@ -47,7 +50,7 @@ class XMLFakturaWriter:
         if True: #settings.DEVELOPMENT:
             print('outputting')
             # with open('out.xml', 'w') as f:
-            with open('C:\\Users\\RSIM0016\\Documents\\faktura\\test.xml', 'w') as f:
+            with open('C:\\Users\\RSIM0016\\Documents\\faktura\\test.xml', 'w', encoding='utf-8') as f:
                 f.write(self.prettify(self.root))
 
         return self.prettify(self.root)
@@ -55,10 +58,10 @@ class XMLFakturaWriter:
     def create(self, faktura: Faktura):
         self.faktura = faktura
 
-        sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
-        self.__add_message_header(sap_order)
-        # self.__add_order_header_lst(sap_order)
-        self.__add_order_header(sap_order, faktura)
+        # sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
+        self.__add_message_header(self.root)
+        # self.__add_order_header_lst(self.root)
+        self.__add_order_header(self.root, faktura)
 
         if False:# settings.DEVELOPMENT:
             print('outputting')
@@ -71,14 +74,14 @@ class XMLFakturaWriter:
 
     def __add_message_header(self, parent):
         message_header = self.__add_subtag(parent, 'messageHeader')
-        self.__test_and_set_or_fail(message_header, 'SenderBusinessSystemID', self.SenderBusinessSystemID)
-        self.__test_and_set_or_fail(message_header, 'CreationDateTime', datetime.today().strftime('%Y-%m-%d;%H:%M'))
+        self.__test_and_set_or_fail(message_header, 'senderBusinessSystemID', self.SenderBusinessSystemID)
+        self.__test_and_set_or_fail(message_header, 'creationDateTime', datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
 
         d = datetime.now()
         timestamp = "{}/{}/{}_{}:{}:{}.{}".format(d.year, d.month, d.day, d.hour, d.minute, d.second, d.microsecond)
         unique_name = "DIAOrder_" + timestamp
 
-        self.__test_and_set_or_fail(message_header, 'OriginalLoadFileName', unique_name)  # lav unikt navn
+        self.__test_and_set_or_fail(message_header, 'originalLoadFileName', unique_name)  # lav unikt navn
 
 
     def __add_order_header_lst(self, parent):
@@ -89,12 +92,12 @@ class XMLFakturaWriter:
         order_header = self.__add_subtag(parent, 'orderHeader')
 
         self.__test_and_set_or_fail(order_header, 'BillingCompanyCode', self.BillingCompanyCode)
-        self.__test_and_set_or_fail(order_header, 'DebtorType', self.debtorType)
+        # self.__test_and_set_or_fail(order_header, 'DebtorType', self.debitorType)
 
         # self.__test_and_set_or_fail(order_header, 'Debitor', "222252300")
-        self.__test_and_set_or_fail(order_header, 'Debitor', faktura.rekvirent.debitor_nr) #XXX
+        self.__test_and_set_or_fail(order_header, 'Debitor', faktura.rekvirent.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
         # self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
-        self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%d;%H:%M'))
+        self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
         self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id))
         self.__test_and_set_or_fail(order_header, 'OrderText1', "for spørgsmål, kontakt Brian Schmidt 12345678")  # selv generer
         self.__test_and_set_or_fail(order_header, 'ProfitCenterHdr', self.ProfitCenter)
@@ -122,7 +125,8 @@ class XMLFakturaWriter:
         months = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"]
         date = analyse.svar_dato
 
-        itemtext = "{} - {} - {}".format(analyse.CPR, str(date.day) + "-" + months[date.month-1] + "-" + str(date.year), analyse.analyse_type.ydelses_kode)
+        CPR = '123467-8912' if self.testing else analyse.CPR
+        itemtext = "{} - {} - {}".format(CPR, str(date.day) + "-" + months[date.month-1] + "-" + str(date.year), analyse.analyse_type.ydelses_kode)
         itemtext = itemtext[:132] # Må max være 132 tegn lang
 
 
