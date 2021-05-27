@@ -4,6 +4,7 @@ import re
 from datetime import datetime
 
 import smbclient
+import sys
 
 import pandas as pd
 import pytz
@@ -27,7 +28,7 @@ local_tz = pytz.timezone('Europe/Copenhagen')
 class Command(BaseCommand):
     ''' Generates XML-representation of specified fakturas and uploads them to the SMB server '''
 
-    serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
+    serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
 
     def writeXMLtoFile(self, xml, filename):
         ''' For testing/debugging purposes '''
@@ -47,12 +48,13 @@ class Command(BaseCommand):
         dst = self.serverLocation[:-1] + filename
 
         try:
-            with smbclient.open_file(dst, mode="w") as fd:
+            with smbclient.open_file(dst, mode="w", encoding='utf-8') as fd:
                 # fd.write(u"%s" % content)
                 fd.write(content)
             return True
         except:
             print('failed')
+            print("Unexpected error:", sys.exc_info()[0])
             return None
 
     def handle(self, *args, **options):
@@ -66,10 +68,10 @@ class Command(BaseCommand):
         # print(faktQS)
 
         # TODO: Lav en global config
-        # smbclient.ClientConfig(username='***REMOVED***', password='***REMOVED***', skip_dfs=True)
+        smbclient.ClientConfig(username='***REMOVED***', password='***REMOVED***', skip_dfs=True)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
-        # print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\archive"))
+        print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes"))
 
         # for faktura in faktQS:
         for i, fakt in enumerate(faktQS):
@@ -79,8 +81,8 @@ class Command(BaseCommand):
                 continue
             x = XML_faktura_writer.create(fakt)
             self.writeXMLtoFile(x, str(fakt.id))
-            # success = self.uploadToSMBShare(x)
-            success = True
+            success = self.uploadToSMBShare(x)
+            # success = True
             if success:
                 fakt.status = 20
                 fakt.save()
