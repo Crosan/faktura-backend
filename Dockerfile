@@ -35,7 +35,8 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 ENV PATH "$PATH:/opt/mssql-tools/bin"
 
 # install dependencies
-RUN pip install -r "$dep"
+#RUN pip install -r "$dep"
+RUN pip install -r requirements.txt
 
 # make scripts executable
 RUN chmod +x scripts/*
