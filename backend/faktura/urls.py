@@ -11,7 +11,7 @@ router.register(r'profiles', views.ProfileViewSet)
 
 router.register(r'analyse-priser', views.AnalysePrisViewSet)
 
-router.register(r'analyse-typer', views.AnalyseTypeViewSet)
+router.register(r'analyse-typer', views.AnalyseTypeViewSet, basename="Analysetyper")
 router.register(r'analyse-typer-nested', views.NestedAnalyseTypeViewSet)
 
 router.register(r'analyser', views.AnalyseViewSet)
@@ -28,6 +28,8 @@ router.register(r'parsing-nested', views.NestedParsingViewSet)
 router.register(r'faktura', views.FakturaViewSet, basename="Faktura")
 router.register(r'faktura-nested', views.NestedFakturaViewSet, basename="Faktura")
 # router.register(r'faktura-semi', views.SemiNestedFakturaViewSet)
+
+router.register(r'faktura-stat', views.FakturaStatViewSet, basename="Faktura statistics")
 
 router.register(r'faktura-status', views.FakturaStatusViewSet)
 
@@ -47,4 +49,5 @@ urlpatterns = [
     url(r'^download/$', views.download_file),
     url(r'^authenticate/', views.AuthenticateView.as_view()),
     url(r'^send/', views.SendFaktura.as_view()),
+    url(r'^rerun/', views.RerunMangelliste.as_view()),
 ]

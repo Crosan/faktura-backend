@@ -29,7 +29,7 @@ class Parser:
         print('New parser initialised')
 
     @classmethod
-    def parse(cls, parsing_object=None, file_path=None, metatype='Labka'):
+    def parse(cls, parsing_object=None, file_path=None, metatype='Labka', rerun=False):
 
         if not file_path:
             file = parsing_object.data_fil
@@ -43,8 +43,6 @@ class Parser:
         # Change this to enable/disable the time calculation (not sure how impactful it is)
         predict_time_left = True
 
-        mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
-        parsing_object.mangel_liste_fil = mangel_liste_file_path
         parsing_object.ptype = 'Labka'
         parsing_object.save()
 
@@ -78,7 +76,13 @@ class Parser:
 
         print("Loading file into memory...")
 
-        df = pd.read_excel(file, header=0, usecols=desired_cols)
+        try:
+            df = pd.read_excel(file, header=0, usecols=desired_cols)
+        except ValueError as err:
+            print("I/O error:", err)
+            parsing_object.status = 'Fejlet, inputfil mangler kolonner: ' + str(err)[63:-1]
+            parsing_object.save()
+            return
         total_rows = len(df)
 
         # GLN_file = settings.BASE_DIR + '/faktura/assets/patoweb/GLN.xlsx'
@@ -217,9 +221,11 @@ class Parser:
         # print(missing_analyser)
 
         # Write error-files
-        # mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
+        mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
+        parsing_object.mangel_liste_fil = mangel_liste_file_path
         print('Writing missing-file to %s' % mangel_liste_file_path)
         cls.subset_of_xlsx(file, mangel_liste_file_path, error_lines)
+        parsing_object.save()
 
         unknown_analysetyper_file_path = cls.__XLSXOutputFilePath('_Ukendte_analyser_', parsing_object, file)
         print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
@@ -231,8 +237,9 @@ class Parser:
         unp_anal_df = pd.DataFrame({'Analysetyper uden pris' : list(priceless_analyser)})
         unp_anal_df.to_excel(priceless_analysetyper_file_path, index=False)
         
-        parsing_object.status = "Færdig:  %d fejl (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100)))
+        parsing_object.status = "Færdig (%d fejl)" % (len(error_lines))
         parsing_object.done = True
+        
         parsing_object.save()
 
         print('All done')
@@ -337,18 +344,11 @@ class Parser:
 
     def __find_analyse_type_pris(analyse_type, prvdato):
         ''' Returns either the most recent active price or None '''
-        retval = None
         tmp_dato = prvdato.to_pydatetime()
-        # print(tmp_dato)
-        # print(prvdato, analyse_type.priser.all())
-        # print(type(tmp_dato))
         for p in analyse_type.priser.order_by('-gyldig_fra'):
-            # print((p.gyldig_fra), (p.gyldig_til))
-            if p.gyldig_fra < tmp_dato and (not p.gyldig_til or (p.gyldig_til > tmp_dato)):
-                retval = p.ekstern_pris
-                break
-        # print(retval)
-        return retval
+            if p.gyldig_fra <= tmp_dato and (not p.gyldig_til or (p.gyldig_til >= tmp_dato)):
+                return p.ekstern_pris
+        return None
 
 
     def subset_of_xlsx(infile: str, outfile: str, lines_to_include):

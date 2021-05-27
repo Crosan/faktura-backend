@@ -33,6 +33,9 @@ class AnalysePrisSerializer(serializers.ModelSerializer):
         fields = "__all__"        
         
 class AnalyseTypeSerializer(serializers.ModelSerializer):
+    antal = serializers.IntegerField(read_only=True)
+    pris = serializers.FloatField(read_only=True)
+
     class Meta:
         model = AnalyseType
         fields = "__all__"
@@ -44,6 +47,7 @@ class RekvirentSerializer(serializers.ModelSerializer):
         
 class ParsingSerializer(serializers.ModelSerializer):
     antal_fakturaer = serializers.IntegerField(read_only=True)
+    samlet_pris = serializers.FloatField(read_only=True)
 
     class Meta:
         model = Parsing
@@ -133,6 +137,7 @@ class NestedFakturaSerializer(serializers.ModelSerializer):
         read_only=True
     )
     samlet_pris = serializers.FloatField(read_only=True)
+    cpr = serializers.IntegerField(read_only=True)
 
     rekvirent = NestedRekvirentSerializer()
 
@@ -185,10 +190,14 @@ class NestedParsingSerializer(serializers.ModelSerializer):
         
         return parsing_obj
 
-    def parseWrap(self, parse_obj):
-        print('wrapper called with path: %s' % parse_obj)
+    def parseWrap(self, parsing_object):
+        print('wrapper called with path: %s' % parsing_object)
         parser = Parser()
-        parser.parse(parse_obj)
+        try:
+            parser.parse(parsing_object)
+        except:
+            parsing_object.status = 'Fejlet: Ukendt fejl'
+            parsing_object.save()
         
 class NestedBetalergruppeSerializer(serializers.ModelSerializer):
     rekvirenter = NestedRekvirentSerializer(many=True, required=False)

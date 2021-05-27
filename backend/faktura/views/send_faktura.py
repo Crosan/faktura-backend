@@ -33,7 +33,8 @@ class SendFaktura(views.APIView):
 
 
 class FakturaSender():
-    ''' Generates XML-representation of specified fakturas and uploads them to the SMB server '''
+    ''' Generates XML-representation of specified fakturas and uploads them to the SMB server 
+    Is not used as of 25/05/21 (check this)'''
 
     serverLocation = r"//regionh.top.local/DFS/Systemer/SAP/SAP001/DIAC2SAP/Prod/"
 
