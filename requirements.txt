@@ -44,6 +44,7 @@ pylint==2.2.2
 pysmb==1.2.6
 pyspnego==0.1.5
 python-dateutil==2.8.1
+python-ldap==3.3.1
 pytz==2018.9
 requests==2.21.0
 six==1.12.0
