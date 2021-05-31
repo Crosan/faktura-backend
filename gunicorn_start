@@ -72,7 +72,7 @@ fi
 # prepare database
 manage_script="$DJANGODIR/manage.py"
 "$manage_script" migrate
-"$manage_script" generate-data
+# "$manage_script" generate-data
 
 echo "Server is up and running and ready to use."
 
