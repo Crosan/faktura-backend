@@ -21,6 +21,7 @@ SECRET_KEY = '(pdtfsnynawgyobmgaqpoh8msglyh=nmqus!1y5(nb)&*f8)9_'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'localhost:4200',
+    'localhost:8000'
 )
 
 # Application definition
