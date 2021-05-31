@@ -28,7 +28,8 @@ RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
     msodbcsql17 \
     locales \
     mssql-tools \
-    krb5-user
+    krb5-user   \
+    python-django-auth-ldap
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 
