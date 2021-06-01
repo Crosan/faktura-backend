@@ -104,7 +104,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
         'NAME': 'AutoDIA_faktura_01',
-        'USER': 'AutoDIAfaktura_user@RGHSQLHOTEL003B',
+        'USER': 'AutoDIAfaktura_user@localhost',
         'PASSWORD': 'Ho##265sKilg!!',
         'HOST': 'RGHSQLHOTEL003B',
         'PORT': '1433',
