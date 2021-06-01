@@ -88,12 +88,30 @@ AUTHENTICATION_BACKENDS = [
 # Database #
 ############
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'AutoDIA_faktura_01',
+        'USER': 'AutoDIAfaktura_user@RGHSQLHOTEL003B',
+        'PASSWORD': 'Ho##265sKilg!!',
+        'HOST': 'RGHSQLHOTEL003B',
+        'PORT': '1433',
+
+        'OPTIONS': {
+            'driver': 'ODBC Driver 13 for SQL Server',
+        },
+    },
 }
+
+# set this to False if you want to turn off pyodbc's connection pooling
+# DATABASE_CONNECTION_POOLING = False
 
 ###########
 # Logging #
