@@ -8,7 +8,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 cryptography==3.4.6
 Django==2.2.16
-#django-auth-ldap
+django-auth-ldap
 django-python3-ldap
 django-coreapi==2.3.0
 django-cors-headers==2.4.0
@@ -42,6 +42,7 @@ pyexcel-ods==0.5.4
 pyexcel-webio==0.1.4
 pyexcel-xls==0.5.8
 pyexcel-xlsx==0.5.6
+pyldap
 PyJWT==1.7.1
 pylint==2.2.2
 pysmb==1.2.6

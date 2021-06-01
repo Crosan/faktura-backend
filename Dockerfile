@@ -30,6 +30,9 @@ RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
     mssql-tools \
     krb5-user   \
     python-django-auth-ldap
+    
+# LDAP drivers
+RUN apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 
