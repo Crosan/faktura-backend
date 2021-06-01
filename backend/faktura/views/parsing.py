@@ -7,7 +7,7 @@ from backend.faktura.serializers import ParsingSerializer, NestedParsingSerializ
 
 class ParsingViewSet(viewsets.ModelViewSet):
     queryset = Parsing.objects.all().annotate(antal_fakturaer=Count('fakturaer', distinct=True)
-                                   ).annotate(samlet_pris=Sum('fakturaer__analyser__samlet_pris', distinct=True)
+                                   ).annotate(samlet_pris=Sum('fakturaer__analyser__samlet_pris')
                                    ).order_by('-oprettet')
     serializer_class = ParsingSerializer
     
