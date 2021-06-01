@@ -2,6 +2,7 @@ import os
 import ldap
 from django_auth_ldap.config import GroupOfNamesType, LDAPSearchUnion, LDAPSearch
 from backend.settings.common import *
+import pyodbc
 
 
 print("USING TESTING SETTINGS")
@@ -95,6 +96,10 @@ AUTHENTICATION_BACKENDS = [
 #     }
 # }
 
+drivers = [item for item in pyodbc.drivers()]
+driver = drivers[-1]
+print("driver:{}".format(driver))
+
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
@@ -106,7 +111,8 @@ DATABASES = {
 
         'OPTIONS': {
             # 'driver': 'ODBC Driver 13 for SQL Server',
-            'driver': '{ODBC Driver 17 for SQL Server}',
+            # 'driver': '{ODBC Driver 17 for SQL Server}',
+            'driver': driver,
         },
     },
 }
