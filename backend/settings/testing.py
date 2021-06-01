@@ -106,8 +106,8 @@ DATABASES = {
         'NAME': 'AutoDIA_faktura_01',
         'USER': '***REMOVED***@localhost',
         'PASSWORD': '***REMOVED***',
-        'HOST': 'RGHSQLHOTEL003B',
-        'PORT': '1433',
+        'HOST': 'RGHSQLHOTEL003B,1433',
+        # 'PORT': '1433',
 
         'OPTIONS': {
             # 'driver': 'ODBC Driver 13 for SQL Server',
