@@ -7,7 +7,7 @@ import pyodbc
 
 print("USING TESTING SETTINGS")
 
-DEBUG = False
+DEBUG = True
 DEVELOPMENT = False
 TESTING = True
 PRODUCTION = False
@@ -18,7 +18,7 @@ ALLOWED_HOSTS = [
     'localhost',
     'lnxgenmed02.unix.regionh.top.local',
     'tlnxautodiaf02.unix.regionh.top.local',
-    'tlnxautodiaf03.unix.regionh.top.local' 
+    'tlnxautodiaf03.unix.regionh.top.local' ,
 ]
 
 REST_FRAMEWORK = {
