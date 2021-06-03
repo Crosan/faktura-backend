@@ -104,10 +104,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
         'NAME': 'AutoDIA_faktura_01',
-        'USER': 'AutoDIAfaktura_user@localhost',
+        'USER': 'AutoDIAfaktura_user',
         'PASSWORD': 'Ho##265sKilg!!',
-        'HOST': 'RGHSQLHOTEL003B,1433',
-        # 'PORT': '1433',
+        'HOST': 'RGHSQLHOTEL003B.regionh.top.local',
+        'PORT': '1433',
 
         'OPTIONS': {
             # 'driver': 'ODBC Driver 13 for SQL Server',
