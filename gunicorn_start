@@ -82,5 +82,6 @@ echo "Starting gunicorn with command:"
 echo gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND #--log-level=$LOGLEVEL
 
 # exec gunicorn backend.wsgi:application --bind localhost:8000
-exec gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND #--log-level=$LOGLEVEL #--log-file=-
+# exec gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND #--log-level=$LOGLEVEL #--log-file=-
+exec gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=127.0.0.1:8000
 #exec "$manage_script" runserver
