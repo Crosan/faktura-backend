@@ -43,6 +43,8 @@ ENV PATH "$PATH:/opt/mssql-tools/bin"
 #RUN pip install -r "$dep"
 RUN pip install -r requirements.txt
 
+EXPOSE 8000
+
 # make scripts executable
 RUN chmod +x scripts/*
 
