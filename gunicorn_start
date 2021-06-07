@@ -14,7 +14,7 @@ RUN_DIR="$BACKEND_SHARED_DIR/run"
 STATIC_DIR="$BACKEND_SHARED_DIR/static"
 MEDIA_DIR="$BACKEND_SHARED_DIR/media"
 SECRETS="/docker/secrets"
-
+ 
 mkdir -p "$LOG_DIR"
 mkdir -p "$RUN_DIR"
 mkdir -p "$MEDIA_DIR"
