@@ -76,15 +76,12 @@ manage_script="$DJANGODIR/manage.py"
 
 echo "Server is up and running and ready to use."
 
-echo ${DJANGO_WSGI_MODULE}
 
-command="gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL --log-file=-"
+command="gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL"
 echo "Starting gunicorn with command:"
 # echo gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL --log-file=-
 echo ${command}
 
-#echo "Touching "
-#touch $LOG_DIR/backend_log
 
 # exec gunicorn backend.wsgi:application --bind localhost:8000
 # exec gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND #--log-level=$LOGLEVEL #--log-file=-
