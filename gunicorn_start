@@ -18,6 +18,7 @@ SECRETS="/docker/secrets"
 mkdir -p "$LOG_DIR"
 mkdir -p "$RUN_DIR"
 mkdir -p "$MEDIA_DIR"
+mkdir -p "$MEDIA_DIR"/mangellister
 mkdir -p "$STATIC_DIR"
 
 ## symbolic links to media and static to docker volume

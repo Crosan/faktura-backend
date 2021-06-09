@@ -201,6 +201,7 @@ class NestedParsingSerializer(serializers.ModelSerializer):
         except Exception as e:
             print(e)
             parsing_object.status = 'Fejlet: ' + traceback.format_exc()
+            logger.error('Parsing failed')
             logger.info(traceback.format_exc())
             parsing_object.save()
         # except:
