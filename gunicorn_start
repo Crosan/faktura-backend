@@ -35,7 +35,8 @@ WORKERS=3
 BIND=unix:"$RUN_DIR/gunicorn.sock"
 DJANGO_SETTINGS_MODULE=backend.settings.${FAKTURA_ENV}
 DJANGO_WSGI_MODULE=backend.wsgi
-LOGLEVEL=error
+# LOGLEVEL=error
+LOGLEVEL=info
 
 # source database & ftp credentials
 if [[ "$FAKTURA_ENV" == "testing" || "$FAKTURA_ENV" == "production" ]]; then
