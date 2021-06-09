@@ -7,7 +7,7 @@ import pyodbc
 
 print("USING TESTING SETTINGS")
 
-DEBUG = True
+DEBUG = False
 DEVELOPMENT = False
 TESTING = True
 PRODUCTION = False
