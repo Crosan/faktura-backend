@@ -192,6 +192,7 @@ class NestedParsingSerializer(serializers.ModelSerializer):
         return parsing_obj
 
     def parseWrap(self, parsing_object):
+        logger = logging.getLogger("app")
         print('wrapper called with path: %s' % parsing_object)
         parser = Parser()
         try:
@@ -199,6 +200,7 @@ class NestedParsingSerializer(serializers.ModelSerializer):
         except Exception as e:
             print(e)
             parsing_object.status = 'Fejlet: ' + traceback.format_exc()
+            logger.info(traceback.format_exc())
             parsing_object.save()
         # except:
         #     parsing_object.status = 'Fejlet: Ukendt fejl'
