@@ -224,6 +224,7 @@ class Parser:
         mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
         parsing_object.mangel_liste_fil = mangel_liste_file_path
         print('Writing missing-file to %s' % mangel_liste_file_path)
+        logger.info('Writing missing-file to %s' % mangel_liste_file_path)
         cls.subset_of_xlsx(file, mangel_liste_file_path, error_lines)
         parsing_object.save()
 
