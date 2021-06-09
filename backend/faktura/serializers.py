@@ -1,5 +1,6 @@
 import os
 import threading
+import traceback
 
 from rest_framework import serializers
 from backend.faktura.models import *
@@ -195,9 +196,13 @@ class NestedParsingSerializer(serializers.ModelSerializer):
         parser = Parser()
         try:
             parser.parse(parsing_object)
-        except:
-            parsing_object.status = 'Fejlet: Ukendt fejl'
+        except Exception as e:
+            print(e)
+            parsing_object.status = 'Fejlet: ' + traceback.format_exc()
             parsing_object.save()
+        # except:
+        #     parsing_object.status = 'Fejlet: Ukendt fejl'
+        #     parsing_object.save()
         
 class NestedBetalergruppeSerializer(serializers.ModelSerializer):
     rekvirenter = NestedRekvirentSerializer(many=True, required=False)
