@@ -49,7 +49,7 @@ class RerunMangelliste(views.APIView):
         try:
             parser.parse(parsing_object, file_path=parsing_object.mangel_liste_fil, rerun=True)
         except:
-            parsing_object.status = 'Fejlet: Ukendt fejl'
+            parsing_object.status = 'Rerun fejlet: Ukendt fejl'
             parsing_object.save()
 
         
