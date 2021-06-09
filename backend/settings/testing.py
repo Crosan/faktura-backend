@@ -12,11 +12,12 @@ DEVELOPMENT = False
 TESTING = True
 PRODUCTION = False
 
+APPEND_SLASH = False
+
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
 ALLOWED_HOSTS = [
     'localhost',
-    'lnxgenmed02.unix.regionh.top.local',
     'tlnxautodiaf02.unix.regionh.top.local',
     'tlnxautodiaf03.unix.regionh.top.local' ,
 ]
@@ -96,9 +97,9 @@ AUTHENTICATION_BACKENDS = [
 #     }
 # }
 
-drivers = [item for item in pyodbc.drivers()]
-driver = drivers[-1]
-print("driver:{}".format(driver))
+# drivers = [item for item in pyodbc.drivers()]
+# driver = drivers[-1]
+# print("driver:{}".format(driver))
 
 DATABASES = {
     'default': {
