@@ -77,7 +77,7 @@ manage_script="$DJANGODIR/manage.py"
 echo "Server is up and running and ready to use."
 
 
-command="gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL"
+command="gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level='$LOGLEVEL'"
 echo "Starting gunicorn with command:"
 # echo gunicorn ${DJANGO_WSGI_MODULE}:application --name $NAME --workers $WORKERS --user=$USER --group=$GROUP --bind=$BIND --log-level=$LOGLEVEL --log-file=-
 echo ${command}
