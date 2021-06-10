@@ -16,6 +16,8 @@ MEDIA_DIR="$BACKEND_SHARED_DIR/media"
 MANGEL_DIR="$MEDIA_DIR/mangellister"
 SECRETS="/docker/secrets"
  
+echo "$MANGEL_DIR"
+
 mkdir -p "$LOG_DIR"
 mkdir -p "$RUN_DIR"
 mkdir -p "$MEDIA_DIR"
