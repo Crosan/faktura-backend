@@ -13,7 +13,7 @@ LOG_DIR="$BACKEND_SHARED_DIR/logs"
 RUN_DIR="$BACKEND_SHARED_DIR/run"
 STATIC_DIR="$BACKEND_SHARED_DIR/static"
 MEDIA_DIR="$BACKEND_SHARED_DIR/media"
-MANGEL_DIR="$MEDIA_DIR/mangellister"
+MANGEL_DIR="/usr/src/app/backend/media/mangellister/"
 SECRETS="/docker/secrets"
  
 echo "$MANGEL_DIR"
