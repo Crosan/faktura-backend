@@ -12,3 +12,6 @@ class AnalyseType(models.Model):
     kilde_navn = models.CharField(max_length=100, blank=True, null=True) 
 
     objects = models.Manager()
+
+    def __str__(self):
+        return "%s - %s" % (self.ydelses_navn, self.ydelses_kode)
