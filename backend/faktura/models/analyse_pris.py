@@ -13,3 +13,6 @@ class AnalysePris(models.Model):
     analyse_type = models.ForeignKey('AnalyseType', related_name='priser', on_delete=models.PROTECT, blank=True, null=True)
 
     objects = models.Manager()
+
+    def __str__(self):
+        return "%s - %s" % (self.analyse_type, str(self.gyldig_fra))
