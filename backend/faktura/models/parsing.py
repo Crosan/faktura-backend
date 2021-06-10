@@ -12,7 +12,7 @@ def upload_parsing_to(instance, file):
 
 class Parsing(models.Model):
     data_fil = models.FileField(upload_to=upload_parsing_to)
-    mangel_liste_fil = models.FileField(blank=True, null=True)
+    mangel_liste_fil = models.FileField(max_length=256, blank=True, null=True)
     oprettet = models.DateTimeField(default=now)
     ptype = models.CharField(max_length=100, null=True, blank=True, choices=TypeChoices)
     #oprettet_af = models.ForeignKey(
