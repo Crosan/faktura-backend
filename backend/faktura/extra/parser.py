@@ -209,6 +209,8 @@ class Parser:
         t1 = time.perf_counter()
         print('\nDone in %.02f seconds (%.05f sec/row)' %
               ((t1 - t0), ((t1-t0) / total_rows)))
+        logger.info('Done in %.02f seconds (%.05f sec/row)' %
+              ((t1 - t0), ((t1-t0) / total_rows)))
 
         parsing_object.status = "Skriver mangellister..."
         parsing_object.save()
@@ -230,19 +232,23 @@ class Parser:
 
         unknown_analysetyper_file_path = cls.__XLSXOutputFilePath('_Ukendte_analyser_', parsing_object, file)
         print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
+        logger.info('Writing missing-file to %s' % unknown_analysetyper_file_path)
         unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : list(missing_analyser)})
         unk_anal_df.to_excel(unknown_analysetyper_file_path, index=False)
 
         priceless_analysetyper_file_path = cls.__XLSXOutputFilePath('_Analyser_uden_pris_', parsing_object, file)
         print('Writing analysetyper w/o price file to %s' % priceless_analysetyper_file_path)
+        logger.info('Writing missing-file to %s' % priceless_analysetyper_file_path)
         unp_anal_df = pd.DataFrame({'Analysetyper uden pris' : list(priceless_analyser)})
         unp_anal_df.to_excel(priceless_analysetyper_file_path, index=False)
         
+        logger.info("Writing status 'done'")
         parsing_object.status = "Færdig (%d fejl)" % (len(error_lines))
         parsing_object.done = True
         
         parsing_object.save()
 
+        logger.info('Ending')
         print('All done')
 
     def __cleanValues(subject):
