@@ -122,3 +122,6 @@ graph*.png
 
 # Excel files
 *.xlsx
+
+# Backup databases
+backend\testdb_backup\*
