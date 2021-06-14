@@ -29,6 +29,7 @@ class Command(BaseCommand):
     ''' Generates XML-representation of specified fakturas and uploads them to the SMB server '''
 
     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
+    logger.info('Sending faktura to: \n %s' % serverLocation)
 
     def writeXMLtoFile(self, xml, filename):
         ''' For testing/debugging purposes '''
