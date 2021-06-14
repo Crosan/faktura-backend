@@ -14,6 +14,7 @@ RUN_DIR="$BACKEND_SHARED_DIR/run"
 STATIC_DIR="$BACKEND_SHARED_DIR/static"
 MEDIA_DIR="$BACKEND_SHARED_DIR/media"
 MANGEL_DIR="/usr/src/app/backend/media/mangellister/"
+TEMPLATES_DIR="/usr/src/app/backend/media/templates/"
 SECRETS="/docker/secrets"
  
 echo "$MANGEL_DIR"
@@ -22,6 +23,7 @@ mkdir -p "$LOG_DIR"
 mkdir -p "$RUN_DIR"
 mkdir -p "$MEDIA_DIR"
 mkdir -p "$MANGEL_DIR"
+mkdir -p "$TEMPLATES_DIR"
 mkdir -p "$STATIC_DIR"
 
 ## symbolic links to media and static to docker volume
