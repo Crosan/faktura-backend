@@ -56,6 +56,7 @@ class Command(BaseCommand):
         except:
             print('failed')
             print("Unexpected error:", sys.exc_info()[0])
+            logger.error("Unexpected error:", sys.exc_info()[0])
             return None
 
     def handle(self, *args, **options):
@@ -78,6 +79,7 @@ class Command(BaseCommand):
         for i, fakt in enumerate(faktQS):
             XML_faktura_writer = XMLFakturaWriter(testing=True) # Horrible hack, change this
             print(fakt)
+            logger.info("Sending file: %s" % fakt)
             if not fakt.status == 10:
                 continue
             x = XML_faktura_writer.create(fakt)
