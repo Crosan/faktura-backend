@@ -37,6 +37,7 @@ class Parser:
             file = file_path
 
         print("Begin parsing '%s'" % str(file))
+        logger.info("Begin parsing '%s'" % str(file))
 
         # parsing_object = Parsing.objects.create(data_fil=file, ptype=metatype)
 
@@ -75,6 +76,7 @@ class Parser:
                         "SVARDATO"]
 
         print("Loading file into memory...")
+        logger.info("Loading file into memory...")
 
         try:
             df = pd.read_excel(file, header=0, usecols=desired_cols)
@@ -95,6 +97,7 @@ class Parser:
         
         # Loop through all lines in input xlsx file
         print('Starting loop')
+        logger.info('Starting loop')
         time_left = 0
         t0 = time.perf_counter()
         for row in df.iterrows():

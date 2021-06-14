@@ -1,4 +1,4 @@
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('RH99000000','Z001','Regionslager','5798001025270')
 ,('2000000','Z002','Reference kunde Z002','5790001952457')
 ,('3000000','Z003','Reference kunde Z003','5790001952440')
@@ -499,7 +499,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('RH22000206','Z001','Rigshospitalet 3011 KB Cellav. + Cytospin','5798001022071')
 ,('RH22000205','Z001','Rigshospitalet 3011KB Grp. 1, Multiplate','5798001022064')
 ,('RH22000204','Z001','Rigshospitalet KB 2013 DANAK','5798001022057');
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('RH22000203','Z001','Rigshospitalet Ekstern QC','5798001022040')
 ,('RH22000202','Z001','Rigshospitalet Hjertegenetik','5798001022033')
 ,('RH22000201','Z001','Rigshospitalet Genetisk Epidemologi','5798001022026')
@@ -1000,7 +1000,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('8000390','Z009','Region Sjælland Psykiatrien Syd','5798002041149')
 ,('5000030','Z005','Aleris Hamlet Ringsted A/S','5790002336027')
 ,('7000242','Z007','Landbrug & Fødevarer F.m.b.A',NULL);
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('2000044','Z002','Ministeriet for Sundhed og Forebygg','5798000362079')
 ,('5000035','Z005','PTU LANDSFORE. AF POLIO-, TRAFIK- O','5790001966300')
 ,('2000045','Z002','Københavns Universitet Institut for Immunologi og Mikrobiologi','5798000421738')
@@ -1501,7 +1501,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('7000428','Z005','Københavns Privathospital','5790002240133')
 ,('7000429','Z007','Teres Hospitalet Parken','5790001964672')
 ,('7000437','Z007','Star Air',NULL);
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('7000438','Z007','Sankt Lukas Stiftelsen',NULL)
 ,('7000439','Z007','Børne Riget',NULL)
 ,('7000440','Z007','Topdanmark Forsikring A/S',NULL)
@@ -2002,7 +2002,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('8000755','Z008','Aalborg Universitetshospital Smertecenter','5798003281179')
 ,('8000756','Z008','Nykøbing F. Sygehus','5798001864749')
 ,('3000758','Z003','Faxe Sociale Udviklingscenter, Sønd','5798007699000');
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('3000759','Z003','Forebyggelsescenter','5798008696343')
 ,('3000761','Z003','Sundhedsafdelingen Lemvig','5798004685709')
 ,('6000472','Z006','Tasiilaq Sygehus','5790001953096')
@@ -2503,7 +2503,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('3001158','Z003','Furesø Kommune Center for Dagtilbud og Skole','5798008526831')
 ,('3001159','Z003','Social Service - Afdelingen på Rådh','5798009041098')
 ,('3001160','Z003','Guldborgsund Kommune Rådhuset','5798007150624');
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('3001162','Z003','Lolland Kommune Rådhuset','5798007107895')
 ,('6000787','Z006','Örebro Kommun Fakturacentralen',NULL)
 ,('6000793','Z006','Hälso och Sjukvårdsförvaltning',NULL)
@@ -3004,7 +3004,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('8001022','Z008','Regionshospitalet Silkeborg','5798002769029')
 ,('3001536','Z003','ØSTERGAARDEN ÆLDRECENTER','5798008059612')
 ,('RH22000313','Z001','Rigshospitalet Udposteringer','5798001023610');
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('3001537','Z003','Social Psykiatrien','5790000222704')
 ,('6001253','Z006','Folktandvården Västra Götland Specialistcentrum Pedodonti',NULL)
 ,('6001254','Z006','AstraZeneca R  & D',NULL)
@@ -3505,7 +3505,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('3001849','Z003','HVIDOVRE KOMMUNE RÅDHUSET','5798009110664')
 ,('6001550','Z006','Region Kronoberg 0136-000',NULL)
 ,('7001837','Z005','IQVIA Partners A/S',NULL);
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('7001839','Z007','DLI Market Intelligence ApS',NULL)
 ,('8001170','Z008','Region Midtjylland - Regionshuset V','5798002763898')
 ,('8001171','Z008','Region Midtjylland - Regionshuset V','5798002765038')
@@ -4006,7 +4006,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('7002258','Z007','Læge Steffen Peter Bjerring','5790001372675')
 ,('RH91000039','Z001','Center for Økonomi L&F Service','5798000384460')
 ,('5000275','Z005','Aleris-Hamlet Hospitaler - Parken',NULL);
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('7002259','Z007','StressCare Institute',NULL)
 ,('7002267','Z007','Lægerne Busgadehuset I/S',NULL)
 ,('7002275','Z007','LÆGEHUSET HASSELVEJ I/S',NULL)
@@ -4507,7 +4507,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('6002368','Z006','Medtronic',NULL)
 ,('3002546','Z003','Hedensted Kommune Handecapafdelingen','5798006261154')
 ,('8001486','Z008','Regionshospitalet Herning','5798002739602');
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('3002552','Z003','Forebyggelse og Myndighed','5798004132401')
 ,('3002553','Z003','Langeland Kommune - Administratione','5798007067045')
 ,('2000526','Z002','KU - Institut for Idræt og Ernæring','5798000422438')
@@ -5008,7 +5008,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('6002819','Z006','Bristol Myers Squibb Company',NULL)
 ,('8001636','Z008','Regionshospital Nordjylland, Thiste','5798003281070')
 ,('7003180','Z007','BSN MEDICAL A/S C/O Essity Denmark A/S',NULL);
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('8001638','Z008','Regionshospital Nordjylland, Brønde','5798003281155')
 ,('6002823','Z006','Region Gävleborg Regionkontoret',NULL)
 ,('6002824','Z006','StatFinn OY',NULL)
@@ -5509,7 +5509,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('7003397','Z007','STRANDMØLLEN A/S',NULL)
 ,('7003398','Z007','Cafe Twist It',NULL)
 ,('3003016','Z003','Ejendomme og Drift, Devika Sønderbo','5798009991997');
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('RH12000056','Z001','Bispebjerg Hospital Q - 50 Medicins akut','5798001028882')
 ,('RH12000057','Z001','Bispebjerg Hospital Ikke i brug','0000000000000')
 ,('RH12000058','Z001','Bispebjerg Hospital Ikke i brug','0000000000000')
@@ -6010,7 +6010,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('6004283','Z006','GE Vingmed Ultrasound AS',NULL)
 ,('7003532','Z007','JAKA Service IVS',NULL)
 ,('7003533','Z007','Jarlens Firma',NULL);
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('7003534','Z007','BESTPRACTICE NORDIC ApS',NULL)
 ,('5000520','Z005','Psykolog Carsten Juul',NULL)
 ,('6004296','Z006','Raido Raps',NULL)
@@ -6511,7 +6511,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('7003661','Z007','Lægerne ved Postparken I/S',NULL)
 ,('7003662','Z007','Lægerne Kanaltorvet I/S',NULL)
 ,('7003663','Z007','LÆGE BO GERDES',NULL);
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('7003664','Z007','LÆGEPRAKSIS V/JAN HOLLENSEN',NULL)
 ,('7003665','Z007','SPECIALLÆGE JACOB PHILIPSEN ApS',NULL)
 ,('7003666','Z007','Hjerteklinikken v/Søren Strange',NULL)
@@ -7012,7 +7012,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('RH91000045','Z001','Center for Økonomi SP Sundhedsdata','5798001060011')
 ,('5000600','Z005','Lægehuset Havnegade Nexø',NULL)
 ,('3003255','Z003','BRK Administration, Landemærket 26','5798009951830');
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('6005743','Z006','Lovisenberg Diakonale Høgskole',NULL)
 ,('6005750','Z006','Department of Epidemiology Boston University',NULL)
 ,('6005751','Z006','Glycotest, Inc.',NULL)
@@ -7513,7 +7513,7 @@ INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
 ,('7004170','Z007','HF & VUC FYN','5798000558496')
 ,('7004171','Z007','Copenhagen Business School Handelsh',NULL)
 ,('7004172','Z007','Campus Bornholm',NULL);
-INSERT INTO faktura_debitor(debitor_nr,gruppe,navn,GLN_nummer) VALUES
+INSERT INTO [AutoDIA_faktura_01].[dbo].[faktura_debitor](debitor_nr,gruppe,navn,GLN_nummer) VALUES
  ('7004173','Z007','ADVODAN Næstved I/S',NULL)
 ,('2000767','Z002','Aalborg City Gymnasium S/I','5798000560949')
 ,('7004174','Z007','Sdr Nærå Friskole og Midtfyns Efter',NULL)
