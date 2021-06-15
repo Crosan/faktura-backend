@@ -105,19 +105,20 @@ class Parser:
             rownr, rowdata = row
 
             # Calculate remaining time - isn't stable until after a few thousand
-            if predict_time_left and (rownr % 100 == 0): # and (rownr > 25000):
+            if predict_time_left and (rownr % 10000 == 0): # and (rownr > 25000):
                 time_passed = time.perf_counter() - t0
                 time_pr_row = time_passed / (rownr + 1)
                 time_left   = timedelta(seconds = int((total_rows - rownr + 1) * time_pr_row))
                 parsing_object.status = 'Indlæser (%.02f %%)' % ((rownr / total_rows)*100)
                 parsing_object.save()
-                sys.stdout.write('\r%d / %d %s' % (rownr+1, total_rows, "" if time_left == 0 else "(%s remaining)" % (time_left)))
+                logger.info('%d / %d %s' % (rownr+1, total_rows, "" if time_left == 0 else "(%s remaining)" % (time_left)))
 
 
             # Store all fields in temporary variables
             r_betalergruppe = cls.__cleanValues(rowdata['BETALERGRUPPE_SOR'])
-            r_cprnr         = rowdata['CPRNR']
-            r_labkakode     = str(rowdata['LABKAKODE'])
+            r_cprnr         = cls.__cleanValues(rowdata['CPRNR'])
+            # r_labkakode     = str(rowdata['LABKAKODE'])
+            r_labkakode     = cls.__cleanValues(rowdata['LABKAKODE'])
             # r_ekstern_pris  = rowdata['EKSTERN_PRIS']
             r_rekvirent     = cls.__cleanValues(rowdata['REKVIRENT'])
             r_shortname     = cls.__cleanValues(rowdata['SHORTNME'])
