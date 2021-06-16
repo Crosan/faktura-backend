@@ -100,14 +100,22 @@ AUTHENTICATION_BACKENDS = [
 # driver = drivers[-1]
 # print("driver:{}".format(driver))
 
+DB_NAME = os.environ.get('DJANGO_DB_NAME')
+DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE')
+DB_HOST = os.environ.get('DJANGO_DB_HOST')
+DB_PORT = os.environ.get('DJANGO_DB_PORT')
+DB_USERNAME = os.environ.get('DJANGO_DB_USERNAME')
+DB_PASSWORD = os.environ.get('DJANGO_DB_PASSWORD')
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '1433',
+        'ENGINE': DB_ENGINE,
+        'NAME': DB_NAME,
+        'USER': DB_USERNAME,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
 
         'OPTIONS': {
             # 'driver': 'ODBC Driver 13 for SQL Server',
@@ -116,7 +124,6 @@ DATABASES = {
         },
     },
 }
-
 # set this to False if you want to turn off pyodbc's connection pooling
 # DATABASE_CONNECTION_POOLING = False
 
