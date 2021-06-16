@@ -30,7 +30,9 @@ RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
     mssql-tools \
     krb5-user   \
     python-django-auth-ldap \
-    gunicorn
+    gunicorn \
+    ranger \
+    tree
     
 # LDAP drivers
 RUN apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
