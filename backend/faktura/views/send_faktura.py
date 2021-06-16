@@ -55,7 +55,7 @@ class FakturaSender():
         filename = r'DIAFaktura_' + datetime.now().strftime("%Y%m%d_%H%M%S%f")[:-4] + '.xml'
         dst = self.serverLocation + filename
         # try:
-        with smbclient.open_file(dst, mode="w", username="***REMOVED***", password="***REMOVED***") as fd:
+        with smbclient.open_file(dst, mode="w", username="RGH-S-AutoDIAfaktura", password="JDQTS#wqzfg72396") as fd:
             fd.write(u"%s" % content)
         #     return True
         # except E:
