@@ -99,7 +99,7 @@ class XMLFakturaWriter:
         # self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
         self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
         self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id))
-        self.__test_and_set_or_fail(order_header, 'OrderText1', "for spørgsmål, kontakt Brian Schmidt 12345678")  # selv generer
+        self.__test_and_set_or_fail(order_header, 'OrderText1', "for spørgsmål, kontakt Brian Schmidt 35453341")  # selv generer
         self.__test_and_set_or_fail(order_header, 'ProfitCenterHdr', self.ProfitCenter)
 
         self.__add_item_lines_lst(order_header, faktura)
@@ -125,7 +125,7 @@ class XMLFakturaWriter:
         months = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"]
         date = analyse.svar_dato
 
-        CPR = '123467-8912' if self.testing else analyse.CPR
+        CPR = '123467-8912' if settings.TESTING else analyse.CPR
         itemtext = "{} - {} - {}".format(CPR, str(date.day) + "-" + months[date.month-1] + "-" + str(date.year), analyse.analyse_type.ydelses_kode)
         itemtext = itemtext[:132] # Må max være 132 tegn lang
 
