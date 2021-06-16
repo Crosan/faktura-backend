@@ -105,7 +105,7 @@ class Parser:
             rownr, rowdata = row
 
             # Calculate remaining time - isn't stable until after a few thousand
-            if predict_time_left and (rownr % 10000 == 0): # and (rownr > 25000):
+            if predict_time_left and (rownr % 1000 == 0): # and (rownr > 25000):
                 time_passed = time.perf_counter() - t0
                 time_pr_row = time_passed / (rownr + 1)
                 time_left   = timedelta(seconds = int((total_rows - rownr + 1) * time_pr_row))
