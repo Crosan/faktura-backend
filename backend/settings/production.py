@@ -9,8 +9,8 @@ print("USING TESTING SETTINGS")
 
 DEBUG = False
 DEVELOPMENT = False
-TESTING = True
-PRODUCTION = False
+TESTING = False
+PRODUCTION = True
 
 APPEND_SLASH = False
 
@@ -18,8 +18,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
 ALLOWED_HOSTS = [
     'localhost',
-    'tlnxautodiaf02.unix.regionh.top.local',
-    'tlnxautodiaf03.unix.regionh.top.local' ,
+    'plnxautodiaf01.unix.regionh.top.local',
 ]
 
 REST_FRAMEWORK = {
@@ -101,22 +100,14 @@ AUTHENTICATION_BACKENDS = [
 # driver = drivers[-1]
 # print("driver:{}".format(driver))
 
-DB_NAME = os.environ.get('DJANGO_DB_NAME')
-DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE')
-DB_HOST = os.environ.get('DJANGO_DB_HOST')
-DB_PORT = os.environ.get('DJANGO_DB_PORT')
-DB_USERNAME = os.environ.get('DJANGO_DB_USERNAME')
-DB_PASSWORD = os.environ.get('DJANGO_DB_PASSWORD')
-
-
 DATABASES = {
     'default': {
-        'ENGINE': DB_ENGINE,
-        'NAME': DB_NAME,
-        'USER': DB_USERNAME,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '1433',
 
         'OPTIONS': {
             # 'driver': 'ODBC Driver 13 for SQL Server',
