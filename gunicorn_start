@@ -52,6 +52,8 @@ if [[ "$FAKTURA_ENV" == "testing" || "$FAKTURA_ENV" == "production" ]]; then
     source "$SECRETS/creds_std"
     echo "SOURCING CREDS_MS"
     source "$SECRETS/creds_ms"
+    echo "SOURCING CREDS_SMB"
+    source "$SECRETS/creds_smb"
 fi
 
 export LOG_DIR

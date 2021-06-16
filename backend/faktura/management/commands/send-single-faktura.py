@@ -28,7 +28,11 @@ local_tz = pytz.timezone('Europe/Copenhagen')
 class Command(BaseCommand):
     ''' Generates XML-representation of specified fakturas and uploads them to the SMB server '''
 
-    serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
+    if settings.TESTING:
+        serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
+    else:
+        serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
+
     logger.info('Sending faktura to: \n %s' % serverLocation)
 
     def writeXMLtoFile(self, xml, filename):
@@ -70,15 +74,16 @@ class Command(BaseCommand):
         # print(faktQS)
 
         # TODO: Lav en global config
-        smbclient.ClientConfig(username='RGH-S-AutoDIAfaktura', password='JDQTS#wqzfg72396', skip_dfs=True)
+
+        smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes"))
 
         # for faktura in faktQS:
         for i, fakt in enumerate(faktQS):
-            XML_faktura_writer = XMLFakturaWriter(testing=True) # Horrible hack, change this
-            print(fakt)
+            XML_faktura_writer = XMLFakturaWriter() # Horrible hack, change this
+            # print(fakt)
             logger.info("Sending file: %s" % fakt)
             if not fakt.status == 10:
                 continue
