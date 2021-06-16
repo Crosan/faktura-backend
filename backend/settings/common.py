@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(pdtfsnynawgyobmgaqpoh8msglyh=nmqus!1y5(nb)&*f8)9_'
+# SECRET_KEY = os.environ.get('DJANGO_key')
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
@@ -91,6 +91,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+##############
+# SMB Server #
+##############
+
+SMB_USER = os.environ.get('SMB_USER')
+SMB_PASS = os.environ.get('SMB_PASS')
 
 
 # Internationalization
