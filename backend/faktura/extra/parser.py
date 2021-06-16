@@ -359,6 +359,7 @@ class Parser:
         for p in analyse_type.priser.order_by('-gyldig_fra'):
             if p.gyldig_fra <= tmp_dato and (not p.gyldig_til or (p.gyldig_til >= tmp_dato)):
                 return p.ekstern_pris
+        logger.info('Analysetype %s har ingen pris for dato %s' % (analyse_type, str(prvdato)))
         return None
 
 
