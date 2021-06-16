@@ -38,7 +38,7 @@ class Command(BaseCommand):
         # smbclient.ClientConfig(username='user', password='pass')
 
         # Optional - register the credentials with a server (overrides ClientConfig for that server)
-        smbclient.register_session(r"regionh.top.local", username="***REMOVED***", password="***REMOVED***")
+        smbclient.register_session(r"regionh.top.local", username="RGH-S-AutoDIAfaktura", password="JDQTS#wqzfg72396")
 
         # print(smbclient.listdir(r"\\regionh.top.local\DFS\Systemer\SAP\SAP001"))#\DIAC2SAP\Prod\"))
         
@@ -73,8 +73,8 @@ class Command(BaseCommand):
 
 
     # def setup_smb_conn(self):
-    #     pswd0 = r"***REMOVED***"
-    #     pswd1 = r"***REMOVED***"
+    #     pswd0 = r"Ho##265sKilg!!"
+    #     pswd1 = r"JDQTS#wqzfg72396"
     #     conn = SMBConnection(,"","",use_ntlm_v2 = True)
     #     return conn
 # SMBConnection(username, password, my_name, remote_name, domain='', use_ntlm_v2=True, sign_options=2, is_direct_tcp=False)
