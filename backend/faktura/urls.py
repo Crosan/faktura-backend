@@ -12,7 +12,7 @@ router.register(r'profiles', views.ProfileViewSet)
 router.register(r'analyse-priser', views.AnalysePrisViewSet)
 
 router.register(r'analyse-typer', views.AnalyseTypeViewSet, basename="Analysetyper")
-router.register(r'analyse-typer-nested', views.NestedAnalyseTypeViewSet)
+router.register(r'analyse-typer-nested', views.NestedAnalyseTypeViewSet, basename='Analysetyper_Nested')
 
 router.register(r'analyser', views.AnalyseViewSet)
 router.register(r'analyser-nested', views.NestedAnalyseViewSet)

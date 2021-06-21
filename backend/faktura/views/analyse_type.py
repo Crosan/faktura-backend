@@ -32,5 +32,14 @@ class AnalyseTypeViewSet(viewsets.ModelViewSet):
 
 
 class NestedAnalyseTypeViewSet(viewsets.ModelViewSet):
-    queryset = AnalyseType.objects.all()
+    # queryset = AnalyseType.objects.all()
     serializer_class = NestedAnalyseTypeSerializer
+
+    def get_queryset(self):
+        searchterm = self.request.query_params.get('q', None)
+        if searchterm:
+            print(searchterm)
+            qs = AnalyseType.objects.filter(Q(ydelses_kode__icontains=searchterm) | Q(ydelses_navn__icontains=searchterm) | Q(gruppering__icontains=searchterm) | Q(afdeling__icontains=searchterm))
+        else:
+            qs = AnalyseType.objects.all()
+        return qs
