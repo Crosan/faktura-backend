@@ -11,6 +11,7 @@ class AnalyseTypeViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         faktura = self.request.query_params.get('faktura', None)
+        searchterm = self.request.query_params.get('q', None)
         # print(faktura)
         if faktura:
             qs = AnalyseType.objects.all().annotate(antal=Count('analyser', filter=Q(analyser__faktura__id = faktura))
@@ -22,6 +23,9 @@ class AnalyseTypeViewSet(viewsets.ModelViewSet):
             #                                ).annotate(sum_total=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=parsing))
             #                                ).annotate(sum_unsent=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10)))
             #                                ).order_by('-sum_total')
+        elif searchterm:
+            print(searchterm)
+            qs = AnalyseType.objects.filter(Q(ydelses_kode__icontains=searchterm) | Q(ydelses_navn__icontains=searchterm) | Q(gruppering__icontains=searchterm) | Q(afdeling__icontains=searchterm))
         else:
             qs = AnalyseType.objects.all()
         return qs
