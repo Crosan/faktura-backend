@@ -96,6 +96,7 @@ class Command(BaseCommand):
                 fakt.save()
             else:
                 print('Failed up upload faktura "%s"' % str(fakt))
+                logger.error('Failed up upload faktura "%s"' % str(fakt))
 
         # XML_faktura_writer.create(faktQS)
 
