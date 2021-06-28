@@ -80,6 +80,7 @@ fi
 
 # prepare database
 manage_script="$DJANGODIR/manage.py"
+"$manage_script" makemigrations
 "$manage_script" makemigrations faktura
 "$manage_script" migrate
 # "$manage_script" generate-data
