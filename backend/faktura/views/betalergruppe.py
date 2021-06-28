@@ -20,7 +20,9 @@ class BetalergruppeViewSet(viewsets.ModelViewSet):
                                            ).annotate(sum_unsent=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10)))
                                            ).order_by('-sum_total')
         else:
-            qs = Betalergruppe.objects.all().order_by('navn')
+            qs = Betalergruppe.objects.all(
+                                          ).annotate(sum_total=Sum('rekvirenter__fakturaer__analyser__samlet_pris')
+                                          ).order_by('-sum_total')
         return qs
     
 
