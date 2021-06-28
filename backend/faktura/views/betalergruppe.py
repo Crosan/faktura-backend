@@ -21,8 +21,8 @@ class BetalergruppeViewSet(viewsets.ModelViewSet):
                                            ).order_by('-sum_total')
         else:
             qs = Betalergruppe.objects.all(
-                                          ).annotate(sum_total=Sum('rekvirenter__fakturaer__analyser__samlet_pris')
-                                          ).order_by('-sum_total')
+                                          ).annotate(sum_total=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=parsing))
+                                          ).order_by('navn')
         return qs
     
 
