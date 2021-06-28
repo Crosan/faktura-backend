@@ -126,8 +126,8 @@ class XMLFakturaWriter:
         date = analyse.svar_dato
 
         CPR = '123467-8912' if settings.TESTING else analyse.CPR
-        itemtext = "{} - {} - {}".format(CPR, str(date.day) + "-" + months[date.month-1] + "-" + str(date.year), analyse.analyse_type.ydelses_kode)
-        itemtext = itemtext[:132] # Må max være 132 tegn lang
+        itemtext = "{} - {} - {} ({})".format(CPR, str(date.day) + "-" + months[date.month-1] + "-" + str(date.year), analyse.analyse_type.ydelses_kode, analyse.analyse_type.ydelses_navn)
+        itemtext = itemtext[:131] # Må max være 132 tegn lang
 
 
         self.__test_and_set_or_fail(item_lines, 'ItemText1', itemtext)
