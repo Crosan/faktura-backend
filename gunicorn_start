@@ -3,13 +3,13 @@
 # create keytab
 #/bin/bash ./scripts/generate-keytab.sh
 
-if [[ "$FAKTURA_ENV" == "production" ]]; then
-    VOLUME_DIR="/data/faktura"
-else
-    VOLUME_DIR="/var/faktura"
-fi
+# if [[ "$FAKTURA_ENV" == "production" ]]; then
+VOLUME_DIR="/data/faktura"
+# else
+#     VOLUME_DIR="/var/faktura"
+# fi
 
-[ ! -d "$VOLUME_DIR" ] && { echo "please mount a shared volume at /var/faktura (test) or /data/faktura (prod), goodbye"; exit; }
+[ ! -d "$VOLUME_DIR" ] && { echo "please mount a shared volume at /data/faktura (prod), goodbye"; exit; }
 
 ## creates log and socket dir in docker volume
 BACKEND_SHARED_DIR="$VOLUME_DIR/backend"
