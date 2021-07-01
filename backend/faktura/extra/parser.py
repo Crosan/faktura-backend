@@ -129,17 +129,18 @@ class Parser:
             # print(r_betalergruppe, r_cprnr, r_labkakode, r_ekstern_pris,  r_rekvirent, r_shortname, r_ean_nummer)
 
             # Find analysetype
-            if r_labkakode in known_analyse_typer.keys():
-                analyse_type_id, analyse_type_pris = known_analyse_typer[r_labkakode]
+            # if r_labkakode in known_analyse_typer.keys():
+            #     analyse_type_id, analyse_type_pris = known_analyse_typer[r_labkakode]
+            # else:
+            # Nu slår vi op hver gang, fordi en analysetype godt kan have ændret pris i løbet af perioden.
+            analyse_type      = cls.__find_analyse_type_id(r_labkakode)
+            if analyse_type:
+                analyse_type_id   = analyse_type.id
+                analyse_type_pris = cls.__find_analyse_type_pris(analyse_type, r_prvdato)
             else:
-                analyse_type      = cls.__find_analyse_type_id(r_labkakode)
-                if analyse_type:
-                    analyse_type_id   = analyse_type.id
-                    analyse_type_pris = cls.__find_analyse_type_pris(analyse_type, r_prvdato)
-                else:
-                    analyse_type_id   = None
-                    analyse_type_pris = None
-                known_analyse_typer[r_labkakode] = (analyse_type_id, analyse_type_pris)
+                analyse_type_id   = None
+                analyse_type_pris = None
+            # known_analyse_typer[r_labkakode] = (analyse_type_id, analyse_type_pris)
 
             # Check that analysetype exists
             if not analyse_type_id:
