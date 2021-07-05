@@ -75,18 +75,17 @@ class Command(BaseCommand):
 
         # TODO: Lav en global config
 
-        logger.info('Setting up ClientConfig')
+        logger.info('Setting up SMB ClientConfig')
         smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
-        logger.info('Running lsitdir')
+        logger.info('Running listdir')
         print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes"))
 
         logger.info('Starting loop')
         # for faktura in faktQS:
         for i, fakt in enumerate(faktQS):
             XML_faktura_writer = XMLFakturaWriter() 
-            # print(fakt)
             logger.info("Sending file: %s" % fakt)
             if not fakt.status == 10:
                 continue
