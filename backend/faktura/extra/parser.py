@@ -79,7 +79,7 @@ class Parser:
         logger.info("Loading file into memory...")
 
         try:
-            df = pd.read_excel(file, header=0, usecols=desired_cols)
+            df = pd.read_excel(file, header=0, usecols=desired_cols, na_filter=False)
         except ValueError as err:
             print("I/O error:", err)
             parsing_object.status = 'Fejlet, inputfil mangler kolonner: ' + str(err)[63:-1]
