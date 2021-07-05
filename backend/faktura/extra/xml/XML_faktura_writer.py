@@ -99,7 +99,7 @@ class XMLFakturaWriter:
         # self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
         self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
         self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id))
-        self.__test_and_set_or_fail(order_header, 'OrderText1', "for spørgsmål, kontakt Brian Schmidt 35453341")  # selv generer
+        self.__test_and_set_or_fail(order_header, 'OrderText1', "For spørgsmål, kontakt Brian Schmidt 35453341")  # selv generer
         self.__test_and_set_or_fail(order_header, 'ProfitCenterHdr', self.ProfitCenter)
 
         self.__add_item_lines_lst(order_header, faktura)
@@ -116,7 +116,10 @@ class XMLFakturaWriter:
 
         self.__test_and_set_or_fail(item_lines, 'LineNumber', str(line_number))
         # self.__test_and_set_or_fail(item_lines, 'ItemNumber', "901363")
-        self.__test_and_set_or_fail(item_lines, 'ItemNumber', "900395")
+        if settings.TESTING:
+            self.__test_and_set_or_fail(item_lines, 'ItemNumber', "900395")
+        else:
+            self.__test_and_set_or_fail(item_lines, 'ItemNumber', "902991")
         # self.__test_and_set_or_fail(item_lines, 'NumberOrdered', str(analyse.antal))
         self.__test_and_set_or_fail(item_lines, 'NumberOrdered', "1")
         self.__test_and_set_or_fail(item_lines, 'UnitPrice', str(analyse.samlet_pris))
