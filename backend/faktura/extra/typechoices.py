@@ -1,5 +1,13 @@
 from model_utils import Choices
 
-TypeChoices = Choices(('Labka', 'Labka'),
-                      ('Blodbank', 'Blodbank'),
-                      ('Andet', 'Andet'))
+TypeChoices = Choices(('KB', 'KB3011'),
+                      ('Biolab', 'Biolab'),
+                      ('GM', 'Genomisk Medicin'),
+                      ('VTL', 'Vævstypelaboratoriet'))
+
+ 
+# KB (= KB3011)
+# Biolab (= Biolab)
+# GM (= Genomisk Medicin)
+# VTL (= Vævstypelaboratoriet)
+ 
