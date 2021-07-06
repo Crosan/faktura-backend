@@ -28,10 +28,10 @@ local_tz = pytz.timezone('Europe/Copenhagen')
 class Command(BaseCommand):
     ''' Generates XML-representation of specified fakturas and uploads them to the SMB server '''
 
-    if settings.TESTING:
-        serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
-    else:
-        serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
+    # if settings.TESTING:
+    serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
+    # else:
+    #     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
 
     logger.info('Sending faktura to: \n %s' % serverLocation)
 
@@ -68,6 +68,7 @@ class Command(BaseCommand):
         
         if not 'selectedFakts' in options['settings'].keys():
             print('no')
+            logger.error('Sendfaktura called with no faktura IDs')
             return #Response(status=status.HTTP_400_BAD_REQUEST)
 
         faktQS = Faktura.objects.filter(pk__in=options['settings']['selectedFakts'])
@@ -80,7 +81,7 @@ class Command(BaseCommand):
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         logger.info('Running listdir')
-        print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes"))
+        print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod"))
 
         logger.info('Starting loop')
         # for faktura in faktQS:
