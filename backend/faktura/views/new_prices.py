@@ -26,28 +26,28 @@ class NewPricesView(views.APIView):
         
             ydelses_kode = method_data[0]
             ydelses_navn = method_data[1]
-            gruppering = method_data[2]
-            kilde_navn = method_data[3]
-            afdeling = method_data[6]
+            # gruppering = method_data[2]
+            # kilde_navn = method_data[3]
+            # afdeling = method_data[6]
             
-            if not isinstance(gruppering, str):
-                gruppering = ""
+            # if not isinstance(gruppering, str):
+            #     gruppering = ""
                 
             if not isinstance(kilde_navn, str):
                 kilde_navn = ""
             
             type = ""
             
-            if afdeling == "KI":
-                if ydelses_kode.startswith('T') or ydelses_kode.endswith('A'):
-                    type = "Analyse"
-                else:
-                    type = "Blodprodukt"
+            # if afdeling == "KI":
+            #     if ydelses_kode.startswith('T') or ydelses_kode.endswith('A'):
+            #         type = "Analyse"
+            #     else:
+            #         type = "Blodprodukt"
                     
             try:
                 analyse_type = AnalyseType.objects.get(ydelses_kode=method_data[0])   
             except:
-                analyse_type = AnalyseType(ydelses_kode=ydelses_kode, ydelses_navn=ydelses_navn, gruppering=gruppering, afdeling=afdeling, type=type, kilde_navn=kilde_navn)
+                analyse_type = AnalyseType(ydelses_kode=ydelses_kode, ydelses_navn=ydelses_navn)
             
             return analyse_type
     
@@ -55,8 +55,8 @@ class NewPricesView(views.APIView):
         def create_analyse_pris(method_data, analyse_type):
             # print(type(method_data[7]), method_data[7])
 
-            intern_pris = method_data[4]
-            ekstern_pris = method_data[5]
+            # intern_pris = method_data[4]
+            ekstern_pris = method_data[3]
             # try:
             #     gyldig_fra = to_UTC(method_data[7])
             # except:
@@ -67,17 +67,17 @@ class NewPricesView(views.APIView):
             # except:
             #     gyldig_til = None
                 
-            if isinstance(method_data[7], datetime):
-                gyldig_fra = method_data[7]
+            if isinstance(method_data[4], datetime):
+                gyldig_fra = method_data[4]
             else:
                 gyldig_fra = now()
 
-            if isinstance(method_data[8], datetime):
-                gyldig_til = method_data[8]
+            if isinstance(method_data[5], datetime):
+                gyldig_til = method_data[5]
             else:
                 gyldig_til = None
 
-            analyse_pris = AnalysePris(intern_pris=intern_pris, ekstern_pris=ekstern_pris, gyldig_fra=gyldig_fra, gyldig_til=gyldig_til, analyse_type=analyse_type)              
+            analyse_pris = AnalysePris(ekstern_pris=ekstern_pris, gyldig_fra=gyldig_fra, gyldig_til=gyldig_til, analyse_type=analyse_type)              
                 
             return analyse_pris 
             
