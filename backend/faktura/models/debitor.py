@@ -1,7 +1,7 @@
 import os
 
 from django.db import models
-from django.db.models.enums import Choices
+from model_utils import Choices
 from django.utils.timezone import now
 
 regioner = Choices(('Hovedstaden', 'Hovedstaden'),

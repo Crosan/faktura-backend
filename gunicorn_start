@@ -41,7 +41,7 @@ NAME="faktura"
 DJANGODIR=/usr/src/app
 USER=root
 GROUP=root
-WORKERS=3
+WORKERS=3  # TODO: Måske virker SMB hvis denne bliver 1?
 BIND=unix:"$RUN_DIR/gunicorn.sock"
 DJANGO_SETTINGS_MODULE=backend.settings.${FAKTURA_ENV}
 DJANGO_WSGI_MODULE=backend.wsgi
@@ -83,6 +83,7 @@ elif [[ "$FAKTURA_ENV" == "development" ]]; then ## delete sqlite db that was co
 fi
 
 # prepare database
+echo "\033[32mMigrating\033[0m"
 manage_script="$DJANGODIR/manage.py"
 "$manage_script" makemigrations
 "$manage_script" makemigrations faktura
