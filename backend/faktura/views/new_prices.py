@@ -33,10 +33,10 @@ class NewPricesView(views.APIView):
             # if not isinstance(gruppering, str):
             #     gruppering = ""
                 
-            if not isinstance(kilde_navn, str):
-                kilde_navn = ""
+            # if not isinstance(kilde_navn, str):
+            #     kilde_navn = ""
             
-            type = ""
+            # type = ""
             
             # if afdeling == "KI":
             #     if ydelses_kode.startswith('T') or ydelses_kode.endswith('A'):
