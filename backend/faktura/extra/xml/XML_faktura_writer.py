@@ -18,7 +18,7 @@ class XMLFakturaWriter:
         self.SenderBusinessSystemID = "RHDIA"
         self.BillingCompanyCode = "2200"
         self.debitorType = "6"
-        self.ProfitCenter = "222252300"
+        self.ProfitCenter = "222250000"
         self.testing = testing
 
     def __str__(self):

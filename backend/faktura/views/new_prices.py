@@ -85,7 +85,7 @@ class NewPricesView(views.APIView):
     
         file = request.data['file']
         
-        df = pd.read_excel(file, header=None)
+        df = pd.read_excel(file, header=None, na_filter=False)
         
         data_found = False
         
