@@ -62,7 +62,7 @@ class Parser:
 
         known_debitors = {}
         # known_debitors = {
-        #     'EAN-numner' : 'debitor_nr'
+        #     'EAN-numner' : 'debitor_id'
         # }
 
         desired_cols = ["BETALERGRUPPE_SOR",
@@ -163,10 +163,10 @@ class Parser:
 
             # Find debitor
             if r_ean_nummer in known_debitors.keys():
-                debitor = known_debitors[r_ean_nummer]
+                debitor_id = known_debitors[r_ean_nummer]
             else:
-                debitor = cls.__lookup_debitor(r_ean_nummer)
-                known_debitors[r_ean_nummer] = debitor
+                debitor_id = cls.__lookup_debitor(r_ean_nummer)
+                known_debitors[r_ean_nummer] = debitor_id
 
             # debitor = known_debitors.get(r_ean_nummer, None)
             # if not debitor:
@@ -190,7 +190,7 @@ class Parser:
                 current_rekvirent_id = cls.__find_or_create_rekvirent(rekv_nr          = r_rekvirent,
                                                                       shortname        = r_shortname,
                                                                       ean_nummer       = r_ean_nummer,
-                                                                      debitor          = debitor,
+                                                                      debitor_id       = debitor_id,
                                                                       betalergruppe_id = betalergruppe_id)
                 current_faktura_id = cls.__create_faktura(parsing_id=parsing_object.id,
                                                           # pdf_fil      = 'remember to fill this in...',
@@ -295,13 +295,13 @@ class Parser:
         Returns None if none or several are found '''
         debQS = Debitor.objects.filter(GLN_nummer=ean_nummer)
         if len(debQS) == 1:
-            return debQS[0].debitor_nr
+            return debQS[0].id
         else:
             return None
 
 
     @classmethod
-    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, debitor: str, ean_nummer: str, betalergruppe_id: int) -> int:
+    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, debitor_id: int, ean_nummer: str, betalergruppe_id: int) -> int:
         ''' Looks up the rekvirent, and if none is found, creates one and returns the ID.\n
             Updates the EAN-number as well as the betalergruppe if it is blank but supplied to the function. '''
         try:
@@ -317,9 +317,9 @@ class Parser:
                 rekvirent.save()
 
             # Check if debitor is null
-            if (not rekvirent.debitor_nr) and debitor:
+            if (not rekvirent.debitor) and debitor:
                 print('Updating debitor')
-                rekvirent.debitor_nr = debitor
+                rekvirent.debitor = debitor
                 rekvirent.save()
 
             retval = rekvirent.id
@@ -331,7 +331,7 @@ class Parser:
             retval = Rekvirent.objects.create(rekv_nr    = rekv_nr,
                                               shortname  = shortname,
                                               GLN_nummer = ean_nummer,
-                                              debitor_nr = debitor,
+                                              debitor_id = debitor_id,
                                               betalergruppe_id = betalergruppe_id).id
         return retval
 
