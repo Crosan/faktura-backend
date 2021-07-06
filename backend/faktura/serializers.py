@@ -62,7 +62,7 @@ class ParsingSerializer(serializers.ModelSerializer):
             raise ParsingFileTypeValidation(
                 'Parsing filetype must be .xlsx', 'data_fil', status_code=status.HTTP_400_BAD_REQUEST)
 
-        return data       
+        return data
     
 class DebitorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -128,6 +128,7 @@ class NestedAnalyseSerializer(serializers.ModelSerializer):
 class NestedRekvirentSerializer(serializers.ModelSerializer):
     # fakturaer = FakturaSerializer(many=True)
     betalergruppe = BetalergruppeSerializer()
+    debitor = DebitorSerializer()
 
     class Meta:
         model = Rekvirent
