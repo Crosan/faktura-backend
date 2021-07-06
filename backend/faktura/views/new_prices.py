@@ -56,7 +56,7 @@ class NewPricesView(views.APIView):
             # print(type(method_data[7]), method_data[7])
 
             # intern_pris = method_data[4]
-            ekstern_pris = method_data[3]
+            ekstern_pris = method_data[2]
             # try:
             #     gyldig_fra = to_UTC(method_data[7])
             # except:
@@ -67,13 +67,13 @@ class NewPricesView(views.APIView):
             # except:
             #     gyldig_til = None
                 
-            if isinstance(method_data[4], datetime):
-                gyldig_fra = method_data[4]
+            if isinstance(method_data[3], datetime):
+                gyldig_fra = method_data[3]
             else:
                 gyldig_fra = now()
 
-            if isinstance(method_data[5], datetime):
-                gyldig_til = method_data[5]
+            if isinstance(method_data[4], datetime):
+                gyldig_til = method_data[4]
             else:
                 gyldig_til = None
 
