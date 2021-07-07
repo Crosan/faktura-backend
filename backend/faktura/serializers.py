@@ -65,6 +65,10 @@ class ParsingSerializer(serializers.ModelSerializer):
         return data
     
 class DebitorSerializer(serializers.ModelSerializer):
+    sum_total = serializers.FloatField(read_only=True)
+    sum_unsent = serializers.FloatField(read_only=True)
+    antal = serializers.IntegerField(read_only=True)
+    antal_unsent = serializers.IntegerField(read_only=True)
     class Meta:
         model = Debitor
         fields = "__all__"
