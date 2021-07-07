@@ -317,9 +317,9 @@ class Parser:
                 rekvirent.save()
 
             # Check if debitor is null
-            if (not rekvirent.debitor) and debitor:
+            if (not rekvirent.debitor) and debitor_id:
                 print('Updating debitor')
-                rekvirent.debitor_id = debitor.id
+                rekvirent.debitor_id = debitor_id
                 rekvirent.save()
 
             retval = rekvirent.id
