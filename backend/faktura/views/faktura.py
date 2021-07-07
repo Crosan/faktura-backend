@@ -12,16 +12,22 @@ class FakturaViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         parsing = self.request.query_params.get('parsing', None)
         betalergruppe = self.request.query_params.get('betalergruppe', None)
-        if parsing and betalergruppe:
-            qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
+        debitor = self.request.query_params.get('debitor', None)
+
+        print(parsing,betalergruppe,debitor)
+
+        qs = Faktura.objects.all()
+        if betalergruppe:
+            qs = Faktura.objects.filter(rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
             # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
             # qs = qs.order_by('-samlet_pris')
-        elif parsing:
+        if parsing:
             qs = Faktura.objects.filter(parsing__id=parsing)#.order_by('-samlet_pris')
             # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
             # qs = qs.order_by('-samlet_pris')
-        else:
-            qs = Faktura.objects.all()
+        if debitor:
+            qs = qs.filter(rekvirent__debitor__id=debitor)
+        # else:
         qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
         qs = qs.order_by('-samlet_pris')
         qs = qs.annotate(antal_analyser=Count('analyser'))
@@ -44,19 +50,36 @@ class NestedFakturaViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         parsing = self.request.query_params.get('parsing', None)
         betalergruppe = self.request.query_params.get('betalergruppe', None)
-        if parsing and betalergruppe:
-            qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
-            qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
-            qs = qs.annotate(cpr=Count('analyser__CPR', distinct=True))
-            qs = qs.order_by('-samlet_pris')
-        elif parsing:
-            qs = Faktura.objects.filter(parsing__id=parsing)
-            qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
-            qs = qs.annotate(cpr=Count('analyser__CPR', distinct=True))
-            qs = qs.order_by('-samlet_pris')
-        else:
-            qs = Faktura.objects.all()
+        debitor = self.request.query_params.get('debitor', None)
+        qs = Faktura.objects.all()
+
+        print(parsing,betalergruppe,debitor)
+
+        if parsing:
+            qs = qs.filter(parsing__id=parsing)
+        if betalergruppe:
+            qs = qs.filter(rekvirent__betalergruppe__id=betalergruppe)
+        if debitor:
+            qs = qs.filter(rekvirent__debitor__id=debitor)
+        
+        qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
         qs = qs.annotate(antal_analyser=Count('analyser', distinct=True))
+        qs = qs.annotate(cpr=Count('analyser__CPR', distinct=True))
+        qs = qs.order_by('-samlet_pris')
+
+        # if parsing and betalergruppe:
+        #     qs = Faktura.objects.filter(parsing__id=parsing, rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
+        #     qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+        #     qs = qs.annotate(cpr=Count('analyser__CPR', distinct=True))
+        #     qs = qs.order_by('-samlet_pris')
+        # elif parsing:
+        #     qs = Faktura.objects.filter(parsing__id=parsing)
+        #     qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+        #     qs = qs.annotate(cpr=Count('analyser__CPR', distinct=True))
+        #     qs = qs.order_by('-samlet_pris')
+        # else:
+        #     qs = Faktura.objects.all()
+        # qs = qs.annotate(antal_analyser=Count('analyser', distinct=True))
         return qs
 
 class SemiNestedFakturaViewSet(viewsets.ModelViewSet):
