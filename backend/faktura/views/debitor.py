@@ -12,9 +12,13 @@ class DebitorViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         EAN_nummer = self.request.query_params.get('ean', None)
         parsing = self.request.query_params.get('parsing', None)
+        searchterm = self.request.query_params.get('q', None)
         # print(parsing)
         if EAN_nummer:
             qs = Debitor.objects.filter(GLN_nummer=EAN_nummer)
+        elif searchterm:
+            print(searchterm)
+            qs = Debitor.objects.filter(Q(debitor_nr__icontains=searchterm) | Q(navn__icontains=searchterm) | Q(GLN_nummer__icontains=searchterm) | Q(region__icontains=searchterm))
         # else:
         #     qs = Debitor.objects.all()
         # return qs
