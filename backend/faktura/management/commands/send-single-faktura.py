@@ -33,12 +33,12 @@ class Command(BaseCommand):
     # else:
     #     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
 
-    logger.info('Sending faktura to: \n %s' % serverLocation)
 
     def writeXMLtoFile(self, xml, filename):
         ''' For testing/debugging purposes '''
         filename += '.xml'
         outpath = os.path.join(os.getcwd(), 'backend', 'media', 'xml_output', filename)
+        logger.info('Writing xml file to: %s' % outpath)
 
         # with open('C:\\Users\\RSIM0016\\Documents\\faktura\\xmltests\\%s.xml' % filename, 'w', encoding='utf-8') as f:
         with open(outpath, 'w', encoding='utf-8') as f:
@@ -53,6 +53,9 @@ class Command(BaseCommand):
         Returns:
             True : If file was transferred without errors
             None : Otherwise'''
+
+        logger.info('Sending faktura to: \n %s' % self.serverLocation)
+
         filename = r'DIAFaktura_' + datetime.now().strftime("%Y%m%d_%H%M%S%f")[:-4] + '.xml'
         dst = self.serverLocation[:-1] + filename
 
