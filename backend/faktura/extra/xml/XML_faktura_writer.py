@@ -107,7 +107,7 @@ class XMLFakturaWriter:
 
         self.__add_item_lines_lst(order_header, analyser)
 
-    def __add_item_lines_lst(self, parent, analyser: Analyse[]):
+    def __add_item_lines_lst(self, parent, analyser):
         line_number = 1
         for analyse in analyser:
             self.__add_item_lines(parent, analyse, line_number)
