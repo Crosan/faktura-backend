@@ -79,11 +79,13 @@ class Command(BaseCommand):
         #     return #Response(status=status.HTTP_400_BAD_REQUEST)
         logger.info(str(options))
 
-        if not 'debitor' in options['settings'].keys():
+        # if not 'debitor' in options['settings'].keys():
+        if not options['settings'].get('debitor', None):
             logger.error('Sendfaktura called with no debitor ID')
             return 
 
-        if not 'parsing' in options['settings'].keys():
+        # if not 'parsing' in options['settings'].keys():
+        if not options['settings'].get('parsing', None):
             logger.error('Sendfaktura called with no parsing ID')
             return
 

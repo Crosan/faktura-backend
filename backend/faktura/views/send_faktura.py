@@ -1,3 +1,4 @@
+import logging
 from rest_framework import views, status
 from rest_framework.response import Response
 from django.core import serializers
@@ -19,11 +20,13 @@ from backend.faktura.extra.xml.XML_faktura_writer import XMLFakturaWriter
 class SendFaktura(views.APIView):    
 
     def get(self, request, *args, **kwargs):
+        logger = logging.getLogger(__name__)
         # print(request)
         # print(request.query_params.get('faktura', ""))
         fakturas_to_send = request.query_params.get('faktura', "").split(',')
         debitor = request.query_params.get('debitor', "")
         parsing = request.query_params.get('parsing', "")
+        logger.info(f"Debitor: {debitor} ({type(debitor)}), parsing: {parsing} ({type(parsing)})")
         # print(fakturas_to_send)
         # call_command('send-faktura') # Old, commented out by RS 2021-05-10
         # sender = FakturaSender()
