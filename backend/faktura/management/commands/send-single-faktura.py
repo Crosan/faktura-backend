@@ -92,7 +92,7 @@ class Command(BaseCommand):
         faktQS = Faktura.objects.filter(
                 rekvirent__debitor__id=int(options['settings']['debitor'])
             ).filter(
-                parsing__id=int(['settings']['parsing'])
+                parsing__id=int(options['settings']['parsing'])
             )
         
         logger.info(faktQS)
