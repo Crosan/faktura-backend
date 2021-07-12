@@ -22,11 +22,13 @@ class SendFaktura(views.APIView):
         # print(request)
         # print(request.query_params.get('faktura', ""))
         fakturas_to_send = request.query_params.get('faktura', "").split(',')
+        debitor = request.query_params.get('debitor', "")
+        parsing = request.query_params.get('parsing', "")
         # print(fakturas_to_send)
         # call_command('send-faktura') # Old, commented out by RS 2021-05-10
         # sender = FakturaSender()
         # sender.handle(selectedFakts=fakturas_to_send)
-        call_command('send-single-faktura', settings={'selectedFakts' : fakturas_to_send})
+        call_command('send-single-faktura', settings={'selectedFakts' : fakturas_to_send, 'debitor': debitor, 'parsing': parsing})
         print('returning')
 
         return Response(status=status.HTTP_200_OK)
