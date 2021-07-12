@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from backend.faktura.models import Faktura, Parsing, Analyse, Rekvirent
+from backend.faktura.models import Faktura, Parsing, Analyse, Rekvirent, debitor
 from xml.dom import minidom
 from django.conf import settings
 
@@ -39,29 +39,31 @@ class XMLFakturaWriter:
         reparsed = minidom.parseString(rough_string)
         return reparsed.toprettyxml(indent="\t")
 
-    def old_create(self, parsing: Parsing):
-        ''' Deprecated '''
-        self.parsing = parsing
+    # def old_create(self, parsing: Parsing):
+    #     ''' Deprecated '''
+    #     self.parsing = parsing
 
-        sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
-        self.__add_message_header(sap_order)
-        self.__add_order_header_lst(sap_order)
+    #     sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
+    #     self.__add_message_header(sap_order)
+    #     self.__add_order_header_lst(sap_order)
 
-        if True: #settings.DEVELOPMENT:
-            print('outputting')
-            # with open('out.xml', 'w') as f:
-            with open('C:\\Users\\RSIM0016\\Documents\\faktura\\test.xml', 'w', encoding='utf-8') as f:
-                f.write(self.prettify(self.root))
+    #     if True: #settings.DEVELOPMENT:
+    #         print('outputting')
+    #         # with open('out.xml', 'w') as f:
+    #         with open('C:\\Users\\RSIM0016\\Documents\\faktura\\test.xml', 'w', encoding='utf-8') as f:
+    #             f.write(self.prettify(self.root))
 
-        return self.prettify(self.root)
+    #     return self.prettify(self.root)
 
-    def create(self, faktura: Faktura):
-        self.faktura = faktura
+    # def create(self, faktura: Faktura):
+    def create(self, debitor: debitor, analyser):
+        # self.faktura = faktura
+        self.debitor = debitor
 
         # sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
         self.__add_message_header(self.root)
         # self.__add_order_header_lst(self.root)
-        self.__add_order_header(self.root, faktura)
+        self.__add_order_header(self.root, debitor, analyser)
 
         if False:# settings.DEVELOPMENT:
             print('outputting')
@@ -84,11 +86,11 @@ class XMLFakturaWriter:
         self.__test_and_set_or_fail(message_header, 'originalLoadFileName', unique_name)  # lav unikt navn
 
 
-    def __add_order_header_lst(self, parent):
-        for faktura in self.qs:
-            self.__add_order_header(parent, faktura)
+    # def __add_order_header_lst(self, parent):
+    #     for faktura in self.qs:
+    #         self.__add_order_header(parent, faktura)
 
-    def __add_order_header(self, parent, faktura):
+    def __add_order_header(self, parent, debitor, analyser):
         order_header = self.__add_subtag(parent, 'orderHeader')
 
         self.__test_and_set_or_fail(order_header, 'BillingCompanyCode', self.BillingCompanyCode)
@@ -96,18 +98,18 @@ class XMLFakturaWriter:
 
         # self.__test_and_set_or_fail(order_header, 'Debitor', "222252300")
         # self.__test_and_set_or_fail(order_header, 'Debitor', faktura.rekvirent.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
-        self.__test_and_set_or_fail(order_header, 'Debitor', faktura.rekvirent.debitor.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
+        self.__test_and_set_or_fail(order_header, 'Debitor', debitor.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
         # self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
         self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
-        self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id))
+        # self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id)) #TODO: Udkommenteret i forbindelse med overgang til debitor-system, check med Lone+Martin om mangler
         self.__test_and_set_or_fail(order_header, 'OrderText1', "For spørgsmål, kontakt Brian Schmidt 35453341")  # selv generer
         self.__test_and_set_or_fail(order_header, 'ProfitCenterHdr', self.ProfitCenter)
 
-        self.__add_item_lines_lst(order_header, faktura)
+        self.__add_item_lines_lst(order_header, analyser)
 
-    def __add_item_lines_lst(self, parent, faktura: Faktura):
+    def __add_item_lines_lst(self, parent, analyser: Analyse[]):
         line_number = 1
-        for analyse in faktura.analyser.all():
+        for analyse in analyser:
             self.__add_item_lines(parent, analyse, line_number)
             line_number = line_number + 1
 

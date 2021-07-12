@@ -89,11 +89,13 @@ class Command(BaseCommand):
             logger.error('Sendfaktura called with no parsing ID')
             return
 
-        # faktQS = Faktura.objects.filter(
-        #         rekvirent__debitor__id=int(options['settings']['debitor'])
-        #     ).filter(
-        #         parsing__id=int(options['settings']['parsing'])
-        #     )
+        faktQS = Faktura.objects.filter(
+                rekvirent__debitor__id=int(options['settings']['debitor'])
+            ).filter(
+                parsing__id=int(options['settings']['parsing'])
+            ).filter(
+                status=10
+            )
 
         chosenDebitor = Debitor.objects.get(pk=int(options['settings']['debitor']))
 
@@ -101,13 +103,14 @@ class Command(BaseCommand):
                 faktura__rekvirent__debitor__id=int(options['settings']['debitor'])
             ).filter(
                 faktura__parsing__id=int(options['settings']['parsing'])
+            ).filter(
+                faktura__status=10
             )
         
         logger.info(analQS)
         logger.info(chosenDebitor)
-        return
 
-        faktQS = Faktura.objects.filter(pk__in=options['settings']['selectedFakts'])
+        # faktQS = Faktura.objects.filter(pk__in=options['settings']['selectedFakts'])
         # print(faktQS)
 
         # TODO: Lav en global config
@@ -119,23 +122,37 @@ class Command(BaseCommand):
         # logger.info('Running listdir')
         # print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod"))
 
-        logger.info('Starting loop')
-        # for faktura in faktQS:
-        for i, fakt in enumerate(faktQS):
-            XML_faktura_writer = XMLFakturaWriter() 
-            logger.info("Sending file: %s" % fakt)
-            if not fakt.status == 10:
-                continue
-            x = XML_faktura_writer.create(fakt)
-            self.writeXMLtoFile(x, str(fakt.id))
-            # success = self.uploadToSMBShare(x)
+        logger.info('Starting writing the faktura')
+        XML_faktura_writer = XMLFakturaWriter()
+
+        output = XML_faktura_writer.create(chosenDebitor, analQS)
+
+        try:
+            self.writeXMLtoFile(output, options['settings']['parsing'] + '_' +  chosenDebitor.debitor_nr)
             success = True
-            if success:
-                fakt.status = 20
-                fakt.save()
-            else:
-                print('Failed up upload faktura "%s"' % str(fakt))
-                logger.error('Failed up upload faktura "%s"' % str(fakt))
+        except:
+            logger.error('Writing xml file failed')
+            success = False
+            
+        logger.info('Succcess:', success)
+
+        # logger.info('Starting loop')
+        # # for faktura in faktQS:
+        # for i, fakt in enumerate(faktQS):
+        #     XML_faktura_writer = XMLFakturaWriter() 
+        #     logger.info("Sending file: %s" % fakt)
+        #     if not fakt.status == 10:
+        #         continue
+        #     x = XML_faktura_writer.create(fakt)
+        #     self.writeXMLtoFile(x, str(fakt.id))
+        #     # success = self.uploadToSMBShare(x)
+        #     success = True
+        #     if success:
+        #         fakt.status = 20
+        #         fakt.save()
+        #     else:
+        #         print('Failed up upload faktura "%s"' % str(fakt))
+        #         logger.error('Failed up upload faktura "%s"' % str(fakt))
 
         # XML_faktura_writer.create(faktQS)
 
