@@ -30,6 +30,7 @@ mkdir -p "$MEDIA_DIR"
 mkdir -p "$MANGEL_DIR"
 mkdir -p "$TEMPLATES_DIR"
 mkdir -p "$STATIC_DIR"
+mkdir -p "$OUTPUT_DIR"
 
 ## symbolic links to media and static to docker volume
 [ -d "/usr/src/app/backend/static" ] && cp -rfT /usr/src/app/backend/static "$STATIC_DIR"
