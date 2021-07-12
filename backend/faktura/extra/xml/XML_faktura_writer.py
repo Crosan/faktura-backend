@@ -95,7 +95,8 @@ class XMLFakturaWriter:
         # self.__test_and_set_or_fail(order_header, 'DebtorType', self.debitorType)
 
         # self.__test_and_set_or_fail(order_header, 'Debitor', "222252300")
-        self.__test_and_set_or_fail(order_header, 'Debitor', faktura.rekvirent.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
+        # self.__test_and_set_or_fail(order_header, 'Debitor', faktura.rekvirent.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
+        self.__test_and_set_or_fail(order_header, 'Debitor', faktura.rekvirent.debitor.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
         # self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
         self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
         self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id))
