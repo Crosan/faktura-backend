@@ -94,8 +94,14 @@ class Command(BaseCommand):
             ).filter(
                 parsing__id=int(options['settings']['parsing'])
             )
+
+        analQS = Analyse.objects.filter(
+                faktura__rekvirent__debitor__id=int(options['settings']['debitor'])
+            ).filter(
+                faktura__parsing__id=int(options['settings']['parsing'])
+            )
         
-        logger.info(faktQS)
+        logger.info(analQS)
         return
 
         faktQS = Faktura.objects.filter(pk__in=options['settings']['selectedFakts'])
