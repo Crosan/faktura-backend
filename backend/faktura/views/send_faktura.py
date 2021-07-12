@@ -23,7 +23,7 @@ class SendFaktura(views.APIView):
         logger = logging.getLogger(__name__)
         # print(request)
         # print(request.query_params.get('faktura', ""))
-        logger.log(request.query_params)
+        logger.info(request.query_params)
         fakturas_to_send = request.query_params.get('faktura', "").split(',')
         debitor = request.query_params.get('debitor', "")
         parsing = request.query_params.get('parsing', "")
