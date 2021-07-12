@@ -89,11 +89,13 @@ class Command(BaseCommand):
             logger.error('Sendfaktura called with no parsing ID')
             return
 
-        faktQS = Faktura.objects.filter(
-                rekvirent__debitor__id=int(options['settings']['debitor'])
-            ).filter(
-                parsing__id=int(options['settings']['parsing'])
-            )
+        # faktQS = Faktura.objects.filter(
+        #         rekvirent__debitor__id=int(options['settings']['debitor'])
+        #     ).filter(
+        #         parsing__id=int(options['settings']['parsing'])
+        #     )
+
+        chosenDebitor = Debitor.objects.get(int(options['settings']['debitor']))
 
         analQS = Analyse.objects.filter(
                 faktura__rekvirent__debitor__id=int(options['settings']['debitor'])
@@ -102,6 +104,7 @@ class Command(BaseCommand):
             )
         
         logger.info(analQS)
+        logger.info(chosenDebitor)
         return
 
         faktQS = Faktura.objects.filter(pk__in=options['settings']['selectedFakts'])
