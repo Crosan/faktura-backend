@@ -95,7 +95,7 @@ class Command(BaseCommand):
         #         parsing__id=int(options['settings']['parsing'])
         #     )
 
-        chosenDebitor = Debitor.objects.get(int(options['settings']['debitor']))
+        chosenDebitor = Debitor.objects.get(pk=int(options['settings']['debitor']))
 
         analQS = Analyse.objects.filter(
                 faktura__rekvirent__debitor__id=int(options['settings']['debitor'])
