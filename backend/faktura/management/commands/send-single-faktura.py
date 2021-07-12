@@ -73,10 +73,27 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # self.print_env()
         
-        if not 'selectedFakts' in options['settings'].keys():
-            print('no')
-            logger.error('Sendfaktura called with no faktura IDs')
-            return #Response(status=status.HTTP_400_BAD_REQUEST)
+        # if not 'selectedFakts' in options['settings'].keys():
+        #     print('no')
+        #     logger.error('Sendfaktura called with no faktura IDs')
+        #     return #Response(status=status.HTTP_400_BAD_REQUEST)
+
+        if not 'selectedDebitor' in options['settings'].keys():
+            logger.error('Sendfaktura called with no debitor ID')
+            return 
+
+        if not 'selectedParsing' in options['settings'].keys():
+            logger.error('Sendfaktura called with no parsing ID')
+            return
+
+        faktQS = Faktura.objects.filter(
+                rekvirent__debitor__id=options['settings']['selectedDebitor']
+            ).filter(
+                parsing__id=['settings']['selectedParsing']
+            )
+        
+        logger.info(faktQS)
+        return
 
         faktQS = Faktura.objects.filter(pk__in=options['settings']['selectedFakts'])
         # print(faktQS)
