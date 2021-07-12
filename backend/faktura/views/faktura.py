@@ -14,7 +14,7 @@ class FakturaViewSet(viewsets.ModelViewSet):
         betalergruppe = self.request.query_params.get('betalergruppe', None)
         debitor = self.request.query_params.get('debitor', None)
 
-        print(parsing,betalergruppe,debitor)
+        print('Fakturaviewset:', parsing, betalergruppe, debitor)
 
         qs = Faktura.objects.all()
         if betalergruppe:

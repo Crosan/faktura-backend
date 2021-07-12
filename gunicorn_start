@@ -19,6 +19,7 @@ STATIC_DIR="$BACKEND_SHARED_DIR/static"
 MEDIA_DIR="$BACKEND_SHARED_DIR/media"
 MANGEL_DIR="/usr/src/app/backend/media/mangellister/"
 TEMPLATES_DIR="/usr/src/app/backend/media/templates/"
+OUTPUT_DIR="/usr/src/app/backend/media/xml_output/"
 SECRETS="/docker/secrets"
  
 echo "$MANGEL_DIR"

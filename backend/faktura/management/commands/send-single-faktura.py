@@ -37,7 +37,11 @@ class Command(BaseCommand):
 
     def writeXMLtoFile(self, xml, filename):
         ''' For testing/debugging purposes '''
-        with open('C:\\Users\\RSIM0016\\Documents\\faktura\\xmltests\\%s.xml' % filename, 'w', encoding='utf-8') as f:
+        filename += '.xml'
+        outpath = os.path.join(os.getcwd(), 'backend', 'media', 'xml_output', filename)
+
+        # with open('C:\\Users\\RSIM0016\\Documents\\faktura\\xmltests\\%s.xml' % filename, 'w', encoding='utf-8') as f:
+        with open(outpath, 'w', encoding='utf-8') as f:
             f.write(xml)
     
     def uploadToSMBShare(self, content):
@@ -58,8 +62,8 @@ class Command(BaseCommand):
                 fd.write(content)
             return True
         except:
-            print('failed')
-            print("Unexpected error:", sys.exc_info()[0])
+            # print('failed')
+            # print("Unexpected error:", sys.exc_info()[0])
             logger.error("Unexpected error:", sys.exc_info()[0])
             return None
 
@@ -76,8 +80,8 @@ class Command(BaseCommand):
 
         # TODO: Lav en global config
 
-        logger.info('Setting up SMB ClientConfig')
-        smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
+        # logger.info('Setting up SMB ClientConfig')
+        # smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         # logger.info('Running listdir')
@@ -91,9 +95,9 @@ class Command(BaseCommand):
             if not fakt.status == 10:
                 continue
             x = XML_faktura_writer.create(fakt)
-            # self.writeXMLtoFile(x, str(fakt.id))
-            success = self.uploadToSMBShare(x)
-            # success = True
+            self.writeXMLtoFile(x, str(fakt.id))
+            # success = self.uploadToSMBShare(x)
+            success = True
             if success:
                 fakt.status = 20
                 fakt.save()
