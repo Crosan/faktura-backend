@@ -125,16 +125,20 @@ class Command(BaseCommand):
         logger.info('Starting writing the faktura')
         XML_faktura_writer = XMLFakturaWriter()
 
-        output = XML_faktura_writer.create(chosenDebitor, analQS)
 
         try:
+            output = XML_faktura_writer.create(chosenDebitor, analQS)
             self.writeXMLtoFile(output, options['settings']['parsing'] + '_' +  chosenDebitor.debitor_nr)
+            for faktura in faktQS:
+                faktura.status = 20
+                faktura.save()
             success = True
         except:
             logger.error('Writing xml file failed')
             success = False
-            
-        logger.info('Succcess:', success)
+
+        logger.info('Succcess:')
+        logger.info(success)
 
         # logger.info('Starting loop')
         # # for faktura in faktQS:
