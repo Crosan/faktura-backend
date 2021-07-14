@@ -118,11 +118,11 @@ class Command(BaseCommand):
         # TODO: Lav en global config
 
         # logger.info('Setting up SMB ClientConfig')
-        # smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
+        smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         # logger.info('Running listdir')
-        # print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod"))
+        print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod"))
 
         logger.info('Starting writing the faktura')
         XML_faktura_writer = XMLFakturaWriter()
@@ -140,7 +140,7 @@ class Command(BaseCommand):
             logger.error('Writing xml file failed')
             success = False
 
-        logger.info('Succcess:')
+        logger.info('Success:')
         logger.info(success)
 
         # logger.info('Starting loop')
