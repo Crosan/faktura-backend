@@ -32,7 +32,8 @@ RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
     python-django-auth-ldap \
     gunicorn \
     ranger \
-    tree
+    tree \
+    smbclient
     
 # LDAP drivers
 RUN apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
