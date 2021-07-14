@@ -56,6 +56,8 @@ class Command(BaseCommand):
 
         logger.info('Sending faktura to: \n %s' % self.serverLocation)
 
+        smbclient.reset_connection_cache()
+
         filename = r'DIAFaktura_' + datetime.now().strftime("%Y%m%d_%H%M%S%f")[:-4] + '.xml'
         dst = self.serverLocation[:-1] + filename
 
@@ -67,7 +69,7 @@ class Command(BaseCommand):
         except:
             # print('failed')
             # print("Unexpected error:", sys.exc_info()[0])
-            logger.error("Unexpected error:", sys.exc_info()[0])
+            logger.error("Unexpected error:" + str(sys.exc_info()[0]))
             return None
 
     def handle(self, *args, **options):
@@ -129,6 +131,7 @@ class Command(BaseCommand):
         try:
             output = XML_faktura_writer.create(chosenDebitor, analQS)
             self.writeXMLtoFile(output, options['settings']['parsing'] + '_' +  chosenDebitor.debitor_nr)
+            self.uploadToSMBShare(output)
             for faktura in faktQS:
                 faktura.status = 20
                 faktura.save()
