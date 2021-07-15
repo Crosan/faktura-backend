@@ -81,30 +81,33 @@ class Command(BaseCommand):
         #     return #Response(status=status.HTTP_400_BAD_REQUEST)
         logger.info(str(options))
 
+        debitor = options['settings'].get('debitor', None)
+        parse = options['settings'].get('parsing', None)
+
         # if not 'debitor' in options['settings'].keys():
-        if not options['settings'].get('debitor', None):
+        if not debitor:
             logger.error('Sendfaktura called with no debitor ID')
             return 
 
         # if not 'parsing' in options['settings'].keys():
-        if not options['settings'].get('parsing', None):
+        if not parse:
             logger.error('Sendfaktura called with no parsing ID')
             return
 
         faktQS = Faktura.objects.filter(
-                rekvirent__debitor__id=int(options['settings']['debitor'])
+                rekvirent__debitor__id=int(debitor)
             ).filter(
-                parsing__id=int(options['settings']['parsing'])
+                parsing__id=int(parse)
             ).filter(
                 status=10
             )
 
-        chosenDebitor = Debitor.objects.get(pk=int(options['settings']['debitor']))
+        chosenDebitor = Debitor.objects.get(pk=int(debitor))
 
         analQS = Analyse.objects.filter(
-                faktura__rekvirent__debitor__id=int(options['settings']['debitor'])
+                faktura__rekvirent__debitor__id=int(debitor)
             ).filter(
-                faktura__parsing__id=int(options['settings']['parsing'])
+                faktura__parsing__id=int(parse)
             ).filter(
                 faktura__status=10
             )
@@ -118,7 +121,7 @@ class Command(BaseCommand):
         # TODO: Lav en global config
 
         # logger.info('Setting up SMB ClientConfig')
-        smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
+        # smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         # logger.info('Running listdir')
