@@ -32,6 +32,8 @@ class Command(BaseCommand):
     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
     # else:
     #     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
+    logger.info('Resetting connection cache')
+    smbclient.reset_connection_cache()
 
 
     def writeXMLtoFile(self, xml, filename):
@@ -56,7 +58,7 @@ class Command(BaseCommand):
 
         logger.info('Sending faktura to: \n %s' % self.serverLocation)
 
-        smbclient.reset_connection_cache()
+        
 
         filename = r'DIAFaktura_' + datetime.now().strftime("%Y%m%d_%H%M%S%f")[:-4] + '.xml'
         dst = self.serverLocation[:-1] + filename
@@ -133,7 +135,7 @@ class Command(BaseCommand):
 
         try:
             output = XML_faktura_writer.create(chosenDebitor, analQS)
-            self.writeXMLtoFile(output, options['settings']['parsing'] + '_' +  chosenDebitor.debitor_nr)
+            self.writeXMLtoFile(output, parse + '_' +  chosenDebitor.debitor_nr)
             self.uploadToSMBShare(output)
             for faktura in faktQS:
                 faktura.status = 20
