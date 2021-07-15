@@ -127,7 +127,7 @@ class Command(BaseCommand):
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         # logger.info('Running listdir')
-        print(smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod"))
+        smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
 
         logger.info('Starting writing the faktura')
         XML_faktura_writer = XMLFakturaWriter()
@@ -144,6 +144,8 @@ class Command(BaseCommand):
         except:
             logger.error('Writing xml file failed')
             success = False
+        finally:
+            smbclient.delete_session(r'\\regionh.top.local')
 
         logger.info('Success:')
         logger.info(success)
