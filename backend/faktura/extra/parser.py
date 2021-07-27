@@ -65,6 +65,9 @@ class Parser:
         #     'EAN-numner' : 'debitor_id'
         # }
 
+        missing_analyser = []
+        # missing_analyser = ['labkakode1', 'labkakode2', ...]
+
         desired_cols = ["BETALERGRUPPE_SOR",
                         "CPRNR",
                         "LABKAKODE",
@@ -152,6 +155,7 @@ class Parser:
                 error_lines.append(
                     # (rownr, 'Analyse type "%s" kendes ikke' % r_labkakode))
                     rownr)
+                missing_analyser.append(r_labkakode)
                 continue
 
             # Check that analysetype has price
@@ -159,6 +163,7 @@ class Parser:
                 error_lines.append(
                     # (rownr, 'Analyse type "%s" kendes ikke' % r_labkakode))
                     rownr)
+                missing_analyser.append(r_labkakode)
                 continue
 
             # Find betalergruppe
@@ -226,7 +231,7 @@ class Parser:
         parsing_object.save()
 
         print("Errors: %d (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100))))
-        missing_analyser   = set([key for key, (Aid, _) in known_analyse_typer.items() if not Aid])
+        # missing_analyser   = set([key for key, (Aid, _) in known_analyse_typer.items() if not Aid])
         priceless_analyser = set([key for key, (_, price) in known_analyse_typer.items() if not price]) - missing_analyser
         # print("Unknown analysetypes: %s" % ', '.join(missing_analyser))
         # print(known_analyse_typer)
@@ -243,14 +248,14 @@ class Parser:
         unknown_analysetyper_file_path = cls.__XLSXOutputFilePath('_Ukendte_analyser_', parsing_object, file)
         print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
         logger.info('Writing missing-file to %s' % unknown_analysetyper_file_path)
-        unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : list(missing_analyser)})
+        unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : missing_analyser})
         unk_anal_df.to_excel(unknown_analysetyper_file_path, index=False)
 
-        priceless_analysetyper_file_path = cls.__XLSXOutputFilePath('_Analyser_uden_pris_', parsing_object, file)
-        print('Writing analysetyper w/o price file to %s' % priceless_analysetyper_file_path)
-        logger.info('Writing missing-file to %s' % priceless_analysetyper_file_path)
-        unp_anal_df = pd.DataFrame({'Analysetyper uden pris' : list(priceless_analyser)})
-        unp_anal_df.to_excel(priceless_analysetyper_file_path, index=False)
+        # priceless_analysetyper_file_path = cls.__XLSXOutputFilePath('_Analyser_uden_pris_', parsing_object, file)
+        # print('Writing analysetyper w/o price file to %s' % priceless_analysetyper_file_path)
+        # logger.info('Writing missing-file to %s' % priceless_analysetyper_file_path)
+        # unp_anal_df = pd.DataFrame({'Analysetyper uden pris' : list(priceless_analyser)})
+        # unp_anal_df.to_excel(priceless_analysetyper_file_path, index=False)
         
         logger.info("Writing status 'done'")
         parsing_object.status = "Færdig (%d fejl)" % (len(error_lines))
