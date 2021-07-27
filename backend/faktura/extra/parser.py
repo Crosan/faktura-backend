@@ -115,7 +115,7 @@ class Parser:
 
 
             # Store all fields in temporary variables
-            r_betalergruppe = cls.__cleanValues(rowdata['BETALERGRUPPE_SOR'])
+            # r_betalergruppe = cls.__cleanValues(rowdata['BETALERGRUPPE_SOR'])
             r_cprnr         = cls.__cleanValues(rowdata['CPRNR'])
             # r_labkakode     = str(rowdata['LABKAKODE'])
             r_labkakode     = cls.__cleanValues(rowdata['LABKAKODE'])
@@ -123,8 +123,13 @@ class Parser:
             r_rekvirent     = cls.__cleanValues(rowdata['REKVIRENT'])
             r_shortname     = cls.__cleanValues(rowdata['SHORTNME'])
             r_ean_nummer    = cls.__cleanValues(rowdata['EAN_NUMMER'])
-            r_prvdato       = make_aware(rowdata['PRVTAGNDATO'])
-            r_svardato      = make_aware(rowdata['SVARDATO'])
+            try:
+                r_prvdato       = make_aware(rowdata['PRVTAGNDATO'])
+                r_svardato      = make_aware(rowdata['SVARDATO'])
+            except:
+                parsing_object.status = 'Fejlet - check om datofelter er formateret korrekt.'
+                parsing_object.save()
+                return
 
             # print(r_betalergruppe, r_cprnr, r_labkakode, r_ekstern_pris,  r_rekvirent, r_shortname, r_ean_nummer)
 
@@ -157,8 +162,8 @@ class Parser:
                 continue
 
             # Find betalergruppe
-            betalergruppe_id = cls.__find_or_create_betalergruppe(
-                r_betalergruppe, metatype) if r_betalergruppe else None
+            # betalergruppe_id = cls.__find_or_create_betalergruppe(
+            #     r_betalergruppe, metatype) if r_betalergruppe else None
 
 
             # Find debitor
@@ -190,8 +195,8 @@ class Parser:
                 current_rekvirent_id = cls.__find_or_create_rekvirent(rekv_nr          = r_rekvirent,
                                                                       shortname        = r_shortname,
                                                                       ean_nummer       = r_ean_nummer,
-                                                                      debitor_id       = debitor_id,
-                                                                      betalergruppe_id = betalergruppe_id)
+                                                                      debitor_id       = debitor_id)
+                                                                    #   betalergruppe_id = betalergruppe_id)
                 current_faktura_id = cls.__create_faktura(parsing_id=parsing_object.id,
                                                           # pdf_fil      = 'remember to fill this in...',
                                                           rekvirent_id=current_rekvirent_id)
@@ -301,7 +306,7 @@ class Parser:
 
 
     @classmethod
-    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, debitor_id: int, ean_nummer: str, betalergruppe_id: int) -> int:
+    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, debitor_id: int, ean_nummer: str) -> int:
         ''' Looks up the rekvirent, and if none is found, creates one and returns the ID.\n
             Updates the EAN-number as well as the betalergruppe if it is blank but supplied to the function. '''
         try:
@@ -312,9 +317,9 @@ class Parser:
                 rekvirent.save()
 
             # Check if betalergruppe is null
-            if (not rekvirent.betalergruppe) and betalergruppe_id:
-                rekvirent.betalergruppe_id = betalergruppe_id
-                rekvirent.save()
+            # if (not rekvirent.betalergruppe) and betalergruppe_id:
+            #     rekvirent.betalergruppe_id = betalergruppe_id
+            #     rekvirent.save()
 
             # Check if debitor is null
             if (not rekvirent.debitor) and debitor_id:
@@ -331,8 +336,8 @@ class Parser:
             retval = Rekvirent.objects.create(rekv_nr    = rekv_nr,
                                               shortname  = shortname,
                                               GLN_nummer = ean_nummer,
-                                              debitor_id = debitor_id,
-                                              betalergruppe_id = betalergruppe_id).id
+                                              debitor_id = debitor_id).id
+                                            #   betalergruppe_id = betalergruppe_id).id
         return retval
 
     def __find_or_create_betalergruppe(betalergruppe: str, metatype: str) -> int:
