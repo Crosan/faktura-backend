@@ -11,3 +11,4 @@ from .faktura import *
 from .faktura_xml import *
 from .betalergruppe import *
 from .debitor import *
+from .region import *
