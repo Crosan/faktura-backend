@@ -136,7 +136,7 @@ class Command(BaseCommand):
         try:
             output = XML_faktura_writer.create(chosenDebitor, analQS)
             self.writeXMLtoFile(output, parse + '_' +  chosenDebitor.debitor_nr)
-            self.uploadToSMBShare(output)
+            # self.uploadToSMBShare(output)
             for faktura in faktQS:
                 faktura.status = 20
                 faktura.save()
