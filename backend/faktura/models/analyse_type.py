@@ -1,3 +1,4 @@
+from backend.faktura.models.region import Region
 import os
 
 from django.db import models
@@ -10,6 +11,7 @@ class AnalyseType(models.Model):
     afdeling = models.CharField(max_length=50, blank=True, null=True)
     type = models.CharField(max_length=100, blank=True, null=True)
     kilde_navn = models.CharField(max_length=100, blank=True, null=True) 
+    ignore = models.ManyToManyField(Region)
 
     objects = models.Manager()
 
