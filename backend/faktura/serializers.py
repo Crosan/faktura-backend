@@ -124,6 +124,7 @@ class BetalergruppeSerializer(serializers.ModelSerializer):
 
 class NestedAnalyseTypeSerializer(serializers.ModelSerializer):
     priser = AnalysePrisSerializer(many=True)
+    ignore = RegionSerializer(many=True)
 
     class Meta:
         model = AnalyseType

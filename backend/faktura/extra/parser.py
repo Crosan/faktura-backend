@@ -248,7 +248,7 @@ class Parser:
         unknown_analysetyper_file_path = cls.__XLSXOutputFilePath('_Ukendte_analyser_', parsing_object, file)
         print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
         logger.info('Writing missing-file to %s' % unknown_analysetyper_file_path)
-        unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : missing_analyser})
+        unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : list(set(missing_analyser))})
         unk_anal_df.to_excel(unknown_analysetyper_file_path, index=False)
 
         # priceless_analysetyper_file_path = cls.__XLSXOutputFilePath('_Analyser_uden_pris_', parsing_object, file)
