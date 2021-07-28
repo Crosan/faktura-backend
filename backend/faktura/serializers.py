@@ -42,7 +42,7 @@ class RegionSerializer(serializers.ModelSerializer):
 class AnalyseTypeSerializer(serializers.ModelSerializer):
     antal = serializers.IntegerField(read_only=True)
     pris = serializers.FloatField(read_only=True)
-    ignore = RegionSerializer(read_only=True, many=True)
+    ignore = RegionSerializer(many=True)
 
     class Meta:
         model = AnalyseType
