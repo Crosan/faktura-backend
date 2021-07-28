@@ -34,9 +34,15 @@ class AnalysePrisSerializer(serializers.ModelSerializer):
         model = AnalysePris
         fields = "__all__"        
         
+class RegionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Region
+        fields = "__all__"
+
 class AnalyseTypeSerializer(serializers.ModelSerializer):
     antal = serializers.IntegerField(read_only=True)
     pris = serializers.FloatField(read_only=True)
+    ignore = RegionSerializer(read_only=True, many=True)
 
     class Meta:
         model = AnalyseType
@@ -47,10 +53,6 @@ class RekvirentSerializer(serializers.ModelSerializer):
         model = Rekvirent
         fields = "__all__"
 
-class RegionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Region
-        fields = "__all__"
         
 class ParsingSerializer(serializers.ModelSerializer):
     antal_fakturaer = serializers.IntegerField(read_only=True)

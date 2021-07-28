@@ -232,7 +232,7 @@ class Parser:
 
         print("Errors: %d (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100))))
         # missing_analyser   = set([key for key, (Aid, _) in known_analyse_typer.items() if not Aid])
-        priceless_analyser = set([key for key, (_, price) in known_analyse_typer.items() if not price]) - missing_analyser
+        # priceless_analyser = set([key for key, (_, price) in known_analyse_typer.items() if not price]) - missing_analyser
         # print("Unknown analysetypes: %s" % ', '.join(missing_analyser))
         # print(known_analyse_typer)
         # print(missing_analyser)
