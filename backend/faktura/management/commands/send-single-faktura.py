@@ -126,8 +126,9 @@ class Command(BaseCommand):
         # smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
-        # logger.info('Running listdir')
-        # smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
+        logger.info('Running listdir')
+        dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
+        logger.info(dirlisting)
 
         logger.info('Starting writing the faktura')
         XML_faktura_writer = XMLFakturaWriter()
