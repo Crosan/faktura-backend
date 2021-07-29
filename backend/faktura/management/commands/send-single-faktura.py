@@ -130,7 +130,7 @@ class Command(BaseCommand):
         SMB_USER = os.environ.get('SMB_USER')
         SMB_PASS = os.environ.get('SMB_PASS')
 
-        logger.info(SMB_USER, SMB_PASS)
+        # logger.info(SMB_USER, SMB_PASS)
 
         logger.info('Setting up smb creds')
         smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=True)
