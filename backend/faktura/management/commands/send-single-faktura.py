@@ -56,12 +56,13 @@ class Command(BaseCommand):
             True : If file was transferred without errors
             None : Otherwise'''
 
-        logger.info('Sending faktura to: \n %s' % self.serverLocation)
 
         
 
         filename = r'DIAFaktura_' + datetime.now().strftime("%Y%m%d_%H%M%S%f")[:-4] + '.xml'
         dst = self.serverLocation[:-1] + filename #Remove trailing space in server path
+
+        logger.info('Sending faktura to: \n %s' % dst)
 
         try:
             with smbclient.open_file(dst, mode="w", encoding='utf-8') as fd:
@@ -125,9 +126,19 @@ class Command(BaseCommand):
         # logger.info('Setting up SMB ClientConfig')
         # smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
+        logger.info('Reading SMB creds')
+        SMB_USER = os.environ.get('SMB_USER')
+        SMB_PASS = os.environ.get('SMB_PASS')
+
+        logger.info(SMB_USER, SMB_PASS)
+
+        logger.info('Setting up smb creds')
+        smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=True)
+
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         logger.info('Running listdir')
-        dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
+        # dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
+        dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes")
         logger.info(dirlisting)
 
         logger.info('Starting writing the faktura')

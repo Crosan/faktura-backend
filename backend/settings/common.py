@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+import logging
 import os
 import smbclient
+
+logger = logging.getLogger(__name__)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -97,10 +100,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # SMB Server #
 ##############
 
-SMB_USER = os.environ.get('SMB_USER')
-SMB_PASS = os.environ.get('SMB_PASS')
+# logger.info('Reading SMB creds')
+# SMB_USER = os.environ.get('SMB_USER')
+# SMB_PASS = os.environ.get('SMB_PASS')
 
-smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=True)
+# smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=True)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
