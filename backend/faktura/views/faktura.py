@@ -27,7 +27,7 @@ class FakturaViewSet(viewsets.ModelViewSet):
         #     # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
         #     # qs = qs.order_by('-samlet_pris')
         if debitor:
-            chosenDebitor = Debitor.objects.get(debitor)
+            chosenDebitor = Debitor.objects.get(pk=debitor)
             # Tæl ikke analyser hvis type ikke faktureres til pågældende region med i prisudregningen
             if chosenDebitor.region == 'Hovedstaden':
                 excludeQ = 'analyser__analyse_type__regionh'
@@ -74,7 +74,7 @@ class NestedFakturaViewSet(viewsets.ModelViewSet):
         # if betalergruppe:
         #     qs = qs.filter(rekvirent__betalergruppe__id=betalergruppe)
         if debitor:
-            chosenDebitor = Debitor.objects.get(debitor)
+            chosenDebitor = Debitor.objects.get(pk=debitor)
             # Tæl ikke analyser hvis type ikke faktureres til pågældende region med i prisudregningen
             if chosenDebitor.region == 'Hovedstaden':
                 excludeQ = 'analyser__analyse_type__regionh'
