@@ -80,18 +80,26 @@ class NestedFakturaViewSet(viewsets.ModelViewSet):
             qs = qs.filter(rekvirent__debitor__id=debitor)
             # Tæl ikke analyser hvis type ikke faktureres til pågældende region med i prisudregningen
             # TODO: Lav if/else showet om til en dict switch
-            if chosenDebitor.region == 'Hovedstaden':
-                excludeQ = Q(analyser__analyse_type__regionh=True)
-            elif chosenDebitor.region == 'Sjælland':
-                excludeQ = Q(analyser__analyse_type__sjaelland=True)
-            elif chosenDebitor.region == 'Syddanmark':
-                excludeQ = Q(analyser__analyse_type__syddanmark=True)
-            elif chosenDebitor.region == 'Nordjylland':
-                excludeQ = Q(analyser__analyse_type__nordjylland=True)
-            elif chosenDebitor.region == 'Midtjylland':
-                excludeQ = Q(analyser__analyse_type__midtjylland=True)
-            else:
-                excludeQ = Q(True)
+            excludeDict = {
+                'Hovedstaden': Q(analyser__analyse_type__regionh=True),
+                'Sjælland': Q(analyser__analyse_type__sjaelland=True),
+                'Syddanmark': Q(analyser__analyse_type__syddanmark=True),
+                'Nordjylland': Q(analyser__analyse_type__nordjylland=True),
+                'Midtjylland': Q(analyser__analyse_type__midtjylland=True)
+            }
+            excludeQ = excludeDict.get(chosenDebitor.region, Q(True))
+            # if chosenDebitor.region == 'Hovedstaden':
+            #     excludeQ = Q(analyser__analyse_type__regionh=True)
+            # elif chosenDebitor.region == 'Sjælland':
+            #     excludeQ = Q(analyser__analyse_type__sjaelland=True)
+            # elif chosenDebitor.region == 'Syddanmark':
+            #     excludeQ = Q(analyser__analyse_type__syddanmark=True)
+            # elif chosenDebitor.region == 'Nordjylland':
+            #     excludeQ = Q(analyser__analyse_type__nordjylland=True)
+            # elif chosenDebitor.region == 'Midtjylland':
+            #     excludeQ = Q(analyser__analyse_type__midtjylland=True)
+            # else:
+            #     excludeQ = Q(True)
             qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris', filter=excludeQ))
         else:
             qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
