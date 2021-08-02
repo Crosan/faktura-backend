@@ -69,14 +69,27 @@ class NestedFakturaViewSet(viewsets.ModelViewSet):
 
         print(parsing,betalergruppe,debitor)
 
-        if parsing:
-            qs = qs.filter(parsing__id=parsing)
-        if betalergruppe:
-            qs = qs.filter(rekvirent__betalergruppe__id=betalergruppe)
+        # if parsing:
+        #     qs = qs.filter(parsing__id=parsing)
+        # if betalergruppe:
+        #     qs = qs.filter(rekvirent__betalergruppe__id=betalergruppe)
         if debitor:
+            chosenDebitor = Debitor.objects.get(debitor)
+            # Tæl ikke analyser hvis type ikke faktureres til pågældende region med i prisudregningen
+            if chosenDebitor.region == 'Hovedstaden':
+                excludeQ = 'analyser__analyse_type__regionh'
+            elif chosenDebitor.region == 'Sjælland':
+                excludeQ = 'analyser__analyse_type__sjaelland'
+            elif chosenDebitor.region == 'Syddanmark':
+                excludeQ = 'analyser__analyse_type__syddanmark'
+            elif chosenDebitor.region == 'Nordjylland':
+                excludeQ = 'analyser__analyse_type__nordjylland'
+            elif chosenDebitor.region == 'Midtjylland':
+                excludeQ = 'analyser__analyse_type__midtjylland'
             qs = qs.filter(rekvirent__debitor__id=debitor)
-        
-        qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+            qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'), filter=Q(excludeQ=False))
+        else:
+            qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
         qs = qs.annotate(antal_analyser=Count('analyser', distinct=True))
         qs = qs.annotate(cpr=Count('analyser__CPR', distinct=True))
         qs = qs.order_by('-samlet_pris')
