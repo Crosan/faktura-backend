@@ -25,10 +25,23 @@ class DebitorViewSet(viewsets.ModelViewSet):
     
         # print(parsing)
         elif parsing:
+            regionfilter = {
+                'Hovedstaden': Q(rekvirenter__fakturaer__analyser__analysetype__regionh=True),
+                'Sjælland': Q(rekvirenter__fakturaer__analyser__analysetype__sjaelland=True),
+                'Syddanmark': Q(rekvirenter__fakturaer__analyser__analysetype__syddanmark=True),
+                'Midtjylland': Q(rekvirenter__fakturaer__analyser__analysetype__midtjylland=True),
+                'Nordjylland': Q(rekvirenter__fakturaer__analyser__analysetype__nordjylland=True),
+            }
             qs = Debitor.objects.all(
                                            ).annotate(antal=Count('rekvirenter__fakturaer', filter=Q(rekvirenter__fakturaer__parsing__id=parsing), distinct=True)  #TODO: filtrér analyser med typer der ikke skal faktureres til debitors region fra
                                            ).annotate(antal_unsent=Count('rekvirenter__fakturaer', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10)), distinct=True)
-                                           ).annotate(sum_total=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=parsing))
+                                           ).annotate(sum_total=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & (
+                                                (Q(region='Hovedstaden') & Q(rekvirenter__fakturaer__analyser__analysetype__regionh=True)) |
+                                                (Q(region='Sjælland')    & Q(rekvirenter__fakturaer__analyser__analysetype__sjaelland=True)) |
+                                                (Q(region='Syddanmark')  & Q(rekvirenter__fakturaer__analyser__analysetype__syddanmark=True)) |
+                                                (Q(region='Midtjylland') & Q(rekvirenter__fakturaer__analyser__analysetype__midtjylland=True)) |
+                                                (Q(region='Nordjylland') & Q(rekvirenter__fakturaer__analyser__analysetype__nordjylland=True)) 
+                                           )))
                                            ).annotate(sum_unsent=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10)))
                                            ).filter(antal__gt=0).order_by('-sum_total')
         else:
