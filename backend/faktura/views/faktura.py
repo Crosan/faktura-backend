@@ -1,5 +1,6 @@
+from backend.faktura.models.debitor import Debitor
 from rest_framework import viewsets
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, Q
 
 from backend.faktura.models import Faktura
 from backend.faktura.serializers import FakturaSerializer, NestedFakturaSerializer, SemiNestedFakturaSerializer
@@ -17,18 +18,31 @@ class FakturaViewSet(viewsets.ModelViewSet):
         print('Fakturaviewset:', parsing, betalergruppe, debitor)
 
         qs = Faktura.objects.all()
-        if betalergruppe:
-            qs = Faktura.objects.filter(rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
-            # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
-            # qs = qs.order_by('-samlet_pris')
-        if parsing:
-            qs = Faktura.objects.filter(parsing__id=parsing)#.order_by('-samlet_pris')
-            # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
-            # qs = qs.order_by('-samlet_pris')
+        # if betalergruppe:
+        #     qs = Faktura.objects.filter(rekvirent__betalergruppe__id=betalergruppe)#.order_by('-samlet_pris')
+        #     # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+        #     # qs = qs.order_by('-samlet_pris')
+        # if parsing:
+        #     qs = Faktura.objects.filter(parsing__id=parsing)#.order_by('-samlet_pris')
+        #     # qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+        #     # qs = qs.order_by('-samlet_pris')
         if debitor:
+            chosenDebitor = Debitor.objects.get(debitor)
+            # Tæl ikke analyser hvis type ikke faktureres til pågældende region med i prisudregningen
+            if chosenDebitor.region == 'Hovedstaden':
+                excludeQ = 'analyser__analyse_type__regionh'
+            elif chosenDebitor.region == 'Sjælland':
+                excludeQ = 'analyser__analyse_type__sjaelland'
+            elif chosenDebitor.region == 'Syddanmark':
+                excludeQ = 'analyser__analyse_type__syddanmark'
+            elif chosenDebitor.region == 'Nordjylland':
+                excludeQ = 'analyser__analyse_type__nordjylland'
+            elif chosenDebitor.region == 'Midtjylland':
+                excludeQ = 'analyser__analyse_type__midtjylland'
             qs = qs.filter(rekvirent__debitor__id=debitor)
-        # else:
-        qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
+            qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'), filter=Q(excludeQ=False))
+        else:
+            qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
         qs = qs.order_by('-samlet_pris')
         qs = qs.annotate(antal_analyser=Count('analyser'))
         return qs
