@@ -34,10 +34,10 @@ class AnalysePrisSerializer(serializers.ModelSerializer):
         model = AnalysePris
         fields = "__all__"        
         
-class RegionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Region
-        fields = "__all__"
+# class RegionSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Region
+#         fields = "__all__"
 
 class AnalyseTypeSerializer(serializers.ModelSerializer):
     antal = serializers.IntegerField(read_only=True)
@@ -124,7 +124,7 @@ class BetalergruppeSerializer(serializers.ModelSerializer):
 
 class NestedAnalyseTypeSerializer(serializers.ModelSerializer):
     priser = AnalysePrisSerializer(many=True)
-    ignore = RegionSerializer(many=True)
+    # ignore = RegionSerializer(many=True)
 
     class Meta:
         model = AnalyseType
