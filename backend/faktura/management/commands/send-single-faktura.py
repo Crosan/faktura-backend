@@ -15,6 +15,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.utils.timezone import now
 from pytz import timezone
 from django.core.files.base import ContentFile
+from django.db.models import Q
 
 from backend.faktura.extra.xml.XML_faktura_writer import XMLFakturaWriter
 from backend.faktura.models import *
@@ -106,6 +107,14 @@ class Command(BaseCommand):
             )
 
         chosenDebitor = Debitor.objects.get(pk=int(debitor))
+        # excludeDict = {
+        #         'Hovedstaden': Q(analyse_type__regionh=True),
+        #         'Sjælland': Q(analyse_type__sjaelland=True),
+        #         'Syddanmark': Q(analyse_type__syddanmark=True),
+        #         'Nordjylland': Q(analyse_type__nordjylland=True),
+        #         'Midtjylland': Q(analyse_type__midtjylland=True)
+        #     }
+        # excludeQ = excludeDict.get(chosenDebitor.region, Q(True))
 
         analQS = Analyse.objects.filter(
                 faktura__rekvirent__debitor__id=int(debitor)
@@ -113,6 +122,8 @@ class Command(BaseCommand):
                 faktura__parsing__id=int(parse)
             ).filter(
                 faktura__status=10
+            # ).filter(
+            #     excludeQ
             )
         
         logger.info(analQS)
@@ -133,7 +144,7 @@ class Command(BaseCommand):
         # logger.info(SMB_USER, SMB_PASS)
 
         logger.info('Setting up smb creds')
-        smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=True)
+        smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=False)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         logger.info('Running listdir')
