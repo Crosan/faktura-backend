@@ -104,7 +104,7 @@ logger.info('Reading SMB creds')
 SMB_USER = os.environ.get('SMB_USER')
 SMB_PASS = os.environ.get('SMB_PASS')
 
-smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=False)
+# smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=False)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

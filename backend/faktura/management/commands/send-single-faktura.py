@@ -138,11 +138,14 @@ class Command(BaseCommand):
         # logger.info('Setting up SMB ClientConfig')
         # smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
-        
+        SMB_USER = os.environ.get('SMB_USER')
+        SMB_PASS = os.environ.get('SMB_PASS')
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
-        logger.info('Running listdir')
         # dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
+        logger.info('Registering session')
+        smbclient.register_session(r'box1-fls.regionh.top.local', username=SMB_USER, password=SMB_PASS)
+        logger.info('Running listdir')
         dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes")
         logger.info(dirlisting)
 
@@ -161,6 +164,8 @@ class Command(BaseCommand):
             logger.info('Running listdir')
             dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes")
             logger.info(dirlisting)
+            logger.info('Deleting session...')
+            smbclient.delete_session(r'box1-fls.regionh.top.local')
         except:
             logger.error('Writing or uploading xml file failed')
             success = False
