@@ -10,8 +10,8 @@ class Rekvirent(models.Model):
     rekv_nr = models.CharField(max_length=255, null=True)
     GLN_nummer = models.CharField(max_length=100, null=True)
     debitor_nr = models.CharField(max_length=100, null=True)
-    betalergruppe = models.ForeignKey(
-        'Betalergruppe', related_name='rekvirenter', on_delete=models.PROTECT, blank=True, null=True)
+    # betalergruppe = models.ForeignKey(
+    #     'Betalergruppe', related_name='rekvirenter', on_delete=models.PROTECT, blank=True, null=True)
     debitor = models.ForeignKey('Debitor', related_name='rekvirenter', on_delete=models.PROTECT, blank=True, null=True)
 
     def __str__(self):
