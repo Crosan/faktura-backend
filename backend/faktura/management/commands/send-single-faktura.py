@@ -139,8 +139,10 @@ class Command(BaseCommand):
         # logger.info('Setting up SMB ClientConfig')
         # smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
 
-        # SMB_USER = os.environ.get('SMB_USER')
-        # SMB_PASS = os.environ.get('SMB_PASS')
+        SMB_USER = os.environ.get('SMB_USER')
+        SMB_PASS = os.environ.get('SMB_PASS')
+        logger.info(SMB_USER)
+        logger.info(SMB_PASS)
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         # dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
