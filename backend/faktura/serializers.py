@@ -141,7 +141,7 @@ class NestedAnalyseSerializer(serializers.ModelSerializer):
         
 class NestedRekvirentSerializer(serializers.ModelSerializer):
     # fakturaer = FakturaSerializer(many=True)
-    betalergruppe = BetalergruppeSerializer()
+    # betalergruppe = BetalergruppeSerializer()
     debitor = DebitorSerializer()
 
     class Meta:
