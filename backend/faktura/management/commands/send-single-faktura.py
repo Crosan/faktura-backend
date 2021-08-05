@@ -144,10 +144,10 @@ class Command(BaseCommand):
 
         # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
         # dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
-        # logger.info('Registering session')
-        # thisSession = smbclient.register_session(r'box1-fls.regionh.top.local', username=SMB_USER, password=SMB_PASS)
-        # logger.info(thisSession)
-        # time.sleep(1)
+        logger.info('Registering session')
+        thisSession = smbclient.register_session(r'box1-fls.regionh.top.local', username=SMB_USER, password=SMB_PASS)
+        logger.info(thisSession)
+        time.sleep(1)
         logger.info('Running listdir')
         dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes")
         logger.info(dirlisting)
