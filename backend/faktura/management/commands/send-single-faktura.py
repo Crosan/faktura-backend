@@ -90,14 +90,14 @@ class Command(BaseCommand):
             )
 
         chosenDebitor = Debitor.objects.get(pk=int(debitor))
-        # excludeDict = {
-        #         'Hovedstaden': Q(analyse_type__regionh=True),
-        #         'Sjælland': Q(analyse_type__sjaelland=True),
-        #         'Syddanmark': Q(analyse_type__syddanmark=True),
-        #         'Nordjylland': Q(analyse_type__nordjylland=True),
-        #         'Midtjylland': Q(analyse_type__midtjylland=True)
-        #     }
-        # excludeQ = excludeDict.get(chosenDebitor.region, Q(True))
+        excludeDict = {
+                'Hovedstaden': Q(analyse_type__regionh=True),
+                'Sjælland': Q(analyse_type__sjaelland=True),
+                'Syddanmark': Q(analyse_type__syddanmark=True),
+                'Nordjylland': Q(analyse_type__nordjylland=True),
+                'Midtjylland': Q(analyse_type__midtjylland=True)
+            }
+        excludeQ = excludeDict.get(chosenDebitor.region, None)
 
         analQS = Analyse.objects.filter(
                 faktura__rekvirent__debitor__id=int(debitor)
@@ -108,9 +108,12 @@ class Command(BaseCommand):
             # ).filter(
             #     excludeQ
             )
+
+        if chosenDebitor.region:
+            analQS = analQS.filter(excludeQ)
         
-        logger.info(analQS)
         logger.info(chosenDebitor)
+        logger.info("Antal analyser: %d" % len(analQS))
 
         logger.info('Starting writing the faktura')
         XML_faktura_writer = XMLFakturaWriter()
