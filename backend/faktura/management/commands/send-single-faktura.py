@@ -4,7 +4,6 @@ import re
 from datetime import datetime
 import time
 
-import smbclient
 import sys
 
 import pandas as pd
@@ -36,8 +35,6 @@ class Command(BaseCommand):
     logger.info('Serverlocation is: ' + serverLocation)
     # else:
     #     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
-    # logger.info('Resetting connection cache')
-    # smbclient.reset_connection_cache()
 
 
     def writeXMLtoFile(self, xml, filename):
@@ -46,61 +43,40 @@ class Command(BaseCommand):
         outpath = os.path.join(os.getcwd(), 'backend', 'media', 'xml_output', filename)
         logger.info('Writing xml file to: %s' % outpath)
 
-        # with open('C:\\Users\\RSIM0016\\Documents\\faktura\\xmltests\\%s.xml' % filename, 'w', encoding='utf-8') as f:
         with open(outpath, 'w', encoding='utf-8') as f:
             f.write(xml)
     
-    def uploadToSMBShare(self, content):
+    def uploadToSMBShare(self, content) -> str:
         ''' Uses the server location from the class namespace and generates a timestamped filename
 
         Parameters:
             content : XML-formatted text 
             
         Returns:
-            True : If file was transferred without errors
-            None : Otherwise'''
-
-
-        
-
+            The faktura filename'''
         filename = r'DIAFaktura_' + datetime.now().strftime("%Y%m%d_%H%M%S%f")[:-4] + '.xml'
         logger.info('Output filename is: ' + filename)
         dst = os.path.join(self.serverLocation, filename)
-
         logger.info('Sending faktura to: %s' % dst)
 
         try:
             with open(dst, 'w', encoding='utf-8') as f:
                 f.write(content)
-            # with smbclient.open_file(dst, mode="w", encoding='utf-8') as fd:
-            #     # fd.write(u"%s" % content)
-            #     fd.write(content)
-            # smbclient.delete_session(r'\\regionh.top.local')
-            return True
         except:
-            # print('failed')
-            # print("Unexpected error:", sys.exc_info()[0])
             logger.error("Unexpected error:" + str(sys.exc_info()[0]))
-            return None
+        finally:
+            return filename
 
     def handle(self, *args, **options):
-        # self.print_env()
-        
-        # if not 'selectedFakts' in options['settings'].keys():
-        #     print('no')
-        #     logger.error('Sendfaktura called with no faktura IDs')
-        #     return #Response(status=status.HTTP_400_BAD_REQUEST)
         logger.info(str(options))
 
         debitor = options['settings'].get('debitor', None)
         parse = options['settings'].get('parsing', None)
 
-        # if not 'debitor' in options['settings'].keys():
         if not debitor:
             logger.error('Sendfaktura called with no debitor ID')
             return 
 
-        # if not 'parsing' in options['settings'].keys():
         if not parse:
             logger.error('Sendfaktura called with no parsing ID')
             return
@@ -136,107 +112,24 @@ class Command(BaseCommand):
         logger.info(analQS)
         logger.info(chosenDebitor)
 
-        # faktQS = Faktura.objects.filter(pk__in=options['settings']['selectedFakts'])
-        # print(faktQS)
-
-        # TODO: Lav en global config
-
-        # logger.info('Setting up SMB ClientConfig')
-        # smbclient.ClientConfig(username=settings.SMB_USER, password=settings.SMB_PASS, skip_dfs=True)
-
-        # SMB_USER = os.environ.get('SMB_USER')
-        # SMB_PASS = os.environ.get('SMB_PASS')
-        # logger.info(SMB_USER)
-        # logger.info(SMB_PASS)
-
-        # Forbindelsen virker kun hvis man kører listdir en gang først. Jeg ved ikke hvorfor...
-        # dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod")
-        # logger.info('Registering session')
-        # thisSession = smbclient.register_session(r'box1-fls.regionh.top.local', username=SMB_USER, password=SMB_PASS)
-        # logger.info(thisSession)
-        # time.sleep(1)
-        # logger.info('Running listdir')
-        # dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes")
-        # logger.info(dirlisting)
-
         logger.info('Starting writing the faktura')
         XML_faktura_writer = XMLFakturaWriter()
-
 
         try:
             output = XML_faktura_writer.create(chosenDebitor, analQS)
             self.writeXMLtoFile(output, parse + '_' +  chosenDebitor.debitor_nr)
-            self.uploadToSMBShare(output)
+            filename = self.uploadToSMBShare(output)
             for faktura in faktQS:
                 faktura.status = 20
                 faktura.save()
             success = True
             logger.info('Running listdir')
-            # dirlisting = smbclient.listdir(path=r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes")
             dirlisting = os.listdir(self.serverLocation)
             logger.info(dirlisting)
+            success = filename in dirlisting
         except:
             logger.error('Writing or uploading xml file failed')
             success = False
-        finally:
-            logger.info('Deleting session...')
-            # smbclient.delete_session(r'box1-fls.regionh.top.local')
-        #     smbclient.delete_session(r'\\regionh.top.local')
 
-        logger.info('Success:')
-        logger.info(success)
-
-        # logger.info('Starting loop')
-        # # for faktura in faktQS:
-        # for i, fakt in enumerate(faktQS):
-        #     XML_faktura_writer = XMLFakturaWriter() 
-        #     logger.info("Sending file: %s" % fakt)
-        #     if not fakt.status == 10:
-        #         continue
-        #     x = XML_faktura_writer.create(fakt)
-        #     self.writeXMLtoFile(x, str(fakt.id))
-        #     # success = self.uploadToSMBShare(x)
-        #     success = True
-        #     if success:
-        #         fakt.status = 20
-        #         fakt.save()
-        #     else:
-        #         print('Failed up upload faktura "%s"' % str(fakt))
-        #         logger.error('Failed up upload faktura "%s"' % str(fakt))
-
-        # XML_faktura_writer.create(faktQS)
-
+        logger.info('Success:' + str(success))
         return
-
-        # try:
-        #     conn = self.setup_smb_conn()
-        # except:
-        #     parsings = self.get_unprocessed_parsings()
-
-        #     xml_fakturas = self.process_parsings(parsings)
-
-        #     django_xml_fakturas = self.generate_django_xml_fakturas(xml_fakturas)
-
-        #     print("prepared fakturas")
-
-        #     return
-        #     None
-
-        # conn.connect(os.environ.get('FTP_HOST'), 445)
-
-        # print("login successful")
-
-        # parsings = self.get_unprocessed_parsings()
-
-        # xml_fakturas = self.process_parsings(parsings)
-
-        # django_xml_fakturas = self.generate_django_xml_fakturas(xml_fakturas)
-
-        # print("prepared fakturas")
-
-        # ## Overvej her at slette successfuldt sendte fakturaer da de kan fylde ganske meget
-
-        # upload_dir = os.environ.get('FTP_UPLOAD_DIR')
-        # worker = Worker(conn, upload_dir, django_xml_fakturas)
-
-        # worker.run()
