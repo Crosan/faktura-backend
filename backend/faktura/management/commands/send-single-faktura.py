@@ -179,7 +179,7 @@ class Command(BaseCommand):
             success = False
         finally:
             logger.info('Deleting session...')
-            smbclient.delete_session(r'box1-fls.regionh.top.local')
+            # smbclient.delete_session(r'box1-fls.regionh.top.local')
         #     smbclient.delete_session(r'\\regionh.top.local')
 
         logger.info('Success:')
