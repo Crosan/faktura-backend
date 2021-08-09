@@ -20,6 +20,7 @@ MEDIA_DIR="$BACKEND_SHARED_DIR/media"
 MANGEL_DIR="/usr/src/app/backend/media/mangellister/"
 TEMPLATES_DIR="/usr/src/app/backend/media/templates/"
 OUTPUT_DIR="/usr/src/app/backend/media/xml_output/"
+SMB_DIR="/mnt/SAP"
 SECRETS="/docker/secrets"
  
 echo "$MANGEL_DIR"
@@ -31,6 +32,7 @@ mkdir -p "$MANGEL_DIR"
 mkdir -p "$TEMPLATES_DIR"
 mkdir -p "$STATIC_DIR"
 mkdir -p "$OUTPUT_DIR"
+mkdir -p "$SMB_DIR"
 
 ## symbolic links to media and static to docker volume
 [ -d "/usr/src/app/backend/static" ] && cp -rfT /usr/src/app/backend/static "$STATIC_DIR"
@@ -83,6 +85,12 @@ elif [[ "$FAKTURA_ENV" == "development" ]]; then ## delete sqlite db that was co
     echo "Removing development db"
     rm -rf "$DJANGODIR/backend/db.sqlite3"
 fi
+
+# mount SMB share
+echo "Mounting SMB share"
+mount -t cifs -o vers=2.1,username="$SMB_USER"%"$SMB_PASS",file_mode=0770,dir_mode=0770,iocharset=utf8,uid=0,gid=0 "$SMB_SHARE" "$SMB_DIR"
+
+ls "$SMB_DIR"/DIAC2SAP/Prod/skalslettes
 
 # prepare database
 echo "Migrating"
