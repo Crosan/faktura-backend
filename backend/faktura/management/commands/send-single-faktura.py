@@ -32,7 +32,7 @@ class Command(BaseCommand):
 
     # if settings.TESTING:
     # serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
-    serverLocation = os.path.join(settings.SMB_PATH, settings.SMB_LOCALPATH)
+    serverLocation = os.path.join(settings.SMB_MOUNT_POINT, settings.SMB_PATH)
     logger.info('Serverlocation is: ' + serverLocation)
     # else:
     #     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
@@ -64,9 +64,10 @@ class Command(BaseCommand):
         
 
         filename = r'DIAFaktura_' + datetime.now().strftime("%Y%m%d_%H%M%S%f")[:-4] + '.xml'
-        dst = self.serverLocation[:-1] + filename #Remove trailing space in server path
+        logger.info('Output filename is: ' + filename)
+        dst = os.path.join(self.serverLocation, filename)
 
-        logger.info('Sending faktura to: \n %s' % dst)
+        logger.info('Sending faktura to: %s' % dst)
 
         try:
             with open(dst, 'w', encoding='utf-8') as f:

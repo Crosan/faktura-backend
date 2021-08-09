@@ -106,7 +106,7 @@ SMB_USER = os.environ.get('SMB_USER')
 SMB_PASS = os.environ.get('SMB_PASS')
 SMB_SHARE = os.environ.get('SMB_SHARE')
 SMB_PATH = os.environ.get('SMB_PATH')
-SMB_LOCALPATH = os.environ.get('SMB_DIR')
+SMB_MOUNT_POINT = os.environ.get('SMB_DIR')
 
 # smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=False)
 
