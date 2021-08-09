@@ -32,7 +32,7 @@ class Command(BaseCommand):
 
     # if settings.TESTING:
     # serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
-    serverLocation = os.path.join(settings.PATH, settings.LOCALPATH)
+    serverLocation = os.path.join(settings.SMB_PATH, settings.SMB_LOCALPATH)
     logger.info('Serverlocation is: ' + serverLocation)
     # else:
     #     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
