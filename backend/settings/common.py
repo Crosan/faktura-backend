@@ -100,13 +100,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # SMB Server #
 ##############
 
-logger.info('Reading SMB creds')
+logger.info('Reading SMB creds in common settings')
+print('Reading SMB creds in common settings')
 SMB_USER = os.environ.get('SMB_USER')
 SMB_PASS = os.environ.get('SMB_PASS')
 SMB_SHARE = os.environ.get('SMB_SHARE')
 SMB_PATH = os.environ.get('SMB_PATH')
 SMB_LOCALPATH = os.environ.get('SMB_DIR')
 logger.info(SMB_LOCALPATH)
+print(SMB_LOCALPATH)
 
 # smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=False)
 
