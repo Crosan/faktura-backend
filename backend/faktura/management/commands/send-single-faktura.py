@@ -31,7 +31,9 @@ class Command(BaseCommand):
     ''' Generates XML-representation of specified fakturas and uploads them to the SMB server '''
 
     # if settings.TESTING:
-    serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
+    # serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\skalslettes\ "
+    serverLocation = os.path.join(settings.PATH, settings.LOCALPATH)
+    logger.info('Serverlocation is: ' + serverLocation)
     # else:
     #     serverLocation = r"\\regionh.top.local\DFS\Systemer\SAP\SAP001\DIAC2SAP\Prod\ "
     # logger.info('Resetting connection cache')
@@ -67,10 +69,12 @@ class Command(BaseCommand):
         logger.info('Sending faktura to: \n %s' % dst)
 
         try:
-            with smbclient.open_file(dst, mode="w", encoding='utf-8') as fd:
-                # fd.write(u"%s" % content)
-                fd.write(content)
-            smbclient.delete_session(r'\\regionh.top.local')
+            with open(dst, 'w', encoding='utf-8') as f:
+                f.write(content)
+            # with smbclient.open_file(dst, mode="w", encoding='utf-8') as fd:
+            #     # fd.write(u"%s" % content)
+            #     fd.write(content)
+            # smbclient.delete_session(r'\\regionh.top.local')
             return True
         except:
             # print('failed')
