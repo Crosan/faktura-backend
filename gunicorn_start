@@ -88,7 +88,7 @@ fi
 
 # mount SMB share
 echo "Mounting SMB share"
-mount -t cifs -o vers=2.1,username="$SMB_USER"%"$SMB_PASS",file_mode=0770,dir_mode=0770,iocharset=utf8,uid=0,gid=0 "$SMB_SHARE" "$SMB_DIR"
+mount -t cifs -o vers=2.1,username="$SMB_USER",password="$SMB_PASS",file_mode=0770,dir_mode=0770,iocharset=utf8,uid=0,gid=0 "$SMB_SHARE" "$SMB_DIR"
 
 ls "$SMB_DIR"/DIAC2SAP/Prod/skalslettes
 
