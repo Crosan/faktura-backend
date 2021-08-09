@@ -33,7 +33,8 @@ RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
     gunicorn \
     ranger \
     tree \
-    smbclient
+    smbclient \
+    cifs-utils
     
 # LDAP drivers
 RUN apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
