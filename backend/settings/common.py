@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import logging
 import os
-import smbclient
+# import smbclient
 
 logger = logging.getLogger(__name__)
 
@@ -103,6 +103,10 @@ AUTH_PASSWORD_VALIDATORS = [
 logger.info('Reading SMB creds')
 SMB_USER = os.environ.get('SMB_USER')
 SMB_PASS = os.environ.get('SMB_PASS')
+SMB_SHARE = os.environ.get('SMB_SHARE')
+SMB_PATH = os.environ.get('SMB_PATH')
+SMB_LOCALPATH = os.environ.get('SMB_DIR')
+logger.info(SMB_LOCALPATH)
 
 # smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=False)
 
