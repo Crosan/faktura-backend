@@ -109,6 +109,10 @@ SMB_PATH = os.environ.get('SMB_PATH')
 SMB_LOCALPATH = os.environ.get('SMB_DIR')
 logger.info(SMB_LOCALPATH)
 print(SMB_LOCALPATH)
+print(SMB_USER)
+print(SMB_PASS)
+print(SMB_SHARE)
+print(SMB_PATH)
 
 # smbclient.ClientConfig(username=SMB_USER, password=SMB_PASS, skip_dfs=False)
 
