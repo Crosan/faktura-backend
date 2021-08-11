@@ -34,6 +34,7 @@ class DebitorViewSet(viewsets.ModelViewSet):
             qs = Debitor.objects.all(
                                            ).annotate(antal=Count('rekvirenter__fakturaer', filter=Q(rekvirenter__fakturaer__parsing__id=parsing), distinct=True)  #TODO: filtrér analyser med typer der ikke skal faktureres til debitors region fra
                                            ).annotate(antal_unsent=Count('rekvirenter__fakturaer', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10)), distinct=True)
+                                           ).annotate(antal_unknown=Count('rekvirenter__fakturaer', filter(Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__debitor=None)), distinct=True)
                                            ).annotate(sum_total=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & regionfilter))
                                            ).annotate(sum_unsent=Sum('rekvirenter__fakturaer__analyser__samlet_pris', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10) & regionfilter))
                                            ).filter(antal__gt=0).order_by('-sum_total')
