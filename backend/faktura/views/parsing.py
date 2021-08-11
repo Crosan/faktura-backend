@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, Q
 
 from backend.faktura.models import Parsing
 from backend.faktura.serializers import ParsingSerializer, NestedParsingSerializer, SemiNestedParsingSerializer
@@ -7,6 +7,7 @@ from backend.faktura.serializers import ParsingSerializer, NestedParsingSerializ
 
 class ParsingViewSet(viewsets.ModelViewSet):
     queryset = Parsing.objects.all().annotate(antal_fakturaer=Count('fakturaer', distinct=True)
+                                   ).annotate(antal_unknown=Count('fakturaer', filter=(Q(rekvirent__debitor=None)), distinct=True)
                                    ).annotate(samlet_pris=Sum('fakturaer__analyser__samlet_pris')
                                    ).order_by('-oprettet')
     serializer_class = ParsingSerializer
