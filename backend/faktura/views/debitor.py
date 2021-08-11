@@ -29,7 +29,8 @@ class DebitorViewSet(viewsets.ModelViewSet):
                             (Q(region='Sjælland')    & Q(rekvirenter__fakturaer__analyser__analyse_type__sjaelland=True)) |
                             (Q(region='Syddanmark')  & Q(rekvirenter__fakturaer__analyser__analyse_type__syddanmark=True)) |
                             (Q(region='Midtjylland') & Q(rekvirenter__fakturaer__analyser__analyse_type__midtjylland=True)) |
-                            (Q(region='Nordjylland') & Q(rekvirenter__fakturaer__analyser__analyse_type__nordjylland=True)))
+                            (Q(region='Nordjylland') & Q(rekvirenter__fakturaer__analyser__analyse_type__nordjylland=True))|
+                             Q(region=None))
             qs = Debitor.objects.all(
                                            ).annotate(antal=Count('rekvirenter__fakturaer', filter=Q(rekvirenter__fakturaer__parsing__id=parsing), distinct=True)  #TODO: filtrér analyser med typer der ikke skal faktureres til debitors region fra
                                            ).annotate(antal_unsent=Count('rekvirenter__fakturaer', filter=(Q(rekvirenter__fakturaer__parsing__id=parsing) & Q(rekvirenter__fakturaer__status=10)), distinct=True)
