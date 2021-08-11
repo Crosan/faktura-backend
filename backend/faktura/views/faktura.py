@@ -86,7 +86,7 @@ class NestedFakturaViewSet(viewsets.ModelViewSet):
                 'Nordjylland': Q(analyser__analyse_type__nordjylland=True),
                 'Midtjylland': Q(analyser__analyse_type__midtjylland=True)
             }
-            excludeQ = excludeDict.get(chosenDebitor.region, Q(True))
+            excludeQ = excludeDict.get(chosenDebitor.region, Q())
             qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris', filter=excludeQ))
         else:
             qs = qs.annotate(samlet_pris=Sum('analyser__samlet_pris'))
