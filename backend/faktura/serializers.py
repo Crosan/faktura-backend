@@ -76,6 +76,7 @@ class DebitorSerializer(serializers.ModelSerializer):
     sum_unsent = serializers.FloatField(read_only=True)
     antal = serializers.IntegerField(read_only=True)
     antal_unsent = serializers.IntegerField(read_only=True)
+    antal_unknown = serializers.IntegerField(read_only=True)
     # region = RegionSerializer()
 
     class Meta:
