@@ -76,7 +76,8 @@ class Parser:
                         "SHORTNME",
                         "EAN_NUMMER",
                         "PRVTAGNDATO",
-                        "SVARDATO"]
+                        "SVARDATO",
+                        "ADDRESSLINE1"]
 
         print("Loading file into memory...")
         logger.info("Loading file into memory...")
@@ -126,6 +127,7 @@ class Parser:
             r_rekvirent     = cls.__cleanValues(rowdata['REKVIRENT'])
             r_shortname     = cls.__cleanValues(rowdata['SHORTNME'])
             r_ean_nummer    = cls.__cleanValues(rowdata['EAN_NUMMER'])
+            r_address       = cls.__cleanValues(rowdata['ADDRESSLINE1'])
             try:
                 r_prvdato       = make_aware(rowdata['PRVTAGNDATO'])
                 r_svardato      = make_aware(rowdata['SVARDATO'])
@@ -166,29 +168,12 @@ class Parser:
                 missing_analyser.append(r_labkakode)
                 continue
 
-            # Find betalergruppe
-            # betalergruppe_id = cls.__find_or_create_betalergruppe(
-            #     r_betalergruppe, metatype) if r_betalergruppe else None
-
-
             # Find debitor
             if r_ean_nummer in known_debitors.keys():
                 debitor_id = known_debitors[r_ean_nummer]
             else:
                 debitor_id = cls.__lookup_debitor(r_ean_nummer)
                 known_debitors[r_ean_nummer] = debitor_id
-
-            # debitor = known_debitors.get(r_ean_nummer, None)
-            # if not debitor:
-            #     debitor = cls.__lookup_debitor(r_ean_nummer)
-            #     # if debitor:
-            #     known_debitors[r_ean_nummer] = debitor
-
-            # Check that betalergruppe is specified #Maybe do this later?
-            # if pd.isnull(r_betalergruppe) or (not betalergruppe_id):
-            #     print('Null betalergruppe' + str(rownr))
-            #     error_lines.append((rownr, 'Betalergruppe ikke udfyldt'))
-            #     continue
 
             # Check if we have already seen this rekvirent during this parsing,
             # and consequently also know the faktura ID
@@ -197,11 +182,11 @@ class Parser:
                 # current_faktura_id   = known_fakturaer[current_rekvirent_id]['ID']
                 current_rekvirent_id, current_faktura_id = known_rekvirent_names[r_rekvirent]
             else:
-                current_rekvirent_id = cls.__find_or_create_rekvirent(rekv_nr          = r_rekvirent,
-                                                                      shortname        = r_shortname,
-                                                                      ean_nummer       = r_ean_nummer,
-                                                                      debitor_id       = debitor_id)
-                                                                    #   betalergruppe_id = betalergruppe_id)
+                current_rekvirent_id = cls.__find_or_create_rekvirent(rekv_nr    = r_rekvirent,
+                                                                      shortname  = r_shortname,
+                                                                      ean_nummer = r_ean_nummer,
+                                                                      address    = r_address,
+                                                                      debitor_id = debitor_id)
                 current_faktura_id = cls.__create_faktura(parsing_id=parsing_object.id,
                                                           # pdf_fil      = 'remember to fill this in...',
                                                           rekvirent_id=current_rekvirent_id)
@@ -286,13 +271,6 @@ class Parser:
             os.getcwd(), 'backend', 'media', 'mangellister', file_name)
         return file_path
 
-    # @classmethod
-    # def __create_parsing(cls, data_fil: str, mangel_liste_fil: str, ptype: str) -> Faktura:
-    #     ''' Creates a new parsing and returns it '''
-    #     newparse = Parsing.objects.create(
-    #         data_fil=data_fil, mangel_liste_fil=mangel_liste_fil, ptype=ptype)
-    #     return newparse
-
     @classmethod
     def __create_faktura(cls, parsing_id: int, rekvirent_id: int) -> int:
         ''' Creates a new faktura and returns its ID '''
@@ -311,7 +289,7 @@ class Parser:
 
 
     @classmethod
-    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, debitor_id: int, ean_nummer: str) -> int:
+    def __find_or_create_rekvirent(cls, rekv_nr: str, shortname: str, address: str, debitor_id: int, ean_nummer: str) -> int:
         ''' Looks up the rekvirent, and if none is found, creates one and returns the ID.\n
             Updates the EAN-number as well as the betalergruppe if it is blank but supplied to the function. '''
         try:
@@ -341,6 +319,7 @@ class Parser:
             retval = Rekvirent.objects.create(rekv_nr    = rekv_nr,
                                               shortname  = shortname,
                                               GLN_nummer = ean_nummer,
+                                              address    = address,
                                               debitor_id = debitor_id).id
                                             #   betalergruppe_id = betalergruppe_id).id
         return retval
