@@ -1,3 +1,4 @@
+from posixpath import basename
 from django.conf.urls import url
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
@@ -18,7 +19,7 @@ router.register(r'analyser', views.AnalyseViewSet)
 router.register(r'analyser-nested', views.NestedAnalyseViewSet)
 
 router.register(r'rekvirent', views.RekvirentViewSet)
-router.register(r'rekvirent-nested', views.NestedRekvirentViewSet)
+router.register(r'rekvirent-nested', views.NestedRekvirentViewSet, basename="Rekvirenter_Nested")
 router.register(r'rekvirent-missing', views.MissingRekvirentViewSet)
 
 router.register(r'parsing', views.ParsingViewSet)

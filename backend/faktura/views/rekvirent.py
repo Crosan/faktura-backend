@@ -11,7 +11,16 @@ class RekvirentViewSet(viewsets.ModelViewSet):
     serializer_class = RekvirentSerializer
     
 class NestedRekvirentViewSet(viewsets.ModelViewSet):
-    queryset = Rekvirent.objects.all()
+    # queryset = Rekvirent.objects.all()
+    def get_queryset(self):
+        searchterm = self.request.query_params.get('q', None)
+        if searchterm:
+            print(searchterm)
+            qs = Rekvirent.objects.filter(Q(debitor__navn__icontains=searchterm) | Q(shortname__icontains=searchterm) | Q(GLN_nummer__icontains=searchterm) | Q(debitor__region__icontains=searchterm) | Q(rekv_nr__icontains=searchterm))
+        else:
+            qs = Rekvirent.objects.all()
+        return qs
+
     serializer_class = NestedRekvirentSerializer
 
 class MissingRekvirentViewSet(viewsets.ModelViewSet):
