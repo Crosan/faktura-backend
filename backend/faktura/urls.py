@@ -36,8 +36,8 @@ router.register(r'faktura-status', views.FakturaStatusViewSet)
 
 # router.register(r'region', views.RegionViewSet)
 
-router.register(r'betalergruppe', views.BetalergruppeViewSet, basename="Betalergruppe")
-router.register(r'betalergruppe-nested', views.NestedBetalergruppeViewSet)
+# router.register(r'betalergruppe', views.BetalergruppeViewSet, basename="Betalergruppe")
+# router.register(r'betalergruppe-nested', views.NestedBetalergruppeViewSet)
 
 router.register(r'debitor', views.DebitorViewSet, basename="Debitor")
 

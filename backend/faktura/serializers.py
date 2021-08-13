@@ -110,14 +110,14 @@ class FakturaStatusSerializer(serializers.ModelSerializer):
         model = FakturaStatus
         fields = "__all__"
                
-class BetalergruppeSerializer(serializers.ModelSerializer):
-    sum_total = serializers.FloatField(read_only=True)
-    sum_unsent = serializers.FloatField(read_only=True)
-    antal = serializers.IntegerField(read_only=True)
-    antal_unsent = serializers.IntegerField(read_only=True)
-    class Meta:
-        model = Betalergruppe
-        fields = "__all__"
+# class BetalergruppeSerializer(serializers.ModelSerializer):
+#     sum_total = serializers.FloatField(read_only=True)
+#     sum_unsent = serializers.FloatField(read_only=True)
+#     antal = serializers.IntegerField(read_only=True)
+#     antal_unsent = serializers.IntegerField(read_only=True)
+#     class Meta:
+#         model = Betalergruppe
+#         fields = "__all__"
         
 # ------------------------
 # NESTED SERIALIZERS
@@ -224,12 +224,12 @@ class NestedParsingSerializer(serializers.ModelSerializer):
         #     parsing_object.status = 'Fejlet: Ukendt fejl'
         #     parsing_object.save()
         
-class NestedBetalergruppeSerializer(serializers.ModelSerializer):
-    rekvirenter = NestedRekvirentSerializer(many=True, required=False)
+# class NestedBetalergruppeSerializer(serializers.ModelSerializer):
+#     rekvirenter = NestedRekvirentSerializer(many=True, required=False)
 
-    class Meta:
-        model = Betalergruppe
-        fields = "__all__"
+#     class Meta:
+#         model = Betalergruppe
+#         fields = "__all__"
 
 # ----------------------------
 # ONE LEVEL NESTED SERIALIZERS
@@ -262,13 +262,13 @@ class SemiNestedFakturaSerializer(serializers.ModelSerializer):
 # SPECIAL VIEW SERIALIZERS
 # ------------------------
 
-class PPBetalergruppeSerializer(serializers.ModelSerializer):
-    # rekvirenter = RekvirentWithFaktSerializer(many=True, required=False)
-    sum_total = serializers.FloatField()
+# class PPBetalergruppeSerializer(serializers.ModelSerializer):
+#     # rekvirenter = RekvirentWithFaktSerializer(many=True, required=False)
+#     sum_total = serializers.FloatField()
 
-    class Meta:
-        model = Betalergruppe
-        fields = ('id', 'navn', 'sum_total')
+#     class Meta:
+#         model = Betalergruppe
+#         fields = ('id', 'navn', 'sum_total')
 
 class RekvirentWithFaktSerializer(serializers.ModelSerializer):
     fakturaer = FakturaSerializer(many=True)
