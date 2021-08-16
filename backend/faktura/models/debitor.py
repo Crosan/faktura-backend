@@ -17,8 +17,8 @@ class Debitor(models.Model):
     gruppe = models.CharField(max_length=100, null=True)
     navn = models.CharField(max_length=100, null=True)
     GLN_nummer = models.CharField(max_length=100, null=True)
-    adresse = models.CharField(max_length=256, null=True, blank=True)
-    region = models.CharField(max_length=100, null=True, blank=True, choices=regioner)
+    adresse = models.CharField(max_length=256, null=True)
+    region = models.CharField(max_length=100, null=True, choices=regioner)
     # region = models.ForeignKey(Region, related_name="debitorer", null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
