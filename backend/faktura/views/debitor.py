@@ -18,7 +18,11 @@ class DebitorViewSet(viewsets.ModelViewSet):
             qs = Debitor.objects.filter(GLN_nummer=EAN_nummer)
         elif searchterm:
             print(searchterm)
-            qs = Debitor.objects.filter(Q(debitor_nr__icontains=searchterm) | Q(navn__icontains=searchterm) | Q(GLN_nummer__icontains=searchterm) | Q(region__icontains=searchterm))
+            qs = Debitor.objects.filter(Q(debitor_nr__icontains=searchterm) | 
+                                        Q(navn__icontains=searchterm) | 
+                                        Q(GLN_nummer__icontains=searchterm) | 
+                                        Q(region__icontains=searchterm) | 
+                                        Q(adresse__icontains=searchterm))
         # else:
         #     qs = Debitor.objects.all()
         # return qs

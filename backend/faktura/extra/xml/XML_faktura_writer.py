@@ -56,14 +56,14 @@ class XMLFakturaWriter:
     #     return self.prettify(self.root)
 
     # def create(self, faktura: Faktura):
-    def create(self, debitor: debitor, analyser):
+    def create(self, debitor: debitor, analyser, ordernumber: int):
         # self.faktura = faktura
         self.debitor = debitor
 
         # sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
         self.__add_message_header(self.root)
         # self.__add_order_header_lst(self.root)
-        self.__add_order_header(self.root, debitor, analyser)
+        self.__add_order_header(self.root, debitor, analyser, ordernumber)
 
         if False:# settings.DEVELOPMENT:
             print('outputting')
@@ -90,7 +90,7 @@ class XMLFakturaWriter:
     #     for faktura in self.qs:
     #         self.__add_order_header(parent, faktura)
 
-    def __add_order_header(self, parent, debitor, analyser):
+    def __add_order_header(self, parent, debitor, analyser, ordernumber):
         order_header = self.__add_subtag(parent, 'orderHeader')
 
         self.__test_and_set_or_fail(order_header, 'BillingCompanyCode', self.BillingCompanyCode)
@@ -101,7 +101,7 @@ class XMLFakturaWriter:
         self.__test_and_set_or_fail(order_header, 'Debitor', debitor.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
         # self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
         self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
-        # self.__test_and_set_or_fail(order_header, 'OrderNumber', str(faktura.id)) #TODO: Udkommenteret i forbindelse med overgang til debitor-system, check med Lone+Martin om mangler
+        self.__test_and_set_or_fail(order_header, 'OrderNumber', str(ordernumber)) #TODO: Udkommenteret i forbindelse med overgang til debitor-system, check med Lone+Martin om mangler
         self.__test_and_set_or_fail(order_header, 'OrderText1', "For spørgsmål, kontakt Brian Schmidt 35453341")  # selv generer
         self.__test_and_set_or_fail(order_header, 'ProfitCenterHdr', self.ProfitCenter)
 
