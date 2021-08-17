@@ -10,6 +10,7 @@ ARG dep
 ENV DEBIAN_FRONTEND noninteractive
 
 # ODBC 17 driver installation repositories
+RUN dpkg --add-architecture i386
 RUN apt-get update && apt-get -y install apt-transport-https ca-certificates multiarch-support
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list -o /etc/apt/sources.list.d/mssql-release.list
