@@ -52,7 +52,7 @@ class Parser:
 
         known_analyse_typer = {}
         # known_analyse_typer = {
-        #     "Labkakode" : (AnalyseID, AnalysePris)
+        #     "Labkakode" : (AnalyseID, AnalysePrisQS) | None
         # }
 
         known_rekvirent_names = {}
@@ -161,7 +161,7 @@ class Parser:
                 continue
 
             # Check that analysetype has price
-            if not analyse_type_pris:
+            if analyse_type_pris is None:
                 error_lines.append(
                     # (rownr, 'Analyse type "%s" kendes ikke' % r_labkakode))
                     rownr)
@@ -215,7 +215,7 @@ class Parser:
         parsing_object.status = "Skriver mangellister..."
         parsing_object.save()
 
-        print("Errors: %d (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100))))
+        logger.info("Errors: %d (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100))))
         # missing_analyser   = set([key for key, (Aid, _) in known_analyse_typer.items() if not Aid])
         # priceless_analyser = set([key for key, (_, price) in known_analyse_typer.items() if not price]) - missing_analyser
         # print("Unknown analysetypes: %s" % ', '.join(missing_analyser))
@@ -232,8 +232,9 @@ class Parser:
 
         unknown_analysetyper_file_path = cls.__XLSXOutputFilePath('_Ukendte_analyser_', parsing_object, file)
         print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
-        logger.info('Writing missing-file to %s' % unknown_analysetyper_file_path)
+        logger.info('Generating set of unknown analyses')
         unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : list(set(missing_analyser))})
+        logger.info('Writing missing-file to %s' % unknown_analysetyper_file_path)
         unk_anal_df.to_excel(unknown_analysetyper_file_path, index=False)
 
         # priceless_analysetyper_file_path = cls.__XLSXOutputFilePath('_Analyser_uden_pris_', parsing_object, file)
@@ -324,14 +325,14 @@ class Parser:
                                             #   betalergruppe_id = betalergruppe_id).id
         return retval
 
-    def __find_or_create_betalergruppe(betalergruppe: str, metatype: str) -> int:
-        ''' Looks up the betalergruppe, and if none is found, creates one and returns the ID '''
-        try:
-            retval = Betalergruppe.objects.get(navn=betalergruppe, bgtype=metatype).id
-        except ObjectDoesNotExist:
-            logger.info("Opretter ny betalergruppe: " + str(betalergruppe))
-            retval = Betalergruppe.objects.create(navn=betalergruppe, bgtype=metatype).id
-        return retval
+    # def __find_or_create_betalergruppe(betalergruppe: str, metatype: str) -> int:
+    #     ''' Looks up the betalergruppe, and if none is found, creates one and returns the ID '''
+    #     try:
+    #         retval = Betalergruppe.objects.get(navn=betalergruppe, bgtype=metatype).id
+    #     except ObjectDoesNotExist:
+    #         logger.info("Opretter ny betalergruppe: " + str(betalergruppe))
+    #         retval = Betalergruppe.objects.create(navn=betalergruppe, bgtype=metatype).id
+    #     return retval
 
     def __find_analyse_type_id(labkakode: str):
         ''' Looks up the analyse-code, and returns either the associated AnalyseType or None. '''
