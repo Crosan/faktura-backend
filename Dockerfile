@@ -10,7 +10,7 @@ ARG dep
 ENV DEBIAN_FRONTEND noninteractive
 
 # ODBC 17 driver installation repositories
-RUN dpkg --add-architecture i386
+RUN dpkg --add-architecture amd64
 RUN apt-get update 
 RUN apt-get -y install apt-transport-https ca-certificates multiarch-support
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
