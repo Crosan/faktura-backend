@@ -9,6 +9,9 @@ ARG dep
 # avoid getting prompted for kerberos settings
 ENV DEBIAN_FRONTEND noninteractive
 
+# check version
+RUN cat /etc/*release
+
 # ODBC 17 driver installation repositories
 RUN apt-get update && apt-get -y install apt-transport-https ca-certificates multiarch-support
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
