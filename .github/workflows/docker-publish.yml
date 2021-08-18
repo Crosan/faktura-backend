@@ -43,7 +43,7 @@ jobs:
  #   needs: test
 
     #runs-on: ubuntu-latest #Skiftet fordi debian bullseye (udgivet d. 16/08/21) ikke understøtter multiarch support
-    runs-on: buster
+    runs-on: debian-buster
     if: github.event_name == 'push'
 
     permissions:
