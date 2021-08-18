@@ -168,6 +168,7 @@ class Parser:
 
             # Check that analysetype has price
             if analyse_type_pris is None:
+                logger.info('Analysetype %s har ingen pris for dato %s' % (r_labkakode, str(r_prvdato)))
                 error_lines.append(
                     # (rownr, 'Analyse type "%s" kendes ikke' % r_labkakode))
                     rownr)
@@ -365,7 +366,7 @@ class Parser:
         for p in qs.order_by('-gyldig_fra'):
             if p.gyldig_fra <= tmp_dato and (not p.gyldig_til or (p.gyldig_til >= tmp_dato)):
                 return p.ekstern_pris
-        logger.info('Analysetype %s har ingen pris for dato %s' % (analyse_type, str(prvdato)))
+        # logger.info('Analysetype %s har ingen pris for dato %s' % (analyse_type, str(prvdato)))
         return None
 
 
