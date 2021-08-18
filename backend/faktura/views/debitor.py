@@ -1,7 +1,8 @@
+from django.db.models.query import QuerySet
 from rest_framework import viewsets
 from django.db.models import Count, Sum, Q
 
-from backend.faktura.models import Debitor
+from backend.faktura.models import Debitor, Rekvirent
 from backend.faktura.serializers import DebitorSerializer
 
 
@@ -13,6 +14,7 @@ class DebitorViewSet(viewsets.ModelViewSet):
         EAN_nummer = self.request.query_params.get('ean', None)
         parsing = self.request.query_params.get('parsing', None)
         searchterm = self.request.query_params.get('q', None)
+        searchRekvirent = self.request.query_params.get('r', None)
         # print(parsing)
         if EAN_nummer:
             qs = Debitor.objects.filter(GLN_nummer=EAN_nummer)
@@ -23,6 +25,27 @@ class DebitorViewSet(viewsets.ModelViewSet):
                                         Q(GLN_nummer__icontains=searchterm) | 
                                         Q(region__icontains=searchterm) | 
                                         Q(adresse__icontains=searchterm))
+        elif searchRekvirent:
+            queryRekvirent = Rekvirent.objects.get(pk=int(searchRekvirent))
+            print(queryRekvirent)
+            a = Debitor.objects.none()
+            if queryRekvirent.GLN_nummer:
+                qs1 = Debitor.objects.filter(Q(GLN_nummer__icontains=queryRekvirent.GLN_nummer))
+                print(qs1)
+                a = a.union(qs1)
+            if queryRekvirent.shortname:
+                qs2 = Debitor.objects.filter(Q(navn__icontains=queryRekvirent.shortname))
+                print(qs2)
+                a = a.union(qs2)
+            if queryRekvirent.address:
+                qs3 = Debitor.objects.filter(Q(adresse__icontains=' '.join(queryRekvirent.address.split()[:2])))
+                print(qs3)
+                a = a.union(qs3)
+            print(a)
+            return a
+            # qs = Debitor.objects.filter((Q('queryRekvirent__GLN_nummer')) & Q(GLN_nummer__icontains=queryRekvirent.GLN_nummer)) |
+            #                             (Q('queryRekvirent__shortname')) & Q(navn__icontains=queryRekvirent.shortname))|
+            #                             (Q('queryRekvirent__address')) & Q(adresse__icontains=' '.join(queryRekvirent.address.split()[:2])))) # Tager de første to ord, oftest vejnavn og - & )nr
         # else:
         #     qs = Debitor.objects.all()
         # return qs
