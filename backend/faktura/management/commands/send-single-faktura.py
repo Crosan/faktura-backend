@@ -3,7 +3,7 @@ import math
 import re
 from datetime import datetime
 import time
-
+import traceback
 import sys
 
 import pandas as pd
@@ -122,17 +122,20 @@ class Command(BaseCommand):
             output = XML_faktura_writer.create(chosenDebitor, analQS)
             self.writeXMLtoFile(output, parse + '_' +  chosenDebitor.debitor_nr, faktQS[0].id)
             filename = self.uploadToSMBShare(output)
-            for faktura in faktQS:
-                faktura.status = 20
-                faktura.save()
             success = True
             logger.info('Running listdir')
             dirlisting = os.listdir(self.serverLocation)
             logger.info(dirlisting)
             success = filename in dirlisting
-        except:
+        except Exception as e:
             logger.error('Writing or uploading xml file failed')
+            logging.error(traceback.format_exc())
             success = False
 
+        if success:
+            for faktura in faktQS:
+                faktura.status = 20
+                faktura.save()
+                
         logger.info('Success:' + str(success))
         return

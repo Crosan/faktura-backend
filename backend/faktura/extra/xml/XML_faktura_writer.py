@@ -101,7 +101,7 @@ class XMLFakturaWriter:
         self.__test_and_set_or_fail(order_header, 'Debitor', debitor.debitor_nr, {'DebitorType' : self.debitorType}) #XXX
         # self.__test_and_set_or_fail(order_header, 'GlobalLocationNumber', faktura.rekvirent.GLN_nummer)
         self.__test_and_set_or_fail(order_header, 'PreferedInvoiceDate', datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
-        self.__test_and_set_or_fail(order_header, 'OrderNumber', str(ordernumber)) #TODO: Udkommenteret i forbindelse med overgang til debitor-system, check med Lone+Martin om mangler
+        self.__test_and_set_or_fail(order_header, 'OrderNumber', str(ordernumber)) #Det ordrenummer der bliver brugt nu er ID'et på den første faktura i sættet af fakturaer til denne debitor i denne parsing
         self.__test_and_set_or_fail(order_header, 'OrderText1', "For spørgsmål, kontakt Brian Schmidt 35453341")  # selv generer
         self.__test_and_set_or_fail(order_header, 'ProfitCenterHdr', self.ProfitCenter)
 
