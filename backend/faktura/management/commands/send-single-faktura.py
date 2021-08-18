@@ -122,9 +122,9 @@ class Command(BaseCommand):
 
         try:
             output = XML_faktura_writer.create(chosenDebitor, analQS, ordernumber)
-            self.writeXMLtoFile(output, parse + '_' +  chosenDebitor.debitor_nr, faktQS[0].id)
+            self.writeXMLtoFile(output, parse + '_' +  chosenDebitor.debitor_nr)
             filename = self.uploadToSMBShare(output)
-            success = True
+            # success = True
             logger.info('Running listdir')
             dirlisting = os.listdir(self.serverLocation)
             logger.info(dirlisting)
