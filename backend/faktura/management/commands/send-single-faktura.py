@@ -89,6 +89,8 @@ class Command(BaseCommand):
                 status=10
             )
 
+        ordernumber = f'{faktQS[0].id:06d}'
+
         chosenDebitor = Debitor.objects.get(pk=int(debitor))
         excludeDict = {
                 'Hovedstaden': Q(analyse_type__regionh=True),
@@ -119,7 +121,7 @@ class Command(BaseCommand):
         XML_faktura_writer = XMLFakturaWriter()
 
         try:
-            output = XML_faktura_writer.create(chosenDebitor, analQS)
+            output = XML_faktura_writer.create(chosenDebitor, analQS, ordernumber)
             self.writeXMLtoFile(output, parse + '_' +  chosenDebitor.debitor_nr, faktQS[0].id)
             filename = self.uploadToSMBShare(output)
             success = True
@@ -136,6 +138,6 @@ class Command(BaseCommand):
             for faktura in faktQS:
                 faktura.status = 20
                 faktura.save()
-                
+
         logger.info('Success:' + str(success))
         return
