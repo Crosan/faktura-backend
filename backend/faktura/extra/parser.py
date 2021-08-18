@@ -7,6 +7,8 @@ import math
 import time
 import sys
 # from typing import TypeVar
+from typing import Union
+
 
 from django.core.management.base import BaseCommand, CommandError
 from backend.faktura.models import *
@@ -52,7 +54,7 @@ class Parser:
 
         known_analyse_typer = {}
         # known_analyse_typer = {
-        #     "Labkakode" : (AnalyseID, AnalysePrisQS) | None
+        #     "Labkakode" : AnalyseTypeObject
         # }
 
         known_rekvirent_names = {}
@@ -139,14 +141,18 @@ class Parser:
             # print(r_betalergruppe, r_cprnr, r_labkakode, r_ekstern_pris,  r_rekvirent, r_shortname, r_ean_nummer)
 
             # Find analysetype
-            # if r_labkakode in known_analyse_typer.keys():
-            #     analyse_type_id, analyse_type_pris = known_analyse_typer[r_labkakode]
-            # else:
-            # Nu slår vi op hver gang, fordi en analysetype godt kan have ændret pris i løbet af perioden.
-            analyse_type      = cls.__find_analyse_type_id(r_labkakode)
+            # Nu slår vi op hver gang, fordi en analysetype godt kan have ændret pris i løbet af perioden. Ikke alligevel 17/08/21 - RS
+            if r_labkakode in known_analyse_typer.keys():
+                analyse_type = known_analyse_typer[r_labkakode]
+            else:
+                analyse_type      = cls.__find_analyse_type_id(r_labkakode)
+                known_analyse_typer[r_labkakode] = analyse_type
+
+
             if analyse_type:
                 analyse_type_id   = analyse_type.id
-                analyse_type_pris = cls.__find_analyse_type_pris(analyse_type, r_prvdato)
+                # analyse_type_pris = cls.__find_analyse_type_pris(analyse_type, r_prvdato)
+                analyse_type_pris = cls.__find_analyse_type_pris_from_queryset(analyse_type.priser, r_prvdato)
             else:
                 analyse_type_id   = None
                 analyse_type_pris = None
@@ -352,6 +358,17 @@ class Parser:
                 return p.ekstern_pris
         logger.info('Analysetype %s har ingen pris for dato %s' % (analyse_type, str(prvdato)))
         return None
+
+    def __find_analyse_type_pris_from_queryset(qs, prvdato) -> Union[float, None] :
+        ''' Returns either the most recent active price or None '''
+        tmp_dato = prvdato.to_pydatetime()
+        for p in qs.order_by('-gyldig_fra'):
+            if p.gyldig_fra <= tmp_dato and (not p.gyldig_til or (p.gyldig_til >= tmp_dato)):
+                return p.ekstern_pris
+        logger.info('Analysetype %s har ingen pris for dato %s' % (analyse_type, str(prvdato)))
+        return None
+
+
 
 
     def subset_of_xlsx(infile: str, outfile: str, lines_to_include):
