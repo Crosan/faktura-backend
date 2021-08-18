@@ -19,15 +19,14 @@ class DebitorViewSet(viewsets.ModelViewSet):
         if EAN_nummer:
             qs = Debitor.objects.filter(GLN_nummer=EAN_nummer)
         elif searchterm:
-            print(searchterm)
             qs = Debitor.objects.filter(Q(debitor_nr__icontains=searchterm) | 
                                         Q(navn__icontains=searchterm) | 
                                         Q(GLN_nummer__icontains=searchterm) | 
                                         Q(region__icontains=searchterm) | 
                                         Q(adresse__icontains=searchterm))
         elif searchRekvirent:
+            '''Attempts first to match on GLN-numbers, and if none are found, matches on name and address'''
             queryRekvirent = Rekvirent.objects.get(pk=int(searchRekvirent))
-            print(queryRekvirent)
             a = Debitor.objects.none()
             if queryRekvirent.GLN_nummer:
                 qs1 = Debitor.objects.filter(Q(GLN_nummer__icontains=queryRekvirent.GLN_nummer))
@@ -37,13 +36,10 @@ class DebitorViewSet(viewsets.ModelViewSet):
                 # a = a.union(qs1)
             if queryRekvirent.shortname:
                 qs2 = Debitor.objects.filter(Q(navn__icontains=queryRekvirent.shortname))
-                print(qs2)
                 a = a.union(qs2)
             if queryRekvirent.address:
-                qs3 = Debitor.objects.filter(Q(adresse__icontains=' '.join(queryRekvirent.address.split()[:2])))
-                print(qs3)
+                qs3 = Debitor.objects.filter(Q(adresse__icontains=' '.join(queryRekvirent.address.split()[:2]))) # Take the two first words of the name, usually streetname and -number
                 a = a.union(qs3)
-            print(a)
             return a
             # qs = Debitor.objects.filter((Q('queryRekvirent__GLN_nummer')) & Q(GLN_nummer__icontains=queryRekvirent.GLN_nummer)) |
             #                             (Q('queryRekvirent__shortname')) & Q(navn__icontains=queryRekvirent.shortname))|
