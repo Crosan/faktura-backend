@@ -32,7 +32,9 @@ class DebitorViewSet(viewsets.ModelViewSet):
             if queryRekvirent.GLN_nummer:
                 qs1 = Debitor.objects.filter(Q(GLN_nummer__icontains=queryRekvirent.GLN_nummer))
                 print(qs1)
-                a = a.union(qs1)
+                if len(qs1) > 0:
+                    return qs1
+                # a = a.union(qs1)
             if queryRekvirent.shortname:
                 qs2 = Debitor.objects.filter(Q(navn__icontains=queryRekvirent.shortname))
                 print(qs2)
