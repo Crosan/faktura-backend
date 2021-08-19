@@ -24,8 +24,8 @@ class NewPricesView(views.APIView):
         #Gets the relevant analyse_type object
         def get_analyse_type(method_data):
         
-            ydelses_kode = method_data[0]
-            ydelses_navn = method_data[1]
+            ydelses_kode = method_data[0].strip()
+            ydelses_navn = method_data[1].strip()
             # gruppering = method_data[2]
             # kilde_navn = method_data[3]
             # afdeling = method_data[6]
@@ -45,7 +45,7 @@ class NewPricesView(views.APIView):
             #         type = "Blodprodukt"
                     
             try:
-                analyse_type = AnalyseType.objects.get(ydelses_kode=method_data[0])   
+                analyse_type = AnalyseType.objects.get(ydelses_kode=ydelses_kode)   
             except:
                 analyse_type = AnalyseType(ydelses_kode=ydelses_kode, ydelses_navn=ydelses_navn)
             

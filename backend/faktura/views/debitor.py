@@ -23,7 +23,7 @@ class DebitorViewSet(viewsets.ModelViewSet):
                                         Q(navn__icontains=searchterm) | 
                                         Q(GLN_nummer__icontains=searchterm) | 
                                         Q(region__icontains=searchterm) | 
-                                        Q(adresse__icontains=searchterm))
+                                        Q(adresse__icontains=searchterm)).order_by('navn')
         elif searchRekvirent:
             '''Attempts first to match on GLN-numbers, and if none are found, matches on name and address'''
             queryRekvirent = Rekvirent.objects.get(pk=int(searchRekvirent))
@@ -40,7 +40,7 @@ class DebitorViewSet(viewsets.ModelViewSet):
             if queryRekvirent.address:
                 qs3 = Debitor.objects.filter(Q(adresse__icontains=' '.join(queryRekvirent.address.split()[:2]))) # Take the two first words of the name, usually streetname and -number
                 a = a.union(qs3)
-            return a
+            return a.order_by('navn')
             # qs = Debitor.objects.filter((Q('queryRekvirent__GLN_nummer')) & Q(GLN_nummer__icontains=queryRekvirent.GLN_nummer)) |
             #                             (Q('queryRekvirent__shortname')) & Q(navn__icontains=queryRekvirent.shortname))|
             #                             (Q('queryRekvirent__address')) & Q(adresse__icontains=' '.join(queryRekvirent.address.split()[:2])))) # Tager de første to ord, oftest vejnavn og - & )nr
