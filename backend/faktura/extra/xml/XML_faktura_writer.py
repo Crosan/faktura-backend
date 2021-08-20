@@ -57,19 +57,12 @@ class XMLFakturaWriter:
 
     # def create(self, faktura: Faktura):
     def create(self, debitor: debitor, analyser, ordernumber: str):
-        # self.faktura = faktura
         self.debitor = debitor
 
         # sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
         self.__add_message_header(self.root)
         # self.__add_order_header_lst(self.root)
         self.__add_order_header(self.root, debitor, analyser, ordernumber)
-
-        if False:# settings.DEVELOPMENT:
-            print('outputting')
-            # with open('out.xml', 'w') as f:
-            with open('C:\\Users\\RSIM0016\\Documents\\faktura\\test2.xml', 'w') as f:
-                f.write(self.prettify(self.root))
 
         return self.prettify(self.root)
 

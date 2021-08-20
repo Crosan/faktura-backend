@@ -87,7 +87,8 @@ class Parser:
         try:
             df = pd.read_excel(file, header=0, usecols=desired_cols, na_filter=False)
         except ValueError as err:
-            print("I/O error:", err)
+            logger.error("I/O error:")
+            logger.error(str(err))
             parsing_object.status = 'Fejlet, inputfil mangler kolonner: ' + str(err)[63:-1]
             parsing_object.save()
             return
@@ -102,7 +103,6 @@ class Parser:
         parsing_object.save()
         
         # Loop through all lines in input xlsx file
-        print('Starting loop')
         logger.info('Starting loop')
         time_left = 0
         t0 = time.perf_counter()
@@ -205,11 +205,6 @@ class Parser:
             Analyse.objects.create(CPR=r_cprnr, afregnings_dato=r_prvdato, svar_dato=r_svardato,
                                    analyse_type_id=analyse_type_id, faktura_id=current_faktura_id, samlet_pris=analyse_type_pris)
 
-            # Update lines and price in Faktura
-            # current_faktura = Faktura.objects.get(id=current_faktura_id)
-            # current_faktura.antal_linjer += 1
-            # current_faktura.samlet_pris  += analyse_type_pris
-            # current_faktura.save()
 
 
         # Finish the loop, print info
@@ -223,11 +218,6 @@ class Parser:
         parsing_object.save()
 
         logger.info("Errors: %d (%.02f%%)" % (len(error_lines), ((len(error_lines)/(total_rows)*100))))
-        # missing_analyser   = set([key for key, (Aid, _) in known_analyse_typer.items() if not Aid])
-        # priceless_analyser = set([key for key, (_, price) in known_analyse_typer.items() if not price]) - missing_analyser
-        # print("Unknown analysetypes: %s" % ', '.join(missing_analyser))
-        # print(known_analyse_typer)
-        # print(missing_analyser)
 
         # Write error-files
         mangel_liste_file_path = cls.__XLSXOutputFilePath('_Mangel_', parsing_object, file)
@@ -244,12 +234,6 @@ class Parser:
         logger.info('Writing missing-file to %s' % unknown_analysetyper_file_path)
         unk_anal_df.to_excel(unknown_analysetyper_file_path, index=False)
 
-        # priceless_analysetyper_file_path = cls.__XLSXOutputFilePath('_Analyser_uden_pris_', parsing_object, file)
-        # print('Writing analysetyper w/o price file to %s' % priceless_analysetyper_file_path)
-        # logger.info('Writing missing-file to %s' % priceless_analysetyper_file_path)
-        # unp_anal_df = pd.DataFrame({'Analysetyper uden pris' : list(priceless_analyser)})
-        # unp_anal_df.to_excel(priceless_analysetyper_file_path, index=False)
-        
         logger.info("Writing status 'done'")
         parsing_object.status = "Færdig (%d fejl)" % (len(error_lines))
         parsing_object.done = True
@@ -307,11 +291,6 @@ class Parser:
                 rekvirent.GLN_nummer = ean_nummer
                 rekvirent.save()
 
-            # Check if betalergruppe is null
-            # if (not rekvirent.betalergruppe) and betalergruppe_id:
-            #     rekvirent.betalergruppe_id = betalergruppe_id
-            #     rekvirent.save()
-
             # Check if debitor is null
             if (not rekvirent.debitor) and debitor_id:
                 print('Updating debitor')
@@ -329,17 +308,7 @@ class Parser:
                                               GLN_nummer = ean_nummer,
                                               address    = address,
                                               debitor_id = debitor_id).id
-                                            #   betalergruppe_id = betalergruppe_id).id
         return retval
-
-    # def __find_or_create_betalergruppe(betalergruppe: str, metatype: str) -> int:
-    #     ''' Looks up the betalergruppe, and if none is found, creates one and returns the ID '''
-    #     try:
-    #         retval = Betalergruppe.objects.get(navn=betalergruppe, bgtype=metatype).id
-    #     except ObjectDoesNotExist:
-    #         logger.info("Opretter ny betalergruppe: " + str(betalergruppe))
-    #         retval = Betalergruppe.objects.create(navn=betalergruppe, bgtype=metatype).id
-    #     return retval
 
     def __find_analyse_type_id(labkakode: str):
         ''' Looks up the analyse-code, and returns either the associated AnalyseType or None. '''
@@ -351,14 +320,14 @@ class Parser:
             retval = None
         return retval
 
-    def __find_analyse_type_pris(analyse_type, prvdato):
-        ''' Returns either the most recent active price or None '''
-        tmp_dato = prvdato.to_pydatetime()
-        for p in analyse_type.priser.order_by('-gyldig_fra'):
-            if p.gyldig_fra <= tmp_dato and (not p.gyldig_til or (p.gyldig_til >= tmp_dato)):
-                return p.ekstern_pris
-        logger.info('Analysetype %s har ingen pris for dato %s' % (analyse_type, str(prvdato)))
-        return None
+    # def __find_analyse_type_pris(analyse_type, prvdato):
+    #     ''' Returns either the most recent active price or None '''
+    #     tmp_dato = prvdato.to_pydatetime()
+    #     for p in analyse_type.priser.order_by('-gyldig_fra'):
+    #         if p.gyldig_fra <= tmp_dato and (not p.gyldig_til or (p.gyldig_til >= tmp_dato)):
+    #             return p.ekstern_pris
+    #     logger.info('Analysetype %s har ingen pris for dato %s' % (analyse_type, str(prvdato)))
+    #     return None
 
     def __find_analyse_type_pris_from_queryset(qs, prvdato) -> Union[float, None] :
         ''' Returns either the most recent active price or None '''
@@ -368,9 +337,6 @@ class Parser:
                 return p.ekstern_pris
         # logger.info('Analysetype %s har ingen pris for dato %s' % (analyse_type, str(prvdato)))
         return None
-
-
-
 
     def subset_of_xlsx(infile: str, outfile: str, lines_to_include):
         ''' Writes the specified lines in the infile to the outfile. '''
