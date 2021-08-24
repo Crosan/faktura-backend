@@ -67,7 +67,7 @@ class Parser:
         #     'EAN-numner' : 'debitor_id'
         # }
 
-        missing_analyser = []
+        missing_analyser = {}
         # missing_analyser = {'labkakode1' : 'analysenavn1'),
         #                     'labkakode2' : 'analysenavn2'), ...
         # }
