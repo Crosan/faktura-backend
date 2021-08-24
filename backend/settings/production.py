@@ -6,6 +6,7 @@ import pyodbc
 
 
 print("USING PRODUCTION SETTINGS")
+logger.info("USING PRODUCTION SETTINGS")
 
 DEBUG = False
 DEVELOPMENT = False

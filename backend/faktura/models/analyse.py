@@ -19,3 +19,6 @@ class Analyse(models.Model):
         'Faktura', related_name='analyser', on_delete=models.CASCADE, blank=True, null=True)
 
     objects = models.Manager()
+
+    def __str__(self):
+        return "%s for %s i parsing %d" % (self.analyse_type.ydelses_kode, self.faktura.rekvirent.shortname, self.faktura.parsing.id)

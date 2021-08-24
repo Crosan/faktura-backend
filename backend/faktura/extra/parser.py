@@ -68,11 +68,14 @@ class Parser:
         # }
 
         missing_analyser = []
-        # missing_analyser = ['labkakode1', 'labkakode2', ...]
+        # missing_analyser = {'labkakode1' : 'analysenavn1'),
+        #                     'labkakode2' : 'analysenavn2'), ...
+        # }
 
         desired_cols = ["BETALERGRUPPE_SOR",
                         "CPRNR",
                         "LABKAKODE",
+                        "ANALYSENAVN",
                         # "EKSTERN_PRIS",
                         "REKVIRENT",
                         "SHORTNME",
@@ -125,6 +128,7 @@ class Parser:
             r_cprnr         = cls.__cleanValues(rowdata['CPRNR'])
             # r_labkakode     = str(rowdata['LABKAKODE'])
             r_labkakode     = cls.__cleanValues(rowdata['LABKAKODE'])
+            r_analysenavn   = cls.__cleanValues(rowdata['ANALYSENAVN'])
             # r_ekstern_pris  = rowdata['EKSTERN_PRIS']
             r_rekvirent     = cls.__cleanValues(rowdata['REKVIRENT'])
             r_shortname     = cls.__cleanValues(rowdata['SHORTNME'])
@@ -163,7 +167,8 @@ class Parser:
                 error_lines.append(
                     # (rownr, 'Analyse type "%s" kendes ikke' % r_labkakode))
                     rownr)
-                missing_analyser.append(r_labkakode)
+                # missing_analyser.append(r_labkakode)
+                missing_analyser[r_labkakode] = r_analysenavn
                 continue
 
             # Check that analysetype has price
@@ -172,7 +177,8 @@ class Parser:
                 error_lines.append(
                     # (rownr, 'Analyse type "%s" kendes ikke' % r_labkakode))
                     rownr)
-                missing_analyser.append(r_labkakode)
+                # missing_analyser.append(r_labkakode)
+                missing_analyser[r_labkakode] = r_analysenavn
                 continue
 
             # Find debitor
@@ -230,7 +236,13 @@ class Parser:
         unknown_analysetyper_file_path = cls.__XLSXOutputFilePath('_Ukendte_analyser_', parsing_object, file)
         print('Writing unknown analysetyper file to %s' % unknown_analysetyper_file_path)
         logger.info('Generating set of unknown analyses')
-        unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : list(set(missing_analyser))})
+        # unk_anal_df = pd.DataFrame({'Ukendte analysetyper' : list(set(missing_analyser))})
+        unk_anal_df = pd.DataFrame({'YdelsesKode' : list(missing_analyser.keys()),
+                                    'Ydelsesnavn' : list(missing_analyser.values()),
+                                    'Ekstern pris' : ['']*len(missing_analyser),
+                                    'Gyldig fra' : ['']*len(missing_analyser),
+                                    'Gyldig til' : ['']*len(missing_analyser),
+                                    })
         logger.info('Writing missing-file to %s' % unknown_analysetyper_file_path)
         unk_anal_df.to_excel(unknown_analysetyper_file_path, index=False)
 

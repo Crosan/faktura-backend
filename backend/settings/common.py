@@ -101,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ##############
 
 logger.info('Reading SMB creds in common settings')
-print('Reading SMB creds in common settings')
+# print('Reading SMB creds in common settings')
 SMB_USER = os.environ.get('SMB_USER')
 SMB_PASS = os.environ.get('SMB_PASS')
 SMB_SHARE = os.environ.get('SMB_SHARE')
