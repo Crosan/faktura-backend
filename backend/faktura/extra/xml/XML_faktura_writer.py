@@ -57,6 +57,7 @@ class XMLFakturaWriter:
 
     # def create(self, faktura: Faktura):
     def create(self, debitor: debitor, analyser, ordernumber: str):
+        '''Returns a pretty formatted xml faktura, invoiced to the debitor param'''
         self.debitor = debitor
 
         # sap_order = self.__add_subtag(self.root, 'GenericSAPOrder')
@@ -125,7 +126,7 @@ class XMLFakturaWriter:
         date = analyse.svar_dato
 
         CPR = '123467-8912' if settings.TESTING else analyse.CPR
-        itemtext = "{} - {} - {} ({})".format(CPR, str(date.day) + "-" + months[date.month-1] + "-" + str(date.year), analyse.analyse_type.ydelses_kode, analyse.analyse_type.ydelses_navn)
+        itemtext = "{} - {} - {} - {} ({})".format(CPR, str(date.day) + "-" + months[date.month-1] + "-" + str(date.year), analyse.analyse_type.ydelses_kode, analyse.faktura.rekvirent.rekv_nr, analyse.analyse_type.ydelses_navn)
         itemtext = itemtext[:131] # Må max være 132 tegn lang
 
 
