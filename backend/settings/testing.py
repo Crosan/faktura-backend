@@ -117,11 +117,11 @@ DATABASES = {
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
         'PORT': DB_PORT,
+        'ATOMIC_REQUESTS': True,
 
         'OPTIONS': {
             # 'driver': 'ODBC Driver 13 for SQL Server',
             'driver': 'ODBC Driver 17 for SQL Server',
-            'ATOMIC_REQUESTS': True
             # 'driver': driver,
         },
     },
