@@ -14,7 +14,7 @@ PRODUCTION = False
 
 APPEND_SLASH = False
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET')
+# SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -121,6 +121,7 @@ DATABASES = {
         'OPTIONS': {
             # 'driver': 'ODBC Driver 13 for SQL Server',
             'driver': 'ODBC Driver 17 for SQL Server',
+            'ATOMIC_REQUESTS': True
             # 'driver': driver,
         },
     },
