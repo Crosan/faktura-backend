@@ -144,6 +144,7 @@ class NestedRekvirentSerializer(serializers.ModelSerializer):
     # fakturaer = FakturaSerializer(many=True)
     # betalergruppe = BetalergruppeSerializer()
     debitor = DebitorSerializer()
+    sum_total = serializers.FloatField(read_only=True)
 
     class Meta:
         model = Rekvirent

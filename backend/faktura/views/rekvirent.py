@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from django.db.models import Q
+from django.db.models import Q, Sum
 
 from backend.faktura.models import Rekvirent
 from backend.faktura.serializers import RekvirentSerializer, NestedRekvirentSerializer
@@ -26,5 +26,7 @@ class NestedRekvirentViewSet(viewsets.ModelViewSet):
 class MissingRekvirentViewSet(viewsets.ModelViewSet):
     filt = Q(debitor = None)
     queryset = Rekvirent.objects.filter(filt)
+    queryset = queryset.annotate(sum_total=Sum('fakturaer__analyser__samlet_pris', filter=Q(fakturaer__status=10)))
+    queryset = queryset.order_by('-sum_total')
     # queryset = Betalergruppe.objects.all().annotate(sum_total=Sum('rekvirenter__fakturaer__samlet_pris', filter=Q(rekvirenter__fakturaer__parsing__id=pk)))
     serializer_class = NestedRekvirentSerializer
